@@ -22,6 +22,7 @@ namespace Entidades
         public string Domicilio { get; set; }
         public TipoCliente TipoDeCliente { get; set; }
 
+        public bool Activo { get; set; } = true;
 
 
     }

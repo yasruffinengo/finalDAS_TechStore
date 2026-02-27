@@ -6,7 +6,7 @@ namespace Modelo
     public class Context : DbContext
     {
         
-        private string conexion = "Data Source=ANA_NOYA\\SQLEXPRESS;Initial Catalog=TechStore;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=True;Trust Server Certificate=True;Command Timeout=0";
+        private string conexion = "Data Source=YASMIN-PC\\SQLEXPRESS;Initial Catalog=TechStore;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;";
 
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
