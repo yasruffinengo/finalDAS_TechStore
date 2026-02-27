@@ -25,5 +25,6 @@ namespace Entidades
         public bool Activo { get; set; } = true;
 
 
+
     }
 }
