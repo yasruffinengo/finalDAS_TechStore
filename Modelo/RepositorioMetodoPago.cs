@@ -13,7 +13,7 @@ namespace Modelo
         private Context context;
 
         public RepositorioMetodoPago()
-        {
+        { 
             context = new Context();
         }
 
