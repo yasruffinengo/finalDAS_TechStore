@@ -9,7 +9,6 @@ namespace Entidades
     public class Venta
     {
         public int VentaId { get; set; }
-        public string Sucursal { get; set; } //clase?
         public int numeroVenta { get; set; }
         public DateTime FechaVenta { get; set; }
         public decimal Monto { get; set; }
@@ -23,5 +22,9 @@ namespace Entidades
         public Cliente Cliente { get; set; }
 
         public Factura Factura { get; set; } //1a1
+
+        public int SucursalId { get; set; } 
+        public Sucursal Sucursal { get; set; }
+
     }
 }

@@ -15,7 +15,7 @@ namespace Modelo
         {
             context = new Context();
         }
-    
+
         public void AgregarVenta(Venta venta)
         {
             try
@@ -28,6 +28,9 @@ namespace Modelo
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Error en Repositorio.AgregarVenta(): " + detalle);
             }
+        }
+
+     
 
         public IReadOnlyCollection<Venta> ListarVenta()
         {
@@ -41,5 +44,17 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ListarVenta: " + detalle);
             }
         }
-    }
+
+        public Venta ObtenerVentaPorId(int id)
+        {
+            try
+            {
+                return context.Ventas.FirstOrDefault(v => v.VentaId == id);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Error en Repositorio.ObtenerVentaPorId: " + detalle);
+            }
+        }
 }

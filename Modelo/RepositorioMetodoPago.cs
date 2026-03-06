@@ -65,6 +65,7 @@ namespace Modelo
                 context.Update(metodoPago);
                 context.SaveChanges();
             }
+            
             catch (Exception ex)
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;

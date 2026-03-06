@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entidades
- {   
+{
     public enum TipoDescuento
     {
         Fijo,
         Dinamico
     }
-
+    
     public class Descuento
     {
         public int DescuentoId { get; set; }

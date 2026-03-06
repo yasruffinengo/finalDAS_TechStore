@@ -23,12 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ControladoraCategoria\ControladoraCategoria.csproj" />
-    <ProjectReference Include="..\ControladoraCliente\ControladoraCliente.csproj" />
-    <ProjectReference Include="..\ControladoraDescuento\ControladoraDescuento.csproj" />
-    <ProjectReference Include="..\ControladoraFactura\ControladoraFactura.csproj" />
-    <ProjectReference Include="..\ControladoraMetodoPago\ControladoraMetodoPago.csproj" />
-    <ProjectReference Include="..\ControladoraProducto\ControladoraProducto.csproj" />
-    <ProjectReference Include="..\ControladoraVenta\ControladoraVenta.csproj" />
     <ProjectReference Include="..\Entidades\Entidades.csproj" />
     <ProjectReference Include="..\Modelo\Modelo.csproj" />
   </ItemGroup>

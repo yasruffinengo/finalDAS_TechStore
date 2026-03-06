@@ -17,7 +17,7 @@ namespace Entidades
         public int ClienteId { get; set; }
         public string Nombre { get; set; }
         public string NumeroDocumento { get; set; }
-        public string Telefono { get; set; }
+        public int Telefono { get; set; }
         public string Email { get; set; }
         public string Domicilio { get; set; }
         public TipoCliente TipoDeCliente { get; set; }
