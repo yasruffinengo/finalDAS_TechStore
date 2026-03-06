@@ -9,8 +9,7 @@ namespace Entidades
     public enum TipoCliente
     {
         Mayorista,
-        Minorista,
-        Ambos
+        Minorista
     }
     public class Cliente
     {

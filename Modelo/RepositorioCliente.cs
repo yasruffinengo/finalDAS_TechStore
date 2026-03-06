@@ -61,7 +61,7 @@ namespace Modelo
         {
             try
             {
-                return context.Clientes.Where(c => c.Activo == true).ToList();
+                return context.Clientes.Where(c => c.Activo == true).ToList().AsReadOnly();
                 
             }
             catch (Exception ex)
