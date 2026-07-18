@@ -20,7 +20,7 @@ namespace Modelo
         {
             try
             {
-                context.Ventas.Add(venta);
+                context.Venta.Add(venta);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -30,13 +30,13 @@ namespace Modelo
             }
         }
 
-     
+
 
         public IReadOnlyCollection<Venta> ListarVenta()
         {
             try
             {
-                return context.Ventas.ToList().AsReadOnly();
+                return context.Venta.ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace Modelo
         {
             try
             {
-                return context.Ventas.FirstOrDefault(v => v.VentaId == id);
+                return context.Venta.FirstOrDefault(v => v.VentaId == id);
             }
             catch (Exception ex)
             {
@@ -57,4 +57,5 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ObtenerVentaPorId: " + detalle);
             }
         }
+    }
 }

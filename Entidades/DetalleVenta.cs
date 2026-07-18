@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Entidades
 {
-    [PrimaryKey(nameof(VentaId), nameof(ProductoId))] //clave compuesta
     public class DetalleVenta
     {
         public int VentaId { get; set; }
@@ -15,11 +14,13 @@ namespace Entidades
         public int ProductoId { get; set; }
         
         public int Cantidad { get; set; }
-        public decimal Monto { get; set; }
+        public decimal Subtotal { get; set; }
         
         public Venta Venta { get; set; } //ref a una vta
         public Producto Producto { get; set; } //ref a un prod
         
+
+        public decimal PrecioUnitario { get; set; }
 
     }
 }

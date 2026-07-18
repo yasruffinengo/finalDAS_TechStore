@@ -9,22 +9,31 @@ namespace Entidades
     public class Venta
     {
         public int VentaId { get; set; }
-        public int numeroVenta { get; set; }
+        public int NumeroVenta { get; set; }
         public DateTime FechaVenta { get; set; }
-        public decimal Monto { get; set; }
-        public List<Producto> ListaProductos { get; set; }
-
-        //cliente, metodo, detalleV y factura(1a1) fk 
+        public decimal MontoSubtotal { get; set; }
+        public decimal MontoDescuento { get; set; }
+        public decimal MontoTotal { get; set; }
         public int MetodoPagoId { get; set; }
-        public ICollection<DetalleVenta> Detalles { get; set; } //1aN navegacion
+        //1aN navegacion. venta.detalle 
+        public ICollection<DetalleVenta> Detalles { get; set; } = new List<DetalleVenta>();
+
         public MetodoPago MetodoPago { get; set; }
+        //relaciono cliente
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
-        public Factura Factura { get; set; } //1a1
-
+        public Factura? Factura { get; set; } //1a1
+        //relaciono sucursal
         public int SucursalId { get; set; } 
         public Sucursal Sucursal { get; set; }
+
+        //relaciono el desc con la venta
+        public int? DescuentoId { get; set; }
+        public Descuento? Descuento { get; set; }
+        //relaciono con vendedor
+        public int VendedorId { get; set; }
+        public Vendedor Vendedor { get; set; }
 
     }
 }

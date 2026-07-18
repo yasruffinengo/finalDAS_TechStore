@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class MetodoPago
+    public class Vendedor
     {
-        public int MetodoPagoId { get; set; }
+        public int VendedorId { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public bool Activo { get; set; } = true;
-
-        // un mp esta en muchas ventas:
+        public string Apellido { get; set; }
+        public bool Activo { get; set; }
+        //relac con venta
         public ICollection<Venta> Ventas { get; set; } = new List<Venta>();
     }
 }

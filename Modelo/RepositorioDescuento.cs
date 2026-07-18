@@ -19,7 +19,7 @@ namespace Modelo
         {
             try
             {
-                context.Descuentos.Add(descuento);
+                context.Descuento.Add(descuento);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -33,7 +33,7 @@ namespace Modelo
             try
             {
 
-                return context.Descuentos.Where(d => d.Activo == true).ToList().AsReadOnly();
+                return context.Descuento.Where(d => d.Activo == true).ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace Modelo
         {
             try
             {
-                context.Descuentos.Update(descuento);
+                context.Descuento.Update(descuento);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Modelo
             try
             {
                 descuento.Activo = false;
-                context.Descuentos.Update(descuento);
+                context.Descuento.Update(descuento);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -69,6 +69,7 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.EliminarDecuento(): " + detalle);
             }
         }
+        /*
         public Descuento ObtenerDescuentoPorTipoCliente(Cliente cliente)
         {
             try
@@ -83,7 +84,7 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ObtenerDescuentoPorTipoCliente(): " + detalle);
             }
         }
-
+        
         public decimal CalcularMontoDescuento(Cliente cliente, decimal subtotal)
         {
             try
@@ -95,13 +96,13 @@ namespace Modelo
 
                 decimal montoDescuento = 0;
 
-                if (descuento.TipoDeDescuento == TipoDescuento.MontoFijo)
+                if (descuento.TipoDeDescuento == TipoDescuento.Fijo)
                 {
-                    montoDescuento = descuento.Valor;
+                    montoDescuento = descuento.Monto;
                 }
                 else
                 {
-                    montoDescuento = subtotal * descuento.Valor / 100m;
+                    montoDescuento = subtotal * descuento.Monto / 100m;
                 }
 
                 return montoDescuento;
@@ -112,5 +113,6 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.CalcularMontoDescuento(): " + detalle);
             }
         }
+        */
     }
 }

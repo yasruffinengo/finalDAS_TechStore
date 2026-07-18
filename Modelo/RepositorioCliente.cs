@@ -20,7 +20,7 @@ namespace Modelo
         {
             try
             {
-                context.Clientes.Add(cliente);
+                context.Cliente.Add(cliente);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace Modelo
         {
             try
             {
-                context.Clientes.Update(cliente);
+                context.Cliente.Update(cliente);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace Modelo
             try
             {
                 cliente.Activo = false;
-                context.Clientes.Update(cliente);
+                context.Cliente.Update(cliente);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace Modelo
         {
             try
             {
-                return context.Clientes.Where(c => c.Activo == true).ToList().AsReadOnly();
+                return context.Cliente.Where(c => c.Activo == true).ToList().AsReadOnly();
                 
             }
             catch (Exception ex)

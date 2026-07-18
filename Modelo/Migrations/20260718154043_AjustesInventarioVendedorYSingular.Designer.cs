@@ -12,8 +12,8 @@ using Modelo;
 namespace Modelo.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20260223120315_Primera")]
-    partial class Primera
+    [Migration("20260718154043_AjustesInventarioVendedorYSingular")]
+    partial class AjustesInventarioVendedorYSingular
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace Modelo.Migrations
 
                     b.HasKey("CategoriaId");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categoria", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.Cliente", b =>
@@ -53,6 +53,9 @@ namespace Modelo.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Domicilio")
                         .IsRequired()
@@ -74,12 +77,14 @@ namespace Modelo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoDeCliente")
+                    b.Property<int>("TipoClienteId")
                         .HasColumnType("int");
 
                     b.HasKey("ClienteId");
 
-                    b.ToTable("Clientes");
+                    b.HasIndex("TipoClienteId");
+
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.Descuento", b =>
@@ -93,23 +98,24 @@ namespace Modelo.Migrations
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Monto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoCliente")
+                    b.Property<int>("TipoClienteId")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoDeDescuento")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("DescuentoId");
 
-                    b.ToTable("Descuentos");
+                    b.HasIndex("TipoClienteId");
+
+                    b.ToTable("Descuento", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.DetalleVenta", b =>
@@ -123,36 +129,36 @@ namespace Modelo.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Monto")
+                    b.Property<decimal>("PrecioUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Subtotal")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("VentaId", "ProductoId");
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("DetallesVenta");
+                    b.ToTable("DetalleVenta", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.Factura", b =>
                 {
-                    b.Property<int>("NumeroCAE")
+                    b.Property<int>("FacturaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NumeroCAE"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaId"));
 
                     b.Property<string>("Concepto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("CotizacionMoneda")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("DetalleIVA")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EndPonitQR")
+                    b.Property<string>("EndPointQR")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -180,6 +186,9 @@ namespace Modelo.Migrations
                     b.Property<decimal>("ImporteTributos")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<long>("NumeroCAE")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("NumeroComprobante")
                         .HasColumnType("int");
 
@@ -199,15 +208,30 @@ namespace Modelo.Migrations
                     b.Property<int>("VentaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("idMoneda")
-                        .HasColumnType("int");
-
-                    b.HasKey("NumeroCAE");
+                    b.HasKey("FacturaId");
 
                     b.HasIndex("VentaId")
                         .IsUnique();
 
-                    b.ToTable("Facturas");
+                    b.ToTable("Factura", (string)null);
+                });
+
+            modelBuilder.Entity("Entidades.Inventario", b =>
+                {
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SucursalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockProducto")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductoId", "SucursalId");
+
+                    b.HasIndex("SucursalId");
+
+                    b.ToTable("Inventario", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.MetodoPago", b =>
@@ -231,7 +255,7 @@ namespace Modelo.Migrations
 
                     b.HasKey("MetodoPagoId");
 
-                    b.ToTable("MetodosPago");
+                    b.ToTable("MetodoPago", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.Producto", b =>
@@ -245,12 +269,13 @@ namespace Modelo.Migrations
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DescuentoId")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("MontoUnitario")
                         .HasColumnType("decimal(18,2)");
@@ -259,18 +284,96 @@ namespace Modelo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VentaId")
-                        .HasColumnType("int");
-
                     b.HasKey("ProductoId");
 
                     b.HasIndex("CategoriaId");
 
-                    b.HasIndex("DescuentoId");
+                    b.HasIndex("Codigo")
+                        .IsUnique();
 
-                    b.HasIndex("VentaId");
+                    b.ToTable("Producto", (string)null);
+                });
 
-                    b.ToTable("Productos");
+            modelBuilder.Entity("Entidades.Sucursal", b =>
+                {
+                    b.Property<int>("SucursalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SucursalId"));
+
+                    b.Property<string>("Domicilio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SucursalId");
+
+                    b.ToTable("Sucursal", (string)null);
+                });
+
+            modelBuilder.Entity("Entidades.TipoCliente", b =>
+                {
+                    b.Property<int>("TipoClienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoClienteId"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipoClienteId");
+
+                    b.ToTable("TipoCliente", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            TipoClienteId = 1,
+                            Nombre = "Mayorista"
+                        },
+                        new
+                        {
+                            TipoClienteId = 2,
+                            Nombre = "Minorista"
+                        });
+                });
+
+            modelBuilder.Entity("Entidades.Vendedor", b =>
+                {
+                    b.Property<int>("VendedorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendedorId"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VendedorId");
+
+                    b.ToTable("Vendedor", (string)null);
                 });
 
             modelBuilder.Entity("Entidades.Venta", b =>
@@ -284,29 +387,68 @@ namespace Modelo.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DescuentoId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaVenta")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("MetodoPagoId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Monto")
+                    b.Property<decimal>("MontoDescuento")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Sucursal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("MontoSubtotal")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("numeroVenta")
+                    b.Property<decimal>("MontoTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("NumeroVenta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SucursalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VendedorId")
                         .HasColumnType("int");
 
                     b.HasKey("VentaId");
 
                     b.HasIndex("ClienteId");
 
+                    b.HasIndex("DescuentoId");
+
                     b.HasIndex("MetodoPagoId");
 
-                    b.ToTable("Ventas");
+                    b.HasIndex("SucursalId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("Venta", (string)null);
+                });
+
+            modelBuilder.Entity("Entidades.Cliente", b =>
+                {
+                    b.HasOne("Entidades.TipoCliente", "TipoCliente")
+                        .WithMany("Clientes")
+                        .HasForeignKey("TipoClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoCliente");
+                });
+
+            modelBuilder.Entity("Entidades.Descuento", b =>
+                {
+                    b.HasOne("Entidades.TipoCliente", "TipoCliente")
+                        .WithMany("Descuentos")
+                        .HasForeignKey("TipoClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoCliente");
                 });
 
             modelBuilder.Entity("Entidades.DetalleVenta", b =>
@@ -339,61 +481,128 @@ namespace Modelo.Migrations
                     b.Navigation("Venta");
                 });
 
+            modelBuilder.Entity("Entidades.Inventario", b =>
+                {
+                    b.HasOne("Entidades.Producto", "Producto")
+                        .WithMany("Inventarios")
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Sucursal", "Sucursal")
+                        .WithMany("Inventarios")
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+
+                    b.Navigation("Sucursal");
+                });
+
             modelBuilder.Entity("Entidades.Producto", b =>
                 {
                     b.HasOne("Entidades.Categoria", "Categoria")
-                        .WithMany()
+                        .WithMany("Productos")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entidades.Descuento", "Descuento")
-                        .WithMany()
-                        .HasForeignKey("DescuentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entidades.Venta", null)
-                        .WithMany("ListaProductos")
-                        .HasForeignKey("VentaId");
-
                     b.Navigation("Categoria");
-
-                    b.Navigation("Descuento");
                 });
 
             modelBuilder.Entity("Entidades.Venta", b =>
                 {
                     b.HasOne("Entidades.Cliente", "Cliente")
-                        .WithMany()
+                        .WithMany("Ventas")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entidades.Descuento", "Descuento")
+                        .WithMany("Ventas")
+                        .HasForeignKey("DescuentoId");
+
                     b.HasOne("Entidades.MetodoPago", "MetodoPago")
-                        .WithMany()
+                        .WithMany("Ventas")
                         .HasForeignKey("MetodoPagoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Sucursal", "Sucursal")
+                        .WithMany("Ventas")
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Vendedor", "Vendedor")
+                        .WithMany("Ventas")
+                        .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
 
+                    b.Navigation("Descuento");
+
                     b.Navigation("MetodoPago");
+
+                    b.Navigation("Sucursal");
+
+                    b.Navigation("Vendedor");
+                });
+
+            modelBuilder.Entity("Entidades.Categoria", b =>
+                {
+                    b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("Entidades.Cliente", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("Entidades.Descuento", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("Entidades.MetodoPago", b =>
+                {
+                    b.Navigation("Ventas");
                 });
 
             modelBuilder.Entity("Entidades.Producto", b =>
                 {
                     b.Navigation("Detalles");
+
+                    b.Navigation("Inventarios");
+                });
+
+            modelBuilder.Entity("Entidades.Sucursal", b =>
+                {
+                    b.Navigation("Inventarios");
+
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("Entidades.TipoCliente", b =>
+                {
+                    b.Navigation("Clientes");
+
+                    b.Navigation("Descuentos");
+                });
+
+            modelBuilder.Entity("Entidades.Vendedor", b =>
+                {
+                    b.Navigation("Ventas");
                 });
 
             modelBuilder.Entity("Entidades.Venta", b =>
                 {
                     b.Navigation("Detalles");
 
-                    b.Navigation("Factura")
-                        .IsRequired();
-
-                    b.Navigation("ListaProductos");
+                    b.Navigation("Factura");
                 });
 #pragma warning restore 612, 618
         }

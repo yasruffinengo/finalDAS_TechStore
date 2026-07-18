@@ -21,7 +21,7 @@ namespace Modelo
         {
             try
             {
-                return context.Categorias.ToList().AsReadOnly();
+                return context.Categoria.ToList().AsReadOnly();
             }
             catch (Exception ex)
             {   
@@ -35,7 +35,7 @@ namespace Modelo
         {
             try
             {
-                context.Categorias.Add(categoria);
+                context.Categoria.Add(categoria);
                 context.SaveChanges();
             }
             catch (Exception ex) {
@@ -49,7 +49,7 @@ namespace Modelo
             
                 try
                 {
-                    context.Categorias.Remove(categoria);
+                    context.Categoria.Remove(categoria);
                     context.SaveChanges();
                 }
                 catch (Exception ex)
@@ -63,7 +63,7 @@ namespace Modelo
         {
             try
             {
-                context.Categorias.Update(categoria);
+                context.Categoria.Update(categoria);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace Modelo
         {
             try
             {
-                return context.Categorias.Find(id);
+                return context.Categoria.Find(id);
             }
             catch (Exception ex)
             {

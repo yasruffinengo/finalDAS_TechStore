@@ -21,7 +21,7 @@ namespace Modelo
         {
             try
             {
-                return context.MetodosPago.Where(m => m.Activo == true).ToList().AsReadOnly();
+                return context.MetodoPago.Where(m => m.Activo == true).ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
@@ -34,7 +34,7 @@ namespace Modelo
         {
             try
             {
-                context.MetodosPago.Add(metodoPago);
+                context.MetodoPago.Add(metodoPago);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace Modelo
             try
             {
                 metodoPago.Activo = false;
-                context.MetodosPago.Update(metodoPago);
+                context.MetodoPago.Update(metodoPago);
                 context.SaveChanges();
             }
             catch (Exception ex)

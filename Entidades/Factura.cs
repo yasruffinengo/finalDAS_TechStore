@@ -22,7 +22,8 @@ namespace Entidades
         }
 
         [Key]
-        public int NumeroCAE { get; set; } //chequear lo de entity
+        public int FacturaId {  get; set; }
+        public long NumeroCAE { get; set; } //lo saque como PK alv
         public DateTime FechaVencimientoCAE { get; set; }
         public int NumeroComprobante { get; set; }
         public DateTime FechaComprobante { get; set; }
@@ -36,11 +37,11 @@ namespace Entidades
         public decimal ImporteTotal { get; set; }
         public decimal ImporteTotalNoGravado { get; set; }
         public decimal ImporteTributos { get; set; }
-        public int idMoneda { get; set; } 
-        public decimal CotizacionMoneda { get; set; }
+        //public int idMoneda { get; set; } 
+        //public decimal CotizacionMoneda { get; set; }
         public int PuntoVenta { get; set; }
         public string DetalleIVA { get; set; } 
-        public string EndPonitQR { get; set; }
+        public string EndPointQR { get; set; }
 
         public int VentaId { get; set; } //fk
         public Venta Venta { get; set; } 

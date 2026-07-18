@@ -21,7 +21,7 @@ namespace Modelo
         {
             try
             {
-                context.Productos.Add(producto);
+                context.Producto.Add(producto);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -35,7 +35,7 @@ namespace Modelo
         {
             try
             {
-                context.Productos.Update(producto);
+                context.Producto.Update(producto);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace Modelo
         {
             try
             {
-                context.Productos.Remove(producto);
+                context.Producto.Remove(producto);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace Modelo
         {
             try
             {
-                return context.Productos.ToList().AsReadOnly();
+                return context.Producto.ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
@@ -73,7 +73,7 @@ namespace Modelo
         {
             try
             {
-                return context.Productos.Find(id);
+                return context.Producto.Find(id);
             }
             catch (Exception ex)
             {

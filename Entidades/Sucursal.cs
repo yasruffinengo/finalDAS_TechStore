@@ -11,8 +11,10 @@ namespace Entidades
         public int SucursalId { get; set; }
         public string Nombre { get; set; }
         public string Domicilio { get; set; }
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         public string Email { get; set; }
+        public ICollection<Venta> Ventas { get; set; } = new List<Venta>();
+        public ICollection<Inventario> Inventarios { get; set; } = new List<Inventario>();
 
     }
 }
