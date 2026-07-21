@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,16 @@ namespace Entidades
         //public TipoCliente TipoDeCliente { get; set; }
 
         public bool Activo { get; set; } = true;
+
+        [NotMapped]
+        public string Estado
+        {
+            get
+            {
+                return Activo ? "Activo" : "Inactivo";
+            }
+        }
+
 
         //navegacion: el cliente tiene muchas ventas.
         public ICollection<Venta> Ventas { get; set; } = new List<Venta>();

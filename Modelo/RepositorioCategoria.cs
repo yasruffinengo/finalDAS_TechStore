@@ -15,22 +15,7 @@ namespace Modelo
         {
             context = new Context();
         }
-
-        //read
-        public IReadOnlyCollection<Categoria> ListarCategorias()
-        {
-            try
-            {
-                return context.Categoria.ToList().AsReadOnly();
-            }
-            catch (Exception ex)
-            {   
-
-                throw new Exception("Error al listar las categorias: " + ex.Message);
-
-            }
-        }
-     
+      
         public void AgregarCategoria(Categoria categoria)
         {
             try
@@ -43,7 +28,19 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.AgregarCategoria(): " + detalle);
             }
         }
-
+        public void ModificarCategoria(Categoria categoria)
+        {
+            try
+            {
+                context.Categoria.Update(categoria);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Error en Repositorio.ModificarCategoria(): " + detalle);
+            }
+        }
         public void EliminarCategoria(Categoria categoria)
         {
             
@@ -59,20 +56,19 @@ namespace Modelo
                 }
             
         }
-        public void ModificarCategoria(Categoria categoria)
+        public IReadOnlyCollection<Categoria> ListarCategorias()
         {
             try
             {
-                context.Categoria.Update(categoria);
-                context.SaveChanges();
+                return context.Categoria.ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ModificarCategoria(): " + detalle);
+
+                throw new Exception("Error al listar las categorias: " + ex.Message);
+
             }
         }
-
         public Categoria ObtenerCategoriaPorId(int id)
         {
             try
@@ -85,6 +81,22 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ObtenerCategoriaPorId(): " + detalle);
             }
         }
+        public Categoria ObtenerCategoriaPorNombre(string nombre)
+        {
+            try
+            {
+                return context.Categoria.FirstOrDefault(c => c.Nombre == nombre);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
 
+                throw new Exception(
+                    "Error en Repositorio.ObtenerCategoriaPorNombre(): " + detalle
+                );
+            }
+        }
     }
 }

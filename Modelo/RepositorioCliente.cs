@@ -70,7 +70,34 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ListarClientes(): " + detalle);
             }
         }
+        public Cliente ObtenerClientePorId(int id)
+        {
+            try
+            {
+                return context.Cliente.Find(id);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Error en Repositorio.ObtenerClientePorId(): " + detalle);
+            }
+        }
+        public Cliente ObtenerClientePorDni(string dni)
+        {
+            try
+            {
+                return context.Cliente.FirstOrDefault(c => c.NumeroDocumento == dni);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
 
-
+                throw new Exception(
+                    "Error en Repositorio.ObtenerClientePorDni(): " + detalle
+                );
+            }
+        }
     }
 }

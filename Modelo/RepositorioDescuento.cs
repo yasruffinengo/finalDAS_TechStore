@@ -28,20 +28,6 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.AgregarDescuento(): " + detalle);
             }
         }
-        public IReadOnlyCollection<Descuento> ListarDescuentos()
-        {
-            try
-            {
-
-                return context.Descuento.Where(d => d.Activo == true).ToList().AsReadOnly();
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ListarDescuentos(): " + detalle);
-            }
-        }
-
         public void ModificarDescuento(Descuento descuento)
         {
             try
@@ -69,22 +55,71 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.EliminarDecuento(): " + detalle);
             }
         }
-        /*
-        public Descuento ObtenerDescuentoPorTipoCliente(Cliente cliente)
+        public IReadOnlyCollection<Descuento> ListarDescuentosActivos()
         {
             try
             {
-                Descuento descuento = context.Descuentos.Where(d => d.Activo && d.TipoCliente == cliente.TipoDeCliente).FirstOrDefault();
 
-                return descuento;
+                return context.Descuento.Where(d => d.Activo == true).ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ObtenerDescuentoPorTipoCliente(): " + detalle);
+                throw new Exception("Error en Repositorio.ListarDescuentos(): " + detalle);
             }
         }
-        
+
+        public Descuento? ObtenerDescuentoPorId(int id)
+        {
+            try
+            {
+                return context.Descuento.Find(id);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Error en Repositorio.ObtenerDescuentoPorId(): " + detalle);
+            }
+        }
+        public Descuento? ObtenerDescuentoPorNombre(string nombre)
+        {
+            try
+            {
+                return context.Descuento.FirstOrDefault(d => d.Nombre == nombre);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerDescuentoPorNombre(): " + detalle
+                );
+            }
+        }
+
+        public IReadOnlyCollection<Descuento> ObtenerDescuentosPorTipoCliente(int tipoClienteId)
+        {
+            try
+            {
+                return context.Descuento
+                    .Where(d => d.TipoClienteId == tipoClienteId)
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerDescuentosPorTipoCliente(): " + detalle
+                );
+            }
+        }
+        /*
         public decimal CalcularMontoDescuento(Cliente cliente, decimal subtotal)
         {
             try
