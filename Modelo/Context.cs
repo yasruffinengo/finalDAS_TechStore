@@ -42,6 +42,14 @@ namespace Modelo
                 .HasIndex(p => p.Codigo)
                 .IsUnique();
 
+            //xq relacione sucursal con vendedor.
+            //para que no elimine vendedor al eliminar sucursal.
+            modelBuilder.Entity<Vendedor>()
+                .HasOne(v => v.Sucursal)
+                .WithMany(s => s.Vendedores)
+                .HasForeignKey(v => v.SucursalId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Inventario>()
                 .HasOne(i => i.Producto)
                 .WithMany(p => p.Inventarios)

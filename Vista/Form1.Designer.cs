@@ -83,12 +83,14 @@
             descuentosToolStripMenuItem.Name = "descuentosToolStripMenuItem";
             descuentosToolStripMenuItem.Size = new Size(282, 34);
             descuentosToolStripMenuItem.Text = "descuentos";
+            descuentosToolStripMenuItem.Click += descuentosToolStripMenuItem_Click;
             // 
             // metodosDePagoToolStripMenuItem
             // 
             metodosDePagoToolStripMenuItem.Name = "metodosDePagoToolStripMenuItem";
             metodosDePagoToolStripMenuItem.Size = new Size(282, 34);
             metodosDePagoToolStripMenuItem.Text = "metodos de pago";
+            metodosDePagoToolStripMenuItem.Click += metodosDePagoToolStripMenuItem_Click;
             // 
             // sucursaleToolStripMenuItem
             // 
@@ -107,22 +109,23 @@
             // clienteToolStripMenuItem
             // 
             clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            clienteToolStripMenuItem.Size = new Size(270, 34);
+            clienteToolStripMenuItem.Size = new Size(190, 34);
             clienteToolStripMenuItem.Text = "producto";
             clienteToolStripMenuItem.Click += clienteToolStripMenuItem_Click;
             // 
             // vendedorToolStripMenuItem
             // 
             vendedorToolStripMenuItem.Name = "vendedorToolStripMenuItem";
-            vendedorToolStripMenuItem.Size = new Size(270, 34);
+            vendedorToolStripMenuItem.Size = new Size(190, 34);
             vendedorToolStripMenuItem.Text = "cliente";
             vendedorToolStripMenuItem.Click += vendedorToolStripMenuItem_Click;
             // 
             // vendedorToolStripMenuItem1
             // 
             vendedorToolStripMenuItem1.Name = "vendedorToolStripMenuItem1";
-            vendedorToolStripMenuItem1.Size = new Size(270, 34);
+            vendedorToolStripMenuItem1.Size = new Size(190, 34);
             vendedorToolStripMenuItem1.Text = "vendedor";
+            vendedorToolStripMenuItem1.Click += vendedorToolStripMenuItem1_Click;
             // 
             // reportesToolStripMenuItem
             // 

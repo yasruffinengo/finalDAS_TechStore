@@ -13,6 +13,7 @@ namespace Entidades
         public string Codigo {get; set; }
         public string Descripcion { get; set; }
         public decimal MontoUnitario { get; set; }
+        public bool Activo { get; set; } = true;
 
         //descuento y categoria fk 
         public int CategoriaId { get; set; }
@@ -20,13 +21,8 @@ namespace Entidades
 
         //navegacion. producto.detalle
         public ICollection<DetalleVenta> Detalles { get; set; } = new List<DetalleVenta>();
+        //p
         public ICollection<Inventario> Inventarios { get; set; } = new List<Inventario>();
-        /*
-        public int DescuentoId { get; set; }
-        public Descuento Descuento { get; set; }
-        */
-
-
 
     }
 }

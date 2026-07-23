@@ -9,7 +9,8 @@ namespace Vista
 
         private void sucursaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmSucursal frm = new frmSucursal();
+            frm.ShowDialog();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -36,6 +37,24 @@ namespace Vista
         private void vendedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmCliente frm = new frmCliente();
+            frm.ShowDialog();
+        }
+
+        private void vendedorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmVendedor frm = new frmVendedor();
+            frm.ShowDialog();
+        }
+
+        private void metodosDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMetodoPago frm = new frmMetodoPago();
+            frm.ShowDialog();
+        }
+
+        private void descuentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDescuento frm = new frmDescuento ();
             frm.ShowDialog();
         }
     }

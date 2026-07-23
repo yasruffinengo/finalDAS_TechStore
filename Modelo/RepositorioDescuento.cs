@@ -41,20 +41,7 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ModificarDescuento(): " + detalle);
             }
         }
-        public void EliminarDescuento(Descuento descuento)
-        {
-            try
-            {
-                descuento.Activo = false;
-                context.Descuento.Update(descuento);
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.EliminarDecuento(): " + detalle);
-            }
-        }
+        
         public IReadOnlyCollection<Descuento> ListarDescuentosActivos()
         {
             try
@@ -65,10 +52,29 @@ namespace Modelo
             catch (Exception ex)
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ListarDescuentos(): " + detalle);
+                throw new Exception("Error en Repositorio.ListarDescuentosActivos(): " + detalle);
             }
         }
+        //
+        public IReadOnlyCollection<Descuento> ListarDescuentos()
+        {
+            try
+            {
+                return context.Descuento
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
 
+                throw new Exception(
+                    "Error en Repositorio.ListarDescuentos): " + detalle
+                );
+            }
+        }
         public Descuento? ObtenerDescuentoPorId(int id)
         {
             try
@@ -98,7 +104,7 @@ namespace Modelo
                 );
             }
         }
-
+        //devuelve todos 
         public IReadOnlyCollection<Descuento> ObtenerDescuentosPorTipoCliente(int tipoClienteId)
         {
             try
@@ -119,35 +125,5 @@ namespace Modelo
                 );
             }
         }
-        /*
-        public decimal CalcularMontoDescuento(Cliente cliente, decimal subtotal)
-        {
-            try
-            {
-                Descuento descuento = ObtenerDescuentoPorTipoCliente(cliente);
-
-                if (descuento == null)
-                    return 0;
-
-                decimal montoDescuento = 0;
-
-                if (descuento.TipoDeDescuento == TipoDescuento.Fijo)
-                {
-                    montoDescuento = descuento.Monto;
-                }
-                else
-                {
-                    montoDescuento = subtotal * descuento.Monto / 100m;
-                }
-
-                return montoDescuento;
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.CalcularMontoDescuento(): " + detalle);
-            }
-        }
-        */
     }
 }

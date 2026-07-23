@@ -14,7 +14,7 @@ namespace Vista
 {
     public partial class frmCliente : Form
     {
-        private Cliente clienteEnEdicion;
+        private Cliente? clienteEnEdicion;
         public frmCliente()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace Vista
         private void Refrescar()
         {
             dgvClientes.DataSource = null;
-            dgvClientes.DataSource = ControladoraCliente.ControladoraCliente.Instancia.ListarClientes();
+            dgvClientes.DataSource = ControladoraCliente.Instancia.ListarClientes();
             //oculto el bool
             dgvClientes.Columns["Activo"].Visible = false;
         }
@@ -37,6 +37,15 @@ namespace Vista
             txtEmail.Clear();
             txtDomicilio.Clear();
             cmbTiposCliente.SelectedIndex = 0;
+        }
+        private void LlenarCampos(Cliente cliente)
+        {
+            txtNombre.Text = cliente.Nombre.ToString();
+            txtDni.Text = cliente.NumeroDocumento.ToString();
+            txtTelefono.Text = cliente.Telefono.ToString();
+            txtEmail.Text = cliente.Email.ToString();
+            txtDomicilio.Text = cliente.Domicilio.ToString();
+            cmbTiposCliente.SelectedValue = cliente.TipoClienteId;
         }
 
         //para cargar el cmbTipoCliente
@@ -69,7 +78,7 @@ namespace Vista
                     cliente.TipoClienteId = (int)cmbTiposCliente.SelectedValue;
 
                     // Llamar a la controladora y recibir el resultado
-                    string mensaje = ControladoraCliente.ControladoraCliente.Instancia.AgregarCliente(cliente);
+                    string mensaje = ControladoraCliente.Instancia.AgregarCliente(cliente);
 
                     // Mostrar el resultado
                     MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -91,8 +100,9 @@ namespace Vista
                 clienteEnEdicion.Telefono = txtTelefono.Text;
                 clienteEnEdicion.Email = txtEmail.Text;
                 clienteEnEdicion.Domicilio = txtDomicilio.Text;
+                clienteEnEdicion.TipoClienteId = (int)cmbTiposCliente.SelectedValue;
 
-                string mensaje = ControladoraCliente.ControladoraCliente.Instancia.ModificarCliente(clienteEnEdicion);
+                string mensaje = ControladoraCliente.Instancia.ModificarCliente(clienteEnEdicion);
 
                 MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -103,15 +113,7 @@ namespace Vista
             Refrescar();
         }
 
-        private void LlenarCampos(Cliente cliente)
-        {
-            txtNombre.Text = cliente.Nombre.ToString();
-            txtDni.Text = cliente.NumeroDocumento.ToString();
-            txtTelefono.Text = cliente.Telefono.ToString();
-            txtEmail.Text = cliente.Email.ToString();
-            txtDomicilio.Text = cliente.Domicilio.ToString();
-            cmbTiposCliente.SelectedValue = cliente.TipoClienteId;
-        }
+
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (dgvClientes.CurrentRow == null)
@@ -125,30 +127,46 @@ namespace Vista
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
+        
         {
             if (dgvClientes.CurrentRow == null)
             {
-                MessageBox.Show("Debe seleccionar un cliente para eliminar.");
+                MessageBox.Show("Debe seleccionar un cliente.");
                 return;
             }
 
-            
-            Cliente clienteSeleccionado = (Cliente)dgvClientes.CurrentRow.DataBoundItem;
+            Cliente clienteSeleccionado =
+                (Cliente)dgvClientes.CurrentRow.DataBoundItem;
 
-            // Confirmación (opcional)
+            string accion = clienteSeleccionado.Activo
+                ? "desactivar"
+                : "activar";
+
             DialogResult confirmacion = MessageBox.Show(
-                "¿Seguro que desea eliminar este cliente?",
-                "Confirmar eliminación",
+                $"¿Seguro que desea {accion} este cliente?",
+                "Confirmar cambio de estado",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
+                MessageBoxIcon.Warning
+            );
 
             if (confirmacion == DialogResult.No)
                 return;
-            string mensaje = ControladoraCliente.ControladoraCliente.Instancia.EliminarCliente(clienteSeleccionado.ClienteId);
 
-            MessageBox.Show(mensaje);
+            string mensaje =
+                ControladoraCliente.Instancia
+                    .CambiarEstadoCliente(clienteSeleccionado.ClienteId);
 
+            MessageBox.Show(
+                mensaje,
+                "Resultado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
+            clienteEnEdicion = null;
+            LimpiarCampos();
             Refrescar();
         }
+    
     }
 }

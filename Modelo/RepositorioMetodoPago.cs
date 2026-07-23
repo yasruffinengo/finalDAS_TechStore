@@ -13,21 +13,8 @@ namespace Modelo
         private Context context;
 
         public RepositorioMetodoPago()
-        { 
-            context = new Context();
-        }
-
-        public IReadOnlyCollection<MetodoPago> ListarMetodoPago()
         {
-            try
-            {
-                return context.MetodoPago.Where(m => m.Activo == true).ToList().AsReadOnly();
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ListarMetodoPago: " + detalle);
-            }
+            context = new Context();
         }
 
         public void AgregarMetodoPago(MetodoPago metodoPago)
@@ -39,37 +26,110 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.AgregarMetodoPago: " + detalle);
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.AgregarMetodoPago(): " + detalle
+                );
             }
         }
-        public void EliminarMetodoPago(MetodoPago metodoPago)
+
+        public void ModificarMetodoPago(MetodoPago metodoPago)
         {
             try
             {
-                metodoPago.Activo = false;
                 context.MetodoPago.Update(metodoPago);
                 context.SaveChanges();
             }
             catch (Exception ex)
             {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.EliminarMetodoPago(): " + detalle);
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ModificarMetodoPago(): " + detalle
+                );
             }
         }
 
-        public void ModificarMetodoPago (MetodoPago metodoPago)
+        public IReadOnlyCollection<MetodoPago> ListarMetodosPago()
         {
             try
             {
-                context.Update(metodoPago);
-                context.SaveChanges();
+                return context.MetodoPago
+                    .ToList()
+                    .AsReadOnly();
             }
-            
             catch (Exception ex)
             {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ModificarMetodoPago(): " + detalle);
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarMetodosPago(): " + detalle
+                );
+            }
+        }
+
+        public IReadOnlyCollection<MetodoPago> ListarMetodosPagoActivos()
+        {
+            try
+            {
+                return context.MetodoPago
+                    .Where(m => m.Activo)
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarMetodosPagoActivos(): " + detalle
+                );
+            }
+        }
+
+        public MetodoPago? ObtenerMetodoPagoPorId(int metodoPagoId)
+        {
+            try
+            {
+                return context.MetodoPago.Find(metodoPagoId);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerMetodoPagoPorId(): " + detalle
+                );
+            }
+        }
+
+        public MetodoPago? ObtenerMetodoPagoPorNombre(string nombre)
+        {
+            try
+            {
+                return context.MetodoPago
+                    .FirstOrDefault(m => m.Nombre == nombre);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerMetodoPagoPorNombre(): " + detalle
+                );
             }
         }
 

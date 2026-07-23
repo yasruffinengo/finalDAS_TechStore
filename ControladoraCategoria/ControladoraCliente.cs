@@ -2,7 +2,7 @@
 using Modelo;
 using System.Text.RegularExpressions;
 
-namespace ControladoraCliente
+namespace Controladora
 {
     public class ControladoraCliente
     {
@@ -131,31 +131,9 @@ namespace ControladoraCliente
             catch (Exception ex)
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                return "Error al modificar categoria: " + detalle;
+                return "Error al modificar cliente: " + detalle;
             }
         }
-
-        public string EliminarCliente(int idCliente)
-        {
-            try
-            {
-                // Buscar antes de eliminar
-                Cliente? cliente = repositorio.ObtenerClientePorId(idCliente);
-
-                if (cliente == null)
-                    return "Error: el cliente no existe o ya fue eliminado.";
-
-                // Si existe, eliminar
-                repositorio.EliminarCliente(cliente);
-                return "Cliente eliminado correctamente.";
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                return "Error al eliminar cliente: " + detalle;
-            }
-        }
-
         public List<Cliente> ListarClientes()
         {
             try
@@ -167,6 +145,48 @@ namespace ControladoraCliente
                 throw new Exception("error al listar clientes" + ex.Message);
             }
 
+        }
+        public List<Cliente> ListarClientesActivos()
+        {
+            try
+            {
+                return repositorio.ListarClientesActivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al listar clientes activos" + ex.Message);
+            }
+
+        }
+
+        //baja logica ....  .. . . .
+        public string CambiarEstadoCliente(int clienteId)
+        {
+            try
+            {
+                Cliente? cliente =
+                    repositorio.ObtenerClientePorId(clienteId);
+
+                if (cliente == null)
+                    return "Error: El cliente no existe.";
+
+                cliente.Activo = !cliente.Activo;
+
+                repositorio.ModificarCliente(cliente);
+
+                if (cliente.Activo)
+                    return "Cliente activado correctamente.";
+
+                return "Cliente desactivado correctamente.";
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                return "Error al cambiar el estado del cliente: " + detalle;
+            }
         }
     }
 }

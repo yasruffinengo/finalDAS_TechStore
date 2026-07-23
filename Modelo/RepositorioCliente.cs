@@ -43,21 +43,9 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ModificarCliente(): " + detalle);
             }
         }
-        public void EliminarCliente(Cliente cliente)
-        {
-            try
-            {
-                cliente.Activo = false;
-                context.Cliente.Update(cliente);
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.EliminarCliente(): " + detalle);
-            }
-        }
-        public IReadOnlyCollection<Cliente> ListarClientes()
+        //se llama eliminar, pero es BAJA LOGICA
+        //cambia el estado. 
+        public IReadOnlyCollection<Cliente> ListarClientesActivos()
         {
             try
             {
@@ -67,8 +55,29 @@ namespace Modelo
             catch (Exception ex)
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.ListarClientes(): " + detalle);
+                throw new Exception("Error en Repositorio.ListarClientesActivos(): " + detalle);
             }
+        }
+        public IReadOnlyCollection<Cliente> ListarClientes()
+        {
+
+            try
+            {
+                return context.Cliente
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarClientes(): " + detalle
+                );
+            }
+        
         }
         public Cliente ObtenerClientePorId(int id)
         {
