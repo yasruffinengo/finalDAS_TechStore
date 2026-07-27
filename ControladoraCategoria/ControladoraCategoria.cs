@@ -134,7 +134,18 @@ namespace ControladoraCategoria
             }
 
         }
+        public List<Categoria> ListarCategoriasActivas()
+        {
+            try
+            {
+                return repositorio.ListarCategorias().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al listar categorias" + ex.Message);
+            }
 
+        }
 
     }
 }

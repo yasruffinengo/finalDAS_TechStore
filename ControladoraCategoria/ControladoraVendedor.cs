@@ -142,7 +142,7 @@ namespace Controladora
                 repositorio.ModificarVendedor(vendedor);
 
                 if (vendedor.Activo)
-                    return "Vendedor activado ocorrectamente.";
+                    return "Vendedor activado correctamente.";
 
                 return "Vendedor desactivado correctamente.";
             }

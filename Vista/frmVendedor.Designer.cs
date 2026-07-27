@@ -40,12 +40,16 @@
             btnModificar = new Button();
             label7 = new Label();
             dgvVendedores = new DataGridView();
+            txtDni = new TextBox();
+            label4 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVendedores).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtDni);
+            groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(cmbSucursales);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txtApellido);
@@ -53,16 +57,17 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
-            groupBox1.Location = new Point(774, 110);
+            groupBox1.Location = new Point(957, 104);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(432, 319);
+            groupBox1.Size = new Size(432, 390);
             groupBox1.TabIndex = 13;
             groupBox1.TabStop = false;
             // 
             // cmbSucursales
             // 
+            cmbSucursales.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSucursales.FormattingEnabled = true;
-            cmbSucursales.Location = new Point(158, 195);
+            cmbSucursales.Location = new Point(158, 253);
             cmbSucursales.Name = "cmbSucursales";
             cmbSucursales.Size = new Size(245, 33);
             cmbSucursales.TabIndex = 16;
@@ -70,7 +75,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(24, 203);
+            label3.Location = new Point(24, 261);
             label3.Name = "label3";
             label3.Size = new Size(81, 25);
             label3.TabIndex = 15;
@@ -111,7 +116,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(291, 253);
+            btnGuardar.Location = new Point(291, 316);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(112, 34);
             btnGuardar.TabIndex = 5;
@@ -121,7 +126,7 @@
             // 
             // btnCambiarEstado
             // 
-            btnCambiarEstado.Location = new Point(562, 582);
+            btnCambiarEstado.Location = new Point(742, 585);
             btnCambiarEstado.Name = "btnCambiarEstado";
             btnCambiarEstado.Size = new Size(177, 34);
             btnCambiarEstado.TabIndex = 19;
@@ -131,7 +136,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(424, 582);
+            btnModificar.Location = new Point(604, 585);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(112, 34);
             btnModificar.TabIndex = 18;
@@ -155,16 +160,35 @@
             // 
             dgvVendedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVendedores.Location = new Point(12, 83);
+            dgvVendedores.MultiSelect = false;
             dgvVendedores.Name = "dgvVendedores";
+            dgvVendedores.ReadOnly = true;
             dgvVendedores.RowHeadersWidth = 62;
-            dgvVendedores.Size = new Size(727, 468);
+            dgvVendedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvVendedores.Size = new Size(907, 468);
             dgvVendedores.TabIndex = 16;
+            // 
+            // txtDni
+            // 
+            txtDni.Location = new Point(158, 188);
+            txtDni.Name = "txtDni";
+            txtDni.Size = new Size(245, 31);
+            txtDni.TabIndex = 18;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(24, 194);
+            label4.Name = "label4";
+            label4.Size = new Size(43, 25);
+            label4.TabIndex = 17;
+            label4.Text = "Dni:";
             // 
             // frmVendedor
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1252, 644);
+            ClientSize = new Size(1415, 644);
             Controls.Add(btnCambiarEstado);
             Controls.Add(btnModificar);
             Controls.Add(label7);
@@ -194,5 +218,7 @@
         private DataGridView dgvVendedores;
         private ComboBox cmbSucursales;
         private Label label3;
+        private TextBox txtDni;
+        private Label label4;
     }
 }

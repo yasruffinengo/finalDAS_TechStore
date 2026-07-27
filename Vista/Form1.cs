@@ -54,7 +54,24 @@ namespace Vista
 
         private void descuentosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmDescuento frm = new frmDescuento ();
+            frmDescuento frm = new frmDescuento();
+            frm.ShowDialog();
+        }
+
+        private void reportesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnProductos_Click(object sender, EventArgs e)
+        {
+            frmProducto frm = new frmProducto();
+            frm.ShowDialog();
+        }
+
+        private void btbConsultarInventario_Click(object sender, EventArgs e)
+        {
+            frmInventario frm = new frmInventario();    
             frm.ShowDialog();
         }
     }

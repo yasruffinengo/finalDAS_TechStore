@@ -19,6 +19,9 @@ namespace Vista
         public frmDescuento()
         {
             InitializeComponent();
+            CargarTiposCliente();
+            CargarTiposDescuento();
+            Refrescar();
         }
         private void Refrescar()
         {
@@ -26,18 +29,24 @@ namespace Vista
             dgvDescuentos.DataSource = ControladoraDescuento.Instancia.ListarDescuentos();
             //oculto el bool
             dgvDescuentos.Columns["Activo"].Visible = false;
+            dgvDescuentos.Columns["TipoClienteId"].Visible = false;
+            dgvDescuentos.Columns["DescuentoId"].HeaderText = "Id";
+            dgvDescuentos.Columns["TipoCliente"].HeaderText = "Cliente";
+            dgvDescuentos.Columns["TipoDeDescuento"].HeaderText = "Tipo";
         }
         private void LimpiarCampos()
         {
             txtNombre.Clear();
+            txtDescripcion.Clear();
             nudValor.Value = 0;
-            cmbTipoDescuento.SelectedIndex = 0;
-            cmbTipoCliente.SelectedIndex = 0;
+            cmbTipoDescuento.SelectedIndex = -1;
+            cmbTipoCliente.SelectedIndex = -1;
             txtNombre.Focus();
         }
         private void LlenarCampos(Descuento descuento)
         {
             txtNombre.Text = descuento.Nombre;
+            txtDescripcion.Text = descuento.Descripcion;
             nudValor.Value = descuento.Valor;
 
             cmbTipoDescuento.SelectedItem =
@@ -46,6 +55,24 @@ namespace Vista
             cmbTipoCliente.SelectedValue =
                 descuento.TipoClienteId;
 
+        }
+        //cargo cmb
+        private void CargarTiposDescuento()
+        {
+            cmbTipoDescuento.DataSource =
+                Enum.GetValues(typeof(TipoDescuento));
+
+            cmbTipoDescuento.SelectedIndex = -1;
+        }
+        //cargo cmb
+        private void CargarTiposCliente()
+        {
+            cmbTipoCliente.DataSource =
+                ControladoraTipoCliente.Instancia.ListarTiposCliente();
+
+            cmbTipoCliente.DisplayMember = "Nombre";
+            cmbTipoCliente.ValueMember = "TipoClienteId";
+            cmbTipoCliente.SelectedIndex = -1;
         }
         //retorna el id de tipoCliente
         private int ObtenerTipoClienteSeleccionado()
@@ -94,6 +121,7 @@ namespace Vista
                     Descuento nuevoDescuento = new Descuento
                     {
                         Nombre = txtNombre.Text,
+                        Descripcion = txtDescripcion.Text,
                         Valor = nudValor.Value,
                         //idTipoDescuento
                         TipoDeDescuento =
@@ -111,6 +139,7 @@ namespace Vista
                 {
                     descuentoEnEdicion.Nombre =
                         txtNombre.Text;
+                    descuentoEnEdicion.Descripcion = txtDescripcion.Text;
 
                     descuentoEnEdicion.Valor =
                         nudValor.Value;

@@ -32,6 +32,8 @@
             label7 = new Label();
             label4 = new Label();
             groupBox1 = new GroupBox();
+            txtDescripcion = new TextBox();
+            label5 = new Label();
             cmbTipoCliente = new ComboBox();
             nudValor = new NumericUpDown();
             cmbTipoDescuento = new ComboBox();
@@ -52,9 +54,12 @@
             // 
             dgvDescuentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDescuentos.Location = new Point(39, 111);
+            dgvDescuentos.MultiSelect = false;
             dgvDescuentos.Name = "dgvDescuentos";
+            dgvDescuentos.ReadOnly = true;
             dgvDescuentos.RowHeadersWidth = 62;
-            dgvDescuentos.Size = new Size(631, 475);
+            dgvDescuentos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDescuentos.Size = new Size(865, 475);
             dgvDescuentos.TabIndex = 0;
             // 
             // label7
@@ -72,7 +77,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(692, 87);
+            label4.Location = new Point(952, 86);
             label4.Name = "label4";
             label4.Size = new Size(153, 25);
             label4.TabIndex = 13;
@@ -80,6 +85,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtDescripcion);
+            groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(cmbTipoCliente);
             groupBox1.Controls.Add(nudValor);
             groupBox1.Controls.Add(cmbTipoDescuento);
@@ -89,17 +96,33 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
-            groupBox1.Location = new Point(692, 115);
+            groupBox1.Location = new Point(952, 114);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(472, 393);
+            groupBox1.Size = new Size(472, 444);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
+            // 
+            // txtDescripcion
+            // 
+            txtDescripcion.Location = new Point(211, 123);
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(245, 31);
+            txtDescripcion.TabIndex = 22;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(24, 129);
+            label5.Name = "label5";
+            label5.Size = new Size(108, 25);
+            label5.TabIndex = 21;
+            label5.Text = "Descripcion:";
             // 
             // cmbTipoCliente
             // 
             cmbTipoCliente.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoCliente.FormattingEnabled = true;
-            cmbTipoCliente.Location = new Point(211, 257);
+            cmbTipoCliente.Location = new Point(211, 327);
             cmbTipoCliente.Name = "cmbTipoCliente";
             cmbTipoCliente.Size = new Size(245, 33);
             cmbTipoCliente.TabIndex = 20;
@@ -107,7 +130,7 @@
             // nudValor
             // 
             nudValor.DecimalPlaces = 2;
-            nudValor.Location = new Point(211, 120);
+            nudValor.Location = new Point(211, 190);
             nudValor.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudValor.Name = "nudValor";
             nudValor.Size = new Size(245, 31);
@@ -117,7 +140,7 @@
             // 
             cmbTipoDescuento.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoDescuento.FormattingEnabled = true;
-            cmbTipoDescuento.Location = new Point(211, 184);
+            cmbTipoDescuento.Location = new Point(211, 254);
             cmbTipoDescuento.Name = "cmbTipoDescuento";
             cmbTipoDescuento.Size = new Size(245, 33);
             cmbTipoDescuento.TabIndex = 19;
@@ -125,7 +148,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(24, 260);
+            label8.Location = new Point(24, 330);
             label8.Name = "label8";
             label8.Size = new Size(131, 25);
             label8.TabIndex = 18;
@@ -134,7 +157,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(24, 192);
+            label3.Location = new Point(24, 262);
             label3.Name = "label3";
             label3.Size = new Size(163, 25);
             label3.TabIndex = 11;
@@ -159,7 +182,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 126);
+            label2.Location = new Point(24, 196);
             label2.Name = "label2";
             label2.Size = new Size(56, 25);
             label2.TabIndex = 1;
@@ -167,7 +190,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(344, 328);
+            btnGuardar.Location = new Point(344, 398);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(112, 34);
             btnGuardar.TabIndex = 5;
@@ -177,7 +200,7 @@
             // 
             // btnCambiarEstado
             // 
-            btnCambiarEstado.Location = new Point(493, 602);
+            btnCambiarEstado.Location = new Point(727, 602);
             btnCambiarEstado.Name = "btnCambiarEstado";
             btnCambiarEstado.Size = new Size(177, 34);
             btnCambiarEstado.TabIndex = 16;
@@ -187,7 +210,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(355, 602);
+            btnModificar.Location = new Point(589, 602);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(112, 34);
             btnModificar.TabIndex = 15;
@@ -199,7 +222,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1216, 648);
+            ClientSize = new Size(1452, 648);
             Controls.Add(btnCambiarEstado);
             Controls.Add(btnModificar);
             Controls.Add(label4);
@@ -234,5 +257,7 @@
         private ComboBox cmbTipoCliente;
         private Button btnCambiarEstado;
         private Button btnModificar;
+        private TextBox txtDescripcion;
+        private Label label5;
     }
 }

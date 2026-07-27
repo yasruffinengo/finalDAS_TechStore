@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Controladora;
+using ControladoraCategoria;
+using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,256 @@ namespace Vista
 {
     public partial class frmProducto : Form
     {
+        private Producto? productoEnEdicion;
         public frmProducto()
         {
             InitializeComponent();
+            CargarCategorias();
+            Refrescar();
+        }
+        private void Refrescar()
+        {
+            dgvProductos.DataSource = null;
+            dgvProductos.DataSource = ControladoraProducto.Instancia.ListarProductos();
+            //oculto el bool
+            dgvProductos.Columns["Activo"].Visible = false;
+            dgvProductos.Columns["CategoriaId"].Visible = false;
+            dgvProductos.Columns["Detalles"].Visible = false;
+            dgvProductos.Columns["Inventarios"].Visible = false;
+            dgvProductos.Columns["ProductoId"].HeaderText = "Id";
+            dgvProductos.Columns["MontoUnitario"].HeaderText = "Precio";
+        }
+        private void LimpiarCampos()
+        {
+            txtNombre.Clear();
+            txtCodigo.Clear();
+            txtDescripcion.Clear();
+            nudMontoUnitario.Value = 0;
+            cmbCategoria.SelectedIndex = -1;
+
+            txtNombre.Focus();
+        }
+        //metodo para el btnMODIFICAR
+        private void LlenarCampos(Producto producto)
+        {
+            txtNombre.Text = producto.Nombre;
+            txtCodigo.Text = producto.Codigo;
+            txtDescripcion.Text = producto.Descripcion;
+            //selectedValue el valuemember = valor asociado, osea el id
+            cmbCategoria.SelectedValue = producto.CategoriaId;
+            nudMontoUnitario.Value = producto.MontoUnitario;
+
+            //selectedItem espera el OBJETO
+            // // LA SACO XQ NO HACE FALTA
+            //cmbCategoria.SelectedItem = producto.Categoria;
+
+        }
+        //los cmb tengan las categorias
+        private void CargarCategorias()
+        {
+            var categorias = ControladoraCategoria.ControladoraCategoria.Instancia.ListarCategorias();
+
+            // Combo del alta/modificación
+            cmbCategoria.DataSource = categorias.ToList();
+            cmbCategoria.DisplayMember = "Nombre";
+            cmbCategoria.ValueMember = "CategoriaId";
+            cmbCategoria.SelectedIndex = -1;
+
+            // Combo del filtro
+            cmbBusquedaCategoria.DataSource = categorias.ToList();
+            cmbBusquedaCategoria.DisplayMember = "Nombre";
+            cmbBusquedaCategoria.ValueMember = "CategoriaId";
+            cmbBusquedaCategoria.SelectedIndex = -1;
+        }
+        //metodo para obtener valor del cmb 
+        private int ObtenerCategoriaSeleccionada()
+        {
+            if (cmbCategoria.SelectedValue == null)
+                return 0;
+            //retorna ID CATEGORIA
+            return Convert.ToInt32(
+                cmbCategoria.SelectedValue
+            );
+        }
+
+
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvProductos.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un producto para editar.");
+                return;
+            }
+
+            productoEnEdicion = (Producto)dgvProductos.CurrentRow.DataBoundItem;
+            LlenarCampos(productoEnEdicion);
+            txtNombre.Focus();
+        }
+        private void btnCambiarEstado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //databounditem es el objeto de la fila.
+                if (dgvProductos.CurrentRow == null ||
+                    dgvProductos.CurrentRow.DataBoundItem == null)
+                {
+                    MessageBox.Show(
+                        "Debe seleccionar un producto.",
+                        "Atención",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                Producto productoSeleccionado =
+                    (Producto)dgvProductos
+                        .CurrentRow
+                        .DataBoundItem;
+
+                string accion = productoSeleccionado.Activo
+                    ? "desactivar"
+                    : "activar";
+
+                DialogResult confirmacion = MessageBox.Show(
+                    $"¿Seguro que desea {accion} el producto " +
+                    $"\"{productoSeleccionado.Nombre}\"?",
+                    "Confirmar cambio de estado",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (confirmacion != DialogResult.Yes)
+                {
+                    return;
+                }
+
+                string mensaje = ControladoraProducto
+                    .Instancia
+                    .CambiarEstadoProducto(
+                        productoSeleccionado.ProductoId
+                    );
+
+                bool operacionExitosa =
+                    mensaje == "Producto activado correctamente." ||
+                    mensaje == "Producto desactivado correctamente.";
+
+                MessageBox.Show(
+                    mensaje,
+                    "Resultado",
+                    MessageBoxButtons.OK,
+                    operacionExitosa
+                        ? MessageBoxIcon.Information
+                        : MessageBoxIcon.Warning
+                );
+
+                if (!operacionExitosa)
+                {
+                    return;
+                }
+
+                productoEnEdicion = null;
+                LimpiarCampos();
+                Refrescar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error al cambiar el estado del producto: " +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+        private void frmProducto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //chequea si no se selecciono nada
+                if (cmbCategoria.SelectedIndex == -1)
+                {
+                    MessageBox.Show(
+                        "Debe seleccionar una categoria.",
+                        "Atención",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                string mensaje;
+
+                if (productoEnEdicion == null)
+                {
+                    Producto nuevoProducto = new Producto
+                    {
+                        Nombre = txtNombre.Text,
+                        Codigo = txtCodigo.Text,
+                        Descripcion = txtDescripcion.Text,
+                        MontoUnitario = nudMontoUnitario.Value,
+                        CategoriaId = ObtenerCategoriaSeleccionada()
+                    };
+
+                    mensaje = ControladoraProducto
+                        .Instancia
+                        .AgregarProducto(nuevoProducto);
+                }
+                else
+                {
+                    productoEnEdicion.Nombre = txtNombre.Text;
+                    productoEnEdicion.Codigo = txtCodigo.Text;
+                    productoEnEdicion.Descripcion = txtDescripcion.Text;
+                    productoEnEdicion.MontoUnitario = nudMontoUnitario.Value;
+                    productoEnEdicion.CategoriaId = ObtenerCategoriaSeleccionada();
+
+                    mensaje = ControladoraProducto
+                        .Instancia
+                        .ModificarProducto(
+                            productoEnEdicion
+                        );
+                }
+
+                bool operacionExitosa =
+                    mensaje == "Producto agregado correctamente." ||
+                    mensaje == "Producto modificado correctamente.";
+
+                MessageBox.Show(
+                    mensaje,
+                    "Resultado",
+                    MessageBoxButtons.OK,
+                    operacionExitosa
+                        ? MessageBoxIcon.Information
+                        : MessageBoxIcon.Warning
+                );
+
+                if (!operacionExitosa)
+                    return;
+
+                productoEnEdicion = null;
+
+                LimpiarCampos();
+                Refrescar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error al guardar el producto: " +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
     }
 }

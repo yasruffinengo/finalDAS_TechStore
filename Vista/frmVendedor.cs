@@ -27,11 +27,15 @@ namespace Vista
             dgvVendedores.DataSource = ControladoraVendedor.Instancia.ListarVendedores();
             //oculto el bool
             dgvVendedores.Columns["Activo"].Visible = false;
+            dgvVendedores.Columns["SucursalId"].Visible = false;
+            dgvVendedores.Columns["VendedorId"].HeaderText = "Id";
+
         }
         private void LimpiarCampos()
         {
             txtNombre.Clear();
             txtApellido.Clear();
+            txtDni.Clear();
             cmbSucursales.SelectedIndex = -1;
             txtNombre.Focus();
         }
@@ -39,6 +43,7 @@ namespace Vista
         {
             txtNombre.Text = vendedor.Nombre;
             txtApellido.Text = vendedor.Apellido;
+            txtDni.Text = vendedor.Dni;
             cmbSucursales.SelectedValue = vendedor.SucursalId;
 
         }
@@ -85,6 +90,7 @@ namespace Vista
                     {
                         Nombre = txtNombre.Text,
                         Apellido = txtApellido.Text,
+                        Dni = txtDni.Text,
                         SucursalId = ObtenerSucursalSeleccionada()
                     };
 
@@ -96,6 +102,7 @@ namespace Vista
                 {
                     vendedorEnEdicion.Nombre = txtNombre.Text;
                     vendedorEnEdicion.Apellido = txtApellido.Text;
+                    vendedorEnEdicion.Dni = txtDni.Text;
                     vendedorEnEdicion.SucursalId = ObtenerSucursalSeleccionada();
 
                     mensaje = ControladoraVendedor.Instancia

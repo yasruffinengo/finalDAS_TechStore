@@ -26,6 +26,7 @@ namespace Vista
             dgvMetodosPago.DataSource = ControladoraMetodoPago.Instancia.ListarMetodosPago();
             //oculto el bool
             dgvMetodosPago.Columns["Activo"].Visible = false;
+            dgvMetodosPago.Columns["MetodoPagoId"].HeaderText = "Id";
         }
         private void LimpiarCampos()
         {

@@ -28,6 +28,7 @@ namespace Vista
             dgvClientes.DataSource = ControladoraCliente.Instancia.ListarClientes();
             //oculto el bool
             dgvClientes.Columns["Activo"].Visible = false;
+            dgvClientes.Columns["NumeroDocumento"].HeaderText = "Dni";
         }
         private void LimpiarCampos()
         {

@@ -57,5 +57,23 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ObtenerVentaPorId: " + detalle);
             }
         }
+        public int ObtenerProximoNumeroVenta()
+        {
+            try
+            {
+                int ultimoNumero = context.Venta
+                    .OrderByDescending(v => v.NumeroVenta)
+                    .Select(v => v.NumeroVenta)
+                    .FirstOrDefault();
+
+                return ultimoNumero + 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el próximo número de venta: " + ex.Message
+                );
+            }
+        }
     }
 }

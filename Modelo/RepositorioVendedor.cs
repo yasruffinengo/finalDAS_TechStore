@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace Modelo
 
             try
             {
-                return context.Vendedor
+                return context.Vendedor.Include(v => v.Sucursal)
                     .ToList()
                     .AsReadOnly();
             }

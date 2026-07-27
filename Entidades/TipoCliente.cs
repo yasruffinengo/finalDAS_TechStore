@@ -10,6 +10,11 @@ namespace Entidades
     {
         public int TipoClienteId { get; set; }
         public string Nombre { get; set; }
+        //agregado para mostrarlo en la grilla de Descuento
+        public override string ToString()
+        {
+            return Nombre;
+        }
 
         // Navegación: un tipo puede corresponder a muchos clientes
         public ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();

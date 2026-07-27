@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Modelo
 {
@@ -44,24 +45,12 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ModificarProducto(): " + detalle);
             }
         }
-        public void EliminarProducto(Producto producto)
-        {
-            try
-            {
-                context.Producto.Remove(producto);
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                throw new Exception("Error en Repositorio.EliminarProducto(): " + detalle);
-            }
-        }
+        //metodos listar
         public IReadOnlyCollection<Producto> ListarProductos()
         {
             try
             {
-                return context.Producto.ToList().AsReadOnly();
+                return context.Producto.Include(p => p.Categoria).ToList().AsReadOnly();
             }
             catch (Exception ex)
             {
@@ -69,7 +58,62 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ListarProductos(): " + detalle);
             }
         }
-        public Producto ObtenerProductoPorId(int id)
+        public IReadOnlyCollection<Producto> ListarProductosActivos()
+        {
+            try
+            {
+                return context.Producto.Where(p => p.Activo == true).Include(p => p.Categoria).ToList().AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Error en Repositorio.ListarProductosActivos(): " + detalle);
+            }
+        }
+        public IReadOnlyCollection<Producto> ListarProductosPorNombre(string nombre)
+        {
+            try
+            {
+                return context.Producto
+                    .Where(p => p.Nombre.Contains(nombre))
+                    .Include(p => p.Categoria)
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarProductosPorNombre(): " + detalle
+                );
+            }
+        }
+        public IReadOnlyCollection<Producto> ListarProductosPorCategoria(int categoriaId)
+        {
+            try
+            {
+                return context.Producto
+                    .Where(p => p.CategoriaId == categoriaId)
+                    .Include(p=>p.Categoria)
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarProductosPorCategoria(): " + detalle
+                );
+            }
+        }
+        //metodos obtener UN prod
+        public Producto? ObtenerProductoPorId(int id)
         {
             try
             {
@@ -79,6 +123,24 @@ namespace Modelo
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Error en Repositorio.ObtenerProductoPorId(): " + detalle);
+            }
+        }
+        public Producto? ObtenerProductoPorCodigo(string codigo)
+        {
+            try
+            {
+                return context.Producto
+                    .FirstOrDefault(p => p.Codigo == codigo);
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerProductoPorCodigo(): " + detalle
+                );
             }
         }
 

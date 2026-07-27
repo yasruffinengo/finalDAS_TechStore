@@ -25,6 +25,8 @@ namespace Vista
         {
             dgvCategorias.DataSource = null;
             dgvCategorias.DataSource = ControladoraCategoria.ControladoraCategoria.Instancia.ListarCategorias();
+            dgvCategorias.Columns["CategoriaId"].HeaderText = "Id";
+            dgvCategorias.Columns["Productos"].Visible = false;
         }
         private void LimpiarCampos()
         {

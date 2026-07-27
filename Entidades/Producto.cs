@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,20 @@ namespace Entidades
         public string Descripcion { get; set; }
         public decimal MontoUnitario { get; set; }
         public bool Activo { get; set; } = true;
+        //para mostrar columna estado en la grilla de productos
+        [NotMapped]
+        public string Estado
+        {
+            get
+            {
+                return Activo ? "Activo" : "Inactivo";
+            }
+        }
+        //para mostrar el nombre en la grilla Inventario
+        public override string ToString()
+        {
+            return Nombre;
+        }
 
         //descuento y categoria fk 
         public int CategoriaId { get; set; }

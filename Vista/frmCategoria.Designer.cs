@@ -55,7 +55,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 142);
+            label2.Location = new Point(24, 129);
             label2.Name = "label2";
             label2.Size = new Size(108, 25);
             label2.TabIndex = 1;
@@ -70,19 +70,22 @@
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(144, 104);
+            txtDescripcion.Location = new Point(144, 126);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(245, 63);
+            txtDescripcion.Size = new Size(245, 69);
             txtDescripcion.TabIndex = 3;
             // 
             // dgvCategorias
             // 
             dgvCategorias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCategorias.Location = new Point(29, 114);
+            dgvCategorias.MultiSelect = false;
             dgvCategorias.Name = "dgvCategorias";
+            dgvCategorias.ReadOnly = true;
             dgvCategorias.RowHeadersWidth = 62;
-            dgvCategorias.Size = new Size(536, 377);
+            dgvCategorias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCategorias.Size = new Size(616, 489);
             dgvCategorias.TabIndex = 4;
             // 
             // label3
@@ -99,7 +102,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(277, 183);
+            btnGuardar.Location = new Point(277, 233);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(112, 34);
             btnGuardar.TabIndex = 5;
@@ -109,7 +112,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(319, 521);
+            btnModificar.Location = new Point(399, 629);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(112, 34);
             btnModificar.TabIndex = 6;
@@ -119,7 +122,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(453, 521);
+            btnEliminar.Location = new Point(533, 629);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(112, 34);
             btnEliminar.TabIndex = 7;
@@ -134,16 +137,16 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(txtDescripcion);
-            groupBox1.Location = new Point(602, 114);
+            groupBox1.Location = new Point(665, 156);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(432, 243);
+            groupBox1.Size = new Size(427, 316);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(602, 86);
+            label4.Location = new Point(665, 128);
             label4.Name = "label4";
             label4.Size = new Size(143, 25);
             label4.TabIndex = 6;
@@ -153,7 +156,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1061, 591);
+            ClientSize = new Size(1119, 684);
             Controls.Add(label4);
             Controls.Add(groupBox1);
             Controls.Add(btnEliminar);

@@ -55,8 +55,11 @@
             // 
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Location = new Point(12, 125);
+            dgvClientes.MultiSelect = false;
             dgvClientes.Name = "dgvClientes";
+            dgvClientes.ReadOnly = true;
             dgvClientes.RowHeadersWidth = 62;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.Size = new Size(728, 540);
             dgvClientes.TabIndex = 0;
             // 

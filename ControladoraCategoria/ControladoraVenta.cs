@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Controladora
 {
-    internal class ControladoraVenta
+    public class ControladoraVenta
     {
+
     }
 }

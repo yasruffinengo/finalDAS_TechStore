@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace Modelo
             try
             {
 
-                return context.Descuento.Where(d => d.Activo == true).ToList().AsReadOnly();
+                return context.Descuento.Where(d => d.Activo == true).ToList().AsReadOnly().ToList();
             }
             catch (Exception ex)
             {
@@ -60,9 +61,8 @@ namespace Modelo
         {
             try
             {
-                return context.Descuento
-                    .ToList()
-                    .AsReadOnly();
+                return context.Descuento.Include(d => d.TipoCliente).ToList()
+                    ;
             }
             catch (Exception ex)
             {

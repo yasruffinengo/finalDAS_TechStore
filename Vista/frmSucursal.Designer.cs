@@ -51,9 +51,12 @@
             // 
             dgvSucursales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSucursales.Location = new Point(38, 122);
+            dgvSucursales.MultiSelect = false;
             dgvSucursales.Name = "dgvSucursales";
+            dgvSucursales.ReadOnly = true;
             dgvSucursales.RowHeadersWidth = 62;
-            dgvSucursales.Size = new Size(727, 468);
+            dgvSucursales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSucursales.Size = new Size(885, 468);
             dgvSucursales.TabIndex = 0;
             // 
             // label4
@@ -76,7 +79,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
-            groupBox1.Location = new Point(820, 122);
+            groupBox1.Location = new Point(959, 122);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(432, 409);
             groupBox1.TabIndex = 12;
@@ -172,7 +175,7 @@
             // 
             // btnCambiarEstado
             // 
-            btnCambiarEstado.Location = new Point(588, 612);
+            btnCambiarEstado.Location = new Point(746, 612);
             btnCambiarEstado.Name = "btnCambiarEstado";
             btnCambiarEstado.Size = new Size(177, 34);
             btnCambiarEstado.TabIndex = 15;
@@ -182,7 +185,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(450, 612);
+            btnModificar.Location = new Point(608, 612);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(112, 34);
             btnModificar.TabIndex = 14;
@@ -194,7 +197,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1264, 658);
+            ClientSize = new Size(1403, 658);
             Controls.Add(btnCambiarEstado);
             Controls.Add(btnModificar);
             Controls.Add(label7);

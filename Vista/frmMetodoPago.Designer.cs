@@ -46,7 +46,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(618, 86);
+            label4.Location = new Point(846, 102);
             label4.Name = "label4";
             label4.Size = new Size(203, 25);
             label4.TabIndex = 11;
@@ -59,7 +59,7 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(txtDescripcion);
-            groupBox1.Location = new Point(618, 114);
+            groupBox1.Location = new Point(846, 130);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(432, 295);
             groupBox1.TabIndex = 14;
@@ -110,7 +110,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(273, 521);
+            btnModificar.Location = new Point(488, 522);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(112, 34);
             btnModificar.TabIndex = 13;
@@ -120,7 +120,7 @@
             // 
             // btnCambiarEstado
             // 
-            btnCambiarEstado.Location = new Point(423, 521);
+            btnCambiarEstado.Location = new Point(638, 522);
             btnCambiarEstado.Name = "btnCambiarEstado";
             btnCambiarEstado.Size = new Size(158, 34);
             btnCambiarEstado.TabIndex = 12;
@@ -134,7 +134,7 @@
             label3.AllowDrop = true;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 13F);
-            label3.Location = new Point(45, 63);
+            label3.Location = new Point(45, 53);
             label3.Name = "label3";
             label3.Size = new Size(248, 36);
             label3.TabIndex = 9;
@@ -143,17 +143,20 @@
             // dgvMetodosPago
             // 
             dgvMetodosPago.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMetodosPago.Location = new Point(45, 114);
+            dgvMetodosPago.Location = new Point(45, 102);
+            dgvMetodosPago.MultiSelect = false;
             dgvMetodosPago.Name = "dgvMetodosPago";
+            dgvMetodosPago.ReadOnly = true;
             dgvMetodosPago.RowHeadersWidth = 62;
-            dgvMetodosPago.Size = new Size(536, 377);
+            dgvMetodosPago.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMetodosPago.Size = new Size(751, 378);
             dgvMetodosPago.TabIndex = 10;
             // 
             // frmMetodoPago
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1094, 618);
+            ClientSize = new Size(1316, 584);
             Controls.Add(label4);
             Controls.Add(groupBox1);
             Controls.Add(btnModificar);

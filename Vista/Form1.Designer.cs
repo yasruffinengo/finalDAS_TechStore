@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            btnNuevaVenta = new Button();
             menuStrip1 = new MenuStrip();
             configuracionesToolStripMenuItem = new ToolStripMenuItem();
             categoriasProductosToolStripMenuItem = new ToolStripMenuItem();
@@ -36,23 +36,23 @@
             metodosDePagoToolStripMenuItem = new ToolStripMenuItem();
             sucursaleToolStripMenuItem = new ToolStripMenuItem();
             registrarToolStripMenuItem = new ToolStripMenuItem();
-            clienteToolStripMenuItem = new ToolStripMenuItem();
             vendedorToolStripMenuItem = new ToolStripMenuItem();
             vendedorToolStripMenuItem1 = new ToolStripMenuItem();
             reportesToolStripMenuItem = new ToolStripMenuItem();
-            button5 = new Button();
-            button3 = new Button();
+            btbConsultarInventario = new Button();
+            btnFacturas = new Button();
+            btnProductos = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
+            // btnNuevaVenta
             // 
-            button1.Location = new Point(68, 119);
-            button1.Name = "button1";
-            button1.Size = new Size(254, 70);
-            button1.TabIndex = 0;
-            button1.Text = "Nueva Venta";
-            button1.UseVisualStyleBackColor = true;
+            btnNuevaVenta.Location = new Point(254, 113);
+            btnNuevaVenta.Name = "btnNuevaVenta";
+            btnNuevaVenta.Size = new Size(254, 70);
+            btnNuevaVenta.TabIndex = 0;
+            btnNuevaVenta.Text = "Nueva Venta";
+            btnNuevaVenta.UseVisualStyleBackColor = true;
             // 
             // menuStrip1
             // 
@@ -60,7 +60,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { configuracionesToolStripMenuItem, registrarToolStripMenuItem, reportesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(368, 33);
+            menuStrip1.Size = new Size(795, 33);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -101,17 +101,10 @@
             // 
             // registrarToolStripMenuItem
             // 
-            registrarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, vendedorToolStripMenuItem, vendedorToolStripMenuItem1 });
+            registrarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vendedorToolStripMenuItem, vendedorToolStripMenuItem1 });
             registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
             registrarToolStripMenuItem.Size = new Size(93, 29);
             registrarToolStripMenuItem.Text = "registrar";
-            // 
-            // clienteToolStripMenuItem
-            // 
-            clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            clienteToolStripMenuItem.Size = new Size(190, 34);
-            clienteToolStripMenuItem.Text = "producto";
-            clienteToolStripMenuItem.Click += clienteToolStripMenuItem_Click;
             // 
             // vendedorToolStripMenuItem
             // 
@@ -132,34 +125,47 @@
             reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             reportesToolStripMenuItem.Size = new Size(94, 29);
             reportesToolStripMenuItem.Text = "reportes";
+            reportesToolStripMenuItem.Click += reportesToolStripMenuItem_Click;
             // 
-            // button5
+            // btbConsultarInventario
             // 
-            button5.Location = new Point(68, 220);
-            button5.Name = "button5";
-            button5.Size = new Size(254, 70);
-            button5.TabIndex = 5;
-            button5.Text = "Consultar Inventario";
-            button5.UseVisualStyleBackColor = true;
+            btbConsultarInventario.Location = new Point(254, 312);
+            btbConsultarInventario.Name = "btbConsultarInventario";
+            btbConsultarInventario.Size = new Size(254, 70);
+            btbConsultarInventario.TabIndex = 5;
+            btbConsultarInventario.Text = "Inventario";
+            btbConsultarInventario.UseVisualStyleBackColor = true;
+            btbConsultarInventario.Click += btbConsultarInventario_Click;
             // 
-            // button3
+            // btnFacturas
             // 
-            button3.Location = new Point(68, 327);
-            button3.Name = "button3";
-            button3.Size = new Size(254, 70);
-            button3.TabIndex = 6;
-            button3.Text = "Facturas";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnFacturas.Location = new Point(254, 414);
+            btnFacturas.Name = "btnFacturas";
+            btnFacturas.Size = new Size(254, 70);
+            btnFacturas.TabIndex = 6;
+            btnFacturas.Text = "Facturas";
+            btnFacturas.UseVisualStyleBackColor = true;
+            btnFacturas.Click += button3_Click;
+            // 
+            // btnProductos
+            // 
+            btnProductos.Location = new Point(254, 210);
+            btnProductos.Name = "btnProductos";
+            btnProductos.Size = new Size(254, 70);
+            btnProductos.TabIndex = 7;
+            btnProductos.Text = "Productos";
+            btnProductos.UseVisualStyleBackColor = true;
+            btnProductos.Click += btnProductos_Click;
             // 
             // frmInicio
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(368, 472);
-            Controls.Add(button3);
-            Controls.Add(button5);
-            Controls.Add(button1);
+            ClientSize = new Size(795, 546);
+            Controls.Add(btnProductos);
+            Controls.Add(btnFacturas);
+            Controls.Add(btbConsultarInventario);
+            Controls.Add(btnNuevaVenta);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "frmInicio";
@@ -173,7 +179,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button btnNuevaVenta;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem configuracionesToolStripMenuItem;
         private ToolStripMenuItem categoriasProductosToolStripMenuItem;
@@ -181,11 +187,11 @@
         private ToolStripMenuItem metodosDePagoToolStripMenuItem;
         private ToolStripMenuItem sucursaleToolStripMenuItem;
         private ToolStripMenuItem registrarToolStripMenuItem;
-        private ToolStripMenuItem clienteToolStripMenuItem;
         private ToolStripMenuItem vendedorToolStripMenuItem;
-        private Button button5;
-        private Button button3;
+        private Button btbConsultarInventario;
+        private Button btnFacturas;
         private ToolStripMenuItem reportesToolStripMenuItem;
         private ToolStripMenuItem vendedorToolStripMenuItem1;
+        private Button btnProductos;
     }
 }
