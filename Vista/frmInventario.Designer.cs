@@ -59,7 +59,7 @@
             dgvInventario.ReadOnly = true;
             dgvInventario.RowHeadersWidth = 62;
             dgvInventario.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInventario.Size = new Size(728, 540);
+            dgvInventario.Size = new Size(728, 556);
             dgvInventario.TabIndex = 1;
             dgvInventario.CellClick += dgvInventario_CellClick;
             // 
@@ -93,12 +93,11 @@
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(cmbSucursal);
             groupBox1.Controls.Add(cmbProducto);
-            groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label8);
             groupBox1.Location = new Point(804, 159);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(431, 485);
+            groupBox1.Size = new Size(431, 377);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
@@ -173,9 +172,9 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(270, 384);
+            btnGuardar.Location = new Point(27, 677);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(112, 34);
+            btnGuardar.Size = new Size(10, 10);
             btnGuardar.TabIndex = 24;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -246,6 +245,7 @@
             Controls.Add(label4);
             Controls.Add(groupBox1);
             Controls.Add(label7);
+            Controls.Add(btnGuardar);
             Controls.Add(dgvInventario);
             Name = "frmInventario";
             Text = "Inventario";

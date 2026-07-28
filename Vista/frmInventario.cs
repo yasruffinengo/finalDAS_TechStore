@@ -180,65 +180,10 @@ namespace Vista
         {
 
         }
-
+        
         private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (cmbProducto.SelectedValue == null)
-                {
-                    MessageBox.Show(
-                        "Debe seleccionar un producto.",
-                        "Atención",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
+        { 
 
-                    return;
-                }
-
-                if (cmbSucursal.SelectedValue == null)
-                {
-                    MessageBox.Show(
-                        "Debe seleccionar una sucursal.",
-                        "Atención",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
-
-                    return;
-                }
-
-                Inventario inventario = new Inventario
-                {
-                    ProductoId = (int)cmbProducto.SelectedValue,
-                    SucursalId = (int)cmbSucursal.SelectedValue,
-                    //StockProducto = (int)nudStock.Value
-                };
-
-                string mensaje = ControladoraInventario
-                    .Instancia
-                    .GuardarInventario(inventario);
-
-                MessageBox.Show(
-                    mensaje,
-                    "Inventario",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-
-                LimpiarCampos();
-                Refrescar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Error al guardar el inventario: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
         }
 
         private void dgvInventario_CellClick(object sender, DataGridViewCellEventArgs e)
