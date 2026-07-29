@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controladora", "..\ControladoraCategoria\Controladora.csproj", "{78C9DECC-0087-4976-B7C3-936756A11501}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controladora", "ControladoraCategoria\Controladora.csproj", "{78C9DECC-0087-4976-B7C3-936756A11501}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "..\Entidades\Entidades.csproj", "{3F5900B9-1D87-4EF3-991A-E0912E5F0A21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{3F5900B9-1D87-4EF3-991A-E0912E5F0A21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "..\Modelo\Modelo.csproj", "{1D8DBFAF-A27B-485D-8BF0-27D40E56EF3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "Modelo\Modelo.csproj", "{1D8DBFAF-A27B-485D-8BF0-27D40E56EF3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vista", "..\Vista\Vista.csproj", "{38889559-31AA-4C0F-84CB-093B364AFC0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vista", "Vista\Vista.csproj", "{38889559-31AA-4C0F-84CB-093B364AFC0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

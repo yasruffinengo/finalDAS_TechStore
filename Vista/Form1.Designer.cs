@@ -1,4 +1,5 @@
-﻿namespace Vista
+﻿
+namespace Vista
 {
     partial class frmInicio
     {
@@ -206,6 +207,18 @@
             menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteVenta frm = new frmReporteVenta();
+            frm.ShowDialog();
+        }
+
+        private void productosMásVendidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProductoMasVendido frm = new frmProductoMasVendido();
+            frm.ShowDialog();
         }
 
         #endregion

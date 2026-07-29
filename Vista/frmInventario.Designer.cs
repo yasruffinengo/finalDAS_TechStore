@@ -1,4 +1,5 @@
-﻿namespace Vista
+﻿
+namespace Vista
 {
     partial class frmInventario
     {
@@ -281,6 +282,11 @@
             groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -5,8 +5,8 @@ namespace Modelo
 {
     public class Context : DbContext
     {
+        private string conexion = Environment.GetEnvironmentVariable("DB_DSN");
 
-        private string conexion = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TechStore;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False";
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Venta> Venta { get; set; }
@@ -19,6 +19,7 @@ namespace Modelo
         public DbSet<TipoCliente> TipoCliente { get; set; }
         public DbSet<Inventario> Inventario { get; set; }
         public DbSet<Vendedor> Vendedor { get; set; }
+
         //navegacion de 1aN
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
