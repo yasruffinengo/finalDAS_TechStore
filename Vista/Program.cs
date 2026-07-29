@@ -17,7 +17,7 @@ namespace Vista
             try
             {
                 EnvironmentLoader.Load();
-                EnsureDatabaseConnection();
+                EnsureDatabaseConnection(); //aseguramos la conexion a la base de datos antes de iniciar la aplicacion
             }
             catch (Exception ex)
             {

@@ -43,6 +43,7 @@ namespace Vista
                 return;
             }
 
+            //donde gurado el archivo en mi pc
             using SaveFileDialog saveFileDialog = new()
             {
                 Filter = "PDF (*.pdf)|*.pdf",
@@ -58,10 +59,9 @@ namespace Vista
                 btnDescargarFactura.Enabled = false;
                 UseWaitCursor = true;
 
-                byte[] pdf = await ControladoraFactura.Instancia
-                    .GenerarFacturaCPruebaPdfAsync(venta);
+                byte[] pdf = await ControladoraFactura.Instancia.GenerarFacturaCPruebaPdfAsync(venta); //hace peticiom y recibimos la respuesta de la api
 
-                await File.WriteAllBytesAsync(saveFileDialog.FileName, pdf);
+                await File.WriteAllBytesAsync(saveFileDialog.FileName, pdf); // guardo el contenido recibido por el sistema de gena en un archivo
 
                 MessageBox.Show(
                     "Factura descargada correctamente.",

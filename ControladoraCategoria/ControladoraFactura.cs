@@ -43,24 +43,26 @@ namespace Controladora
                 throw new InvalidOperationException("La venta no tiene productos para facturar.");
 
             string apiUrl = EnvironmentLoader
-                .GetRequiredVariable("FACTURACION_API_URL")
+                .GetRequiredVariable("FACTURACION_API_URL") //busca la variables del entorno previamente cargado 
                 .TrimEnd('/');
             string apiKey = EnvironmentLoader.GetRequiredVariable("FACTURACION_API_KEY");
 
-            object requestBody = ConstruirRequestComprobante(venta);
-            string json = JsonSerializer.Serialize(requestBody);
+            object requestBody = ConstruirRequestComprobante(venta); //construimos la request con los datos de la venta
+            string json = JsonSerializer.Serialize(requestBody); //convertimos el objeto a string en formato json
 
-            using HttpRequestMessage request = new(
+            using HttpRequestMessage request = new( //ACA HACE LA PETICION HTTP A LA API DE FACTURACION
                 HttpMethod.Post,
-                $"{apiUrl}/api/v2/documentos/comprobante"
+                $"{apiUrl}/api/v2/documentos/comprobante" //URL + ENDPOINT 
             );
+            //Estas son las cabeceras de la peticion. REQUEST
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/pdf"));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/pdf")); //lo q aceptamos 
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            using HttpResponseMessage response = await HttpClient.SendAsync(request);
+            using HttpResponseMessage response = await HttpClient.SendAsync(request); //ENVIOOOOOOOO
             byte[] content = await response.Content.ReadAsByteArrayAsync();
 
+            //Valida si hay error
             if (!response.IsSuccessStatusCode)
             {
                 string detalle = ObtenerDetalleError(response, content);

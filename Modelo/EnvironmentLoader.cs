@@ -1,9 +1,9 @@
 namespace Modelo
 {
-    public static class EnvironmentLoader
+    public static class EnvironmentLoader 
     {
         // Evita cargar el .env mas de una vez si varios repositorios crean Context al mismo tiempo.
-        private static readonly object Lock = new();
+        private static readonly object Lock = new(); //bloquea q una vez q se carga el archivo no lo vuelva a cargar
         private static bool loaded;
         private static string? loadedPath;
 
@@ -13,7 +13,7 @@ namespace Modelo
             {
                 if (loaded)
                 {
-                    return loadedPath!;
+                    return loadedPath!; //devuelve la ruta del archivo .env cargado previamente
                 }
 
                 string? envPath = FindEnvFile();
@@ -24,7 +24,7 @@ namespace Modelo
                     );
                 }
 
-                DotNetEnv.Env.Load(envPath);
+                DotNetEnv.Env.Load(envPath); //ACA SE LO PASO AL PAQUETE. Y CARGA LAS VARIABLES DE ENTORNO EN TODO EL PROYECTO
                 loadedPath = envPath;
                 loaded = true;
 
@@ -36,7 +36,7 @@ namespace Modelo
         {
             Load();
 
-            string? value = Environment.GetEnvironmentVariable(variableName);
+            string? value = Environment.GetEnvironmentVariable(variableName); 
             if (string.IsNullOrWhiteSpace(value))
             {
                 throw new InvalidOperationException(
@@ -47,6 +47,7 @@ namespace Modelo
             return value;
         }
 
+        //va a buscar el archivo .env en la carpeta del ejecutable y en la carpeta actual de trabajo,  hasta encontrarlo
         private static string? FindEnvFile()
         {
             HashSet<string> visitedDirectories = new(StringComparer.OrdinalIgnoreCase);
@@ -58,6 +59,8 @@ namespace Modelo
             return envPath ?? FindEnvFileFrom(Directory.GetCurrentDirectory(), visitedDirectories);
         }
 
+
+        //logica de busqueda recursiva 
         private static string? FindEnvFileFrom(string startPath, HashSet<string> visitedDirectories)
         {
             DirectoryInfo? directory = new(startPath);
