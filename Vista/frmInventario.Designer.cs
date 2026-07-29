@@ -210,6 +210,16 @@
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             // 
+            // btnGuardar
+            // 
+            btnGuardar.Location = new Point(1082, 664);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(175, 54);
+            btnGuardar.TabIndex = 24;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
             // cmbSucursalFiltro
             // 
             cmbSucursalFiltro.DropDownStyle = ComboBoxStyle.DropDownList;

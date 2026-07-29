@@ -160,5 +160,16 @@ namespace Controladora
                 return "Error al cambiar el estado del metodo de pago: " + detalle;
             }
         }
+        public MetodoPago? ObtenerMetodoPagoPorId(int id)
+        {
+            try
+            {
+                return repositorio.ObtenerMetodoPagoPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el metodo de pago por ID: " + ex.Message);
+            }
+        }
     }
 }

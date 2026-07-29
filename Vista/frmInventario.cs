@@ -17,8 +17,9 @@ namespace Vista
         private Inventario? inventarioSeleccionado;
         public frmInventario()
         {
-
+            
             InitializeComponent();
+            btnGuardar.Visible = false;
             dgvInventario.ReadOnly = true;
             dgvInventario.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
@@ -220,10 +221,10 @@ namespace Vista
         {
             try
             {
-                if (inventarioSeleccionado == null)
+                if (cmbProducto.SelectedValue == null)
                 {
                     MessageBox.Show(
-                        "Debe seleccionar un inventario de la grilla.",
+                        "Debe seleccionar un producto.",
                         "Atención",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
@@ -232,26 +233,58 @@ namespace Vista
                     return;
                 }
 
+                if (cmbSucursal.SelectedValue == null)
+                {
+                    MessageBox.Show(
+                        "Debe seleccionar una sucursal.",
+                        "Atención",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                Producto productoSeleccionado =
+                    (Producto)cmbProducto.SelectedItem;
+
+                int productoId =
+                    (int)cmbProducto.SelectedValue;
+
+                int sucursalId =
+                    (int)cmbSucursal.SelectedValue;
+
                 frmAgregarStock formulario =
                     new frmAgregarStock(
-                        inventarioSeleccionado.Producto.Nombre
+                        productoSeleccionado.Nombre
                     );
 
                 if (formulario.ShowDialog() == DialogResult.OK)
                 {
-                    int nuevoStock =
-                        inventarioSeleccionado.StockProducto
-                        + formulario.CantidadIngresada;
+                    Inventario? inventarioExistente =
+                        ControladoraInventario
+                            .Instancia
+                            .ObtenerPorProductoYSucursal(
+                                productoId,
+                                sucursalId
+                            );
+
+                    int stockActual = 0;
+
+                    if (inventarioExistente != null)
+                    {
+                        stockActual =
+                            inventarioExistente.StockProducto;
+                    }
 
                     Inventario inventario = new Inventario
                     {
-                        ProductoId =
-                            inventarioSeleccionado.ProductoId,
+                        ProductoId = productoId,
+                        SucursalId = sucursalId,
 
-                        SucursalId =
-                            inventarioSeleccionado.SucursalId,
-
-                        StockProducto = nuevoStock
+                        StockProducto =
+                            stockActual
+                            + formulario.CantidadIngresada
                     };
 
                     string mensaje =

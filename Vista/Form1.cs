@@ -75,15 +75,9 @@ namespace Vista
             frm.ShowDialog();
         }
 
-        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnNuevaVenta_Click(object sender, EventArgs e)
         {
-            frmReporteVenta frm = new frmReporteVenta();
-            frm.ShowDialog();
-        }
-
-        private void productosMásVendidosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmProductoMasVendido frm = new frmProductoMasVendido();
+            frmVenta frm = new frmVenta();
             frm.ShowDialog();
         }
     }

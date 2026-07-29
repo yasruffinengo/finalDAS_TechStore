@@ -44,8 +44,7 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ModificarCliente(): " + detalle);
             }
         }
-        //se llama eliminar, pero es BAJA LOGICA
-        //cambia el estado. 
+
         public IReadOnlyCollection<Cliente> ListarClientesActivos()
         {
             try
@@ -81,7 +80,7 @@ namespace Modelo
             }
         
         }
-        public Cliente ObtenerClientePorId(int id)
+        public Cliente? ObtenerClientePorId(int id)
         {
             try
             {

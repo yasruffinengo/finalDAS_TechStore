@@ -36,6 +36,7 @@ namespace Vista
             CantidadIngresada = (int)nudAgregarStock.Value;
 
             DialogResult = DialogResult.OK;
+
             Close();
         }
 

@@ -103,91 +103,158 @@ namespace Controladora
 
         public IReadOnlyCollection<Producto> ListarProductos()
         {
-            return repositorio.ListarProductos();
+            try
+            {
+                return repositorio.ListarProductos();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al listar los productos: " + ex.Message
+                );
+            }
         }
 
         public IReadOnlyCollection<Producto> ListarProductosActivos()
         {
-            return repositorio.ListarProductosActivos();
+            try
+            {
+                return repositorio.ListarProductosActivos();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al listar los productos activos: " + ex.Message
+                );
+            }
         }
 
         public IReadOnlyCollection<Producto> ListarProductosPorNombre(
             string nombre)
         {
-            if (string.IsNullOrWhiteSpace(nombre))
+            try
             {
-                return repositorio.ListarProductos();
-            }
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    return repositorio.ListarProductos();
+                }
 
-            return repositorio
-                .ListarProductosPorNombre(nombre.Trim());
+                return repositorio
+                    .ListarProductosPorNombre(nombre.Trim());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al listar los productos por nombre: " + ex.Message
+                );
+            }
         }
 
         public IReadOnlyCollection<Producto> ListarProductosPorCategoria(
             int categoriaId)
         {
-            if (categoriaId <= 0)
+            try
             {
-                throw new Exception("Debe seleccionar una categoría.");
-            }
+                if (categoriaId <= 0)
+                {
+                    throw new Exception(
+                        "Debe seleccionar una categoría."
+                    );
+                }
 
-            return repositorio
-                .ListarProductosPorCategoria(categoriaId);
+                return repositorio
+                    .ListarProductosPorCategoria(categoriaId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al listar los productos por categoría: " + ex.Message
+                );
+            }
         }
 
         public Producto? ObtenerProductoPorId(int productoId)
         {
-            return repositorio.ObtenerProductoPorId(productoId);
+            try
+            {
+                return repositorio.ObtenerProductoPorId(productoId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el producto por ID: " + ex.Message
+                );
+            }
         }
 
         public Producto? ObtenerProductoPorCodigo(string codigo)
         {
-            return repositorio
-                .ObtenerProductoPorCodigo(codigo.Trim());
+            try
+            {
+                if (string.IsNullOrWhiteSpace(codigo))
+                {
+                    throw new Exception(
+                        "Debe ingresar un código de producto."
+                    );
+                }
+
+                return repositorio
+                    .ObtenerProductoPorCodigo(codigo.Trim());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el producto por código: " + ex.Message
+                );
+            }
         }
 
         private string ValidarProducto(Producto producto)
         {
-            if (producto == null)
-                return "Error: El producto no puede ser nulo.";
-
-            // Nombre
-            if (string.IsNullOrWhiteSpace(producto.Nombre))
-                return "Error: El nombre del producto es obligatorio.";
-
-            producto.Nombre = producto.Nombre.Trim();
-
-            if (producto.Nombre.Length < 3)
-                return "Error: El nombre debe tener al menos 3 caracteres.";
-
-            // Código
-            if (string.IsNullOrWhiteSpace(producto.Codigo))
-                return "Error: El código del producto es obligatorio.";
-
-            producto.Codigo = producto.Codigo.Trim();
-
-            Producto? productoExistente =
-                repositorio.ObtenerProductoPorCodigo(producto.Codigo);
-
-            if (productoExistente != null &&
-                productoExistente.ProductoId != producto.ProductoId)
+            try
             {
-                return "Error: Ya existe otro producto con ese código.";
+                if (producto == null)
+                    return "Error: El producto no puede ser nulo.";
+
+                if (string.IsNullOrWhiteSpace(producto.Nombre))
+                    return "Error: El nombre del producto es obligatorio.";
+
+                producto.Nombre = producto.Nombre.Trim();
+
+                if (producto.Nombre.Length < 3)
+                    return "Error: El nombre debe tener al menos 3 caracteres.";
+
+                if (string.IsNullOrWhiteSpace(producto.Codigo))
+                    return "Error: El código del producto es obligatorio.";
+
+                producto.Codigo = producto.Codigo.Trim();
+
+                Producto? productoExistente =
+                    repositorio.ObtenerProductoPorCodigo(producto.Codigo);
+
+                if (productoExistente != null &&
+                    productoExistente.ProductoId != producto.ProductoId)
+                {
+                    return "Error: Ya existe otro producto con ese código.";
+                }
+
+                producto.Descripcion =
+                    producto.Descripcion?.Trim() ?? string.Empty;
+
+                if (producto.MontoUnitario <= 0)
+                    return "Error: El monto unitario debe ser mayor a cero.";
+
+                if (producto.CategoriaId <= 0)
+                    return "Error: Debe seleccionar una categoría.";
+
+                return "OK";
             }
-
-            // Descripción
-            producto.Descripcion =
-                producto.Descripcion?.Trim() ?? string.Empty;
-
-            // Precio
-            if (producto.MontoUnitario <= 0)
-                return "Error: El monto unitario debe ser mayor a cero.";
-
-            // Categoría
-            if (producto.CategoriaId <= 0)
-                return "Error: Debe seleccionar una categoría.";
-
-            return "OK";
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al validar el producto: " + ex.Message
+                );
+            }
         }
 
     }

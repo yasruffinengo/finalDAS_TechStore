@@ -126,6 +126,25 @@ namespace Controladora
                 throw new Exception("Error al listar vendedores activos: " + ex.Message);
             }
         }
+        public IReadOnlyCollection<Vendedor> ListarVendedoresActivosPorSucursal(int sucursalId)
+        {
+            try
+            {
+                if (sucursalId <= 0)
+                {
+                    throw new Exception(
+                        "Debe seleccionar una sucursal.");
+                }
+
+                return repositorio.ListarVendedoresActivosPorSucursal(sucursalId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error en ControladoraVendedor.ListarVendedoresActivosPorSucursal(): "
+                    + ex.Message);
+            }
+        }
 
         public string CambiarEstadoVendedor(int vendedorId)
         {
@@ -153,6 +172,18 @@ namespace Controladora
                     : ex.Message;
 
                 return "Error al cambiar el estado del vendedor: " + detalle;
+            }
+        }
+
+        public Vendedor? ObtenerVendedorPorId(int id)
+        {
+            try
+            {
+                return repositorio.ObtenerVendedorPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el vendedor por ID: " + ex.Message);
             }
         }
     }

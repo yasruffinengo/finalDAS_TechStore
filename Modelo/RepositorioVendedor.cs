@@ -78,6 +78,29 @@ namespace Modelo
             }
 
         }
+        public IReadOnlyCollection<Vendedor> ListarVendedoresActivosPorSucursal(int sucursalId)
+        {
+            try
+            {
+                return context.Vendedor
+                    .Where(v =>
+                        v.Activo &&
+                        v.SucursalId == sucursalId)
+                    .OrderBy(v => v.Apellido)
+                    .ThenBy(v => v.Nombre)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarVendedoresActivosPorSucursal(): "
+                    + detalle);
+            }
+        }
         public Vendedor? ObtenerVendedorPorId(int idVendedor)
         {
             try
