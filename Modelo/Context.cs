@@ -42,6 +42,11 @@ namespace Modelo
                 .HasIndex(p => p.Codigo)
                 .IsUnique();
 
+            modelBuilder.Entity<MetodoPago>()
+                .HasIndex(mp => mp.EsCuentaCorriente)
+                .IsUnique()
+                .HasFilter("[EsCuentaCorriente] = 1");
+
             //xq relacione sucursal con vendedor.
             //para que no elimine vendedor al eliminar sucursal.
             modelBuilder.Entity<Vendedor>()

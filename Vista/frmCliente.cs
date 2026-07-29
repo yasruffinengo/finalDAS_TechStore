@@ -33,6 +33,8 @@ namespace Vista
             dgvClientes.Columns["ClienteId"].HeaderText = "Id";
             dgvClientes.Columns["NumeroDocumento"].HeaderText = "Dni";
             dgvClientes.Columns["TipoCliente"].HeaderText = "Tipo de cliente";
+            dgvClientes.Columns["EsCuentacorrentista"].HeaderText =
+                "Cuenta corriente";
         }
         private void LimpiarCampos()
         {
@@ -42,6 +44,7 @@ namespace Vista
             txtEmail.Clear();
             txtDomicilio.Clear();
             cmbTiposCliente.SelectedIndex = 0;
+            chkEsCuentacorrentista.Checked = false;
         }
         private void LlenarCampos(Cliente cliente)
         {
@@ -51,6 +54,7 @@ namespace Vista
             txtEmail.Text = cliente.Email.ToString();
             txtDomicilio.Text = cliente.Domicilio.ToString();
             cmbTiposCliente.SelectedValue = cliente.TipoClienteId;
+            chkEsCuentacorrentista.Checked = cliente.EsCuentacorrentista;
         }
 
         //para cargar el cmbTipoCliente
@@ -81,6 +85,8 @@ namespace Vista
                     cliente.Email = txtEmail.Text;
                     cliente.Domicilio = txtDomicilio.Text;
                     cliente.TipoClienteId = (int)cmbTiposCliente.SelectedValue;
+                    cliente.EsCuentacorrentista =
+                        chkEsCuentacorrentista.Checked;
 
                     // Llamar a la controladora y recibir el resultado
                     string mensaje = ControladoraCliente.Instancia.AgregarCliente(cliente);
@@ -106,6 +112,8 @@ namespace Vista
                 clienteEnEdicion.Email = txtEmail.Text;
                 clienteEnEdicion.Domicilio = txtDomicilio.Text;
                 clienteEnEdicion.TipoClienteId = (int)cmbTiposCliente.SelectedValue;
+                clienteEnEdicion.EsCuentacorrentista =
+                    chkEsCuentacorrentista.Checked;
 
                 string mensaje = ControladoraCliente.Instancia.ModificarCliente(clienteEnEdicion);
 

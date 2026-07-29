@@ -69,11 +69,14 @@ namespace Vista
         }
 
         //cargo cmbMetodosPago
-        private void CargarMetodosPago()
+        private void CargarMetodosPago(bool esCuentacorrentista = false)
         {
             cmbMetodoPago.DataSource = null;
             cmbMetodoPago.DataSource =
-                ControladoraMetodoPago.Instancia.ListarMetodosPagoActivos();
+                ControladoraMetodoPago.Instancia
+                    .ListarMetodosPagoActivosParaCliente(
+                        esCuentacorrentista
+                    );
 
             cmbMetodoPago.DisplayMember = "Nombre";
             cmbMetodoPago.ValueMember = "MetodoPagoId";
@@ -181,6 +184,8 @@ namespace Vista
                 CargarDescuentosPorTipoCliente(
                     cliente.TipoClienteId
                 );
+
+                CargarMetodosPago(cliente.EsCuentacorrentista);
             }
             else
             {
@@ -188,6 +193,7 @@ namespace Vista
 
                 cmbDescuento.DataSource = null;
                 cmbDescuento.Enabled = false;
+                CargarMetodosPago();
             }
         }
 

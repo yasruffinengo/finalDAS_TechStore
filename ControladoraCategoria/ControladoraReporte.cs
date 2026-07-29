@@ -86,14 +86,41 @@ namespace Controladora
             }
         }
 
+        public List<EstadoCuentaClienteDTO> ObtenerEstadoCuentasCorrientes(
+            int? clienteId)
+        {
+            try
+            {
+                if (clienteId.HasValue && clienteId.Value <= 0)
+                    throw new ArgumentException("El cliente seleccionado no es válido.");
 
-        /*
+                return repositorio.ObtenerEstadoCuentasCorrientes(clienteId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener estados de cuenta corriente: " + ex.Message
+                );
+            }
+        }
 
-                public List<EstadoCuentaClienteDTO> ObtenerEstadoCuentasCorrientes(
-                    int? clienteId)
-                {
-                    // Consulta de deuda, pagos y saldo.
-                }*/
+        public List<DetalleCuentaCorrienteDTO> ObtenerDetalleCuentaCorriente(
+            int clienteId)
+        {
+            try
+            {
+                if (clienteId <= 0)
+                    throw new ArgumentException("El cliente seleccionado no es válido.");
+
+                return repositorio.ObtenerDetalleCuentaCorriente(clienteId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el detalle de cuenta corriente: " + ex.Message
+                );
+            }
+        }
     }
 
 }

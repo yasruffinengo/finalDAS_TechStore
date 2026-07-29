@@ -24,6 +24,7 @@ namespace Entidades
         //public TipoCliente TipoDeCliente { get; set; }
 
         public bool Activo { get; set; } = true;
+        public bool EsCuentacorrentista { get; set; } = false;
 
         [NotMapped]
         public string Estado

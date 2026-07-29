@@ -52,6 +52,7 @@ namespace Vista
             btn_Clientes = new Button();
             btn_vendedores = new Button();
             btnVerDetalleVenta = new Button();
+            btnMarcarPagada = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -161,6 +162,7 @@ namespace Vista
             estadoDeCtaCorrienteDeClientesToolStripMenuItem.Name = "estadoDeCtaCorrienteDeClientesToolStripMenuItem";
             estadoDeCtaCorrienteDeClientesToolStripMenuItem.Size = new Size(253, 22);
             estadoDeCtaCorrienteDeClientesToolStripMenuItem.Text = "Estado de cta corriente de clientes";
+            estadoDeCtaCorrienteDeClientesToolStripMenuItem.Click += estadoDeCtaCorrienteDeClientesToolStripMenuItem_Click;
             // 
             // btbConsultarInventario
             // 
@@ -202,6 +204,7 @@ namespace Vista
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(604, 329);
             dataGridView1.TabIndex = 8;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // label1
             // 
@@ -253,12 +256,25 @@ namespace Vista
             btnVerDetalleVenta.Text = "Ver detalles";
             btnVerDetalleVenta.UseVisualStyleBackColor = true;
             btnVerDetalleVenta.Click += this.btnVerDetalleVenta_Click;
+            //
+            // btnMarcarPagada
+            //
+            btnMarcarPagada.Enabled = false;
+            btnMarcarPagada.Location = new Point(375, 393);
+            btnMarcarPagada.Margin = new Padding(2);
+            btnMarcarPagada.Name = "btnMarcarPagada";
+            btnMarcarPagada.Size = new Size(178, 25);
+            btnMarcarPagada.TabIndex = 14;
+            btnMarcarPagada.Text = "Marcar como pagada";
+            btnMarcarPagada.UseVisualStyleBackColor = true;
+            btnMarcarPagada.Click += btnMarcarPagada_Click;
             // 
             // frmInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 424);
+            Controls.Add(btnMarcarPagada);
             Controls.Add(btnVerDetalleVenta);
             Controls.Add(btn_vendedores);
             Controls.Add(btn_Clientes);
@@ -319,5 +335,6 @@ namespace Vista
         private Button btn_Clientes;
         private Button btn_vendedores;
         private Button btnVerDetalleVenta;
+        private Button btnMarcarPagada;
     }
 }

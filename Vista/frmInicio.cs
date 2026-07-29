@@ -128,6 +128,18 @@ namespace Vista
                 if (dataGridView1.Columns["MetodoPago"] != null)
                     dataGridView1.Columns["MetodoPago"].HeaderText = "Metodo de pago";
 
+                if (dataGridView1.Columns["EsCuentaCorriente"] != null)
+                    dataGridView1.Columns["EsCuentaCorriente"].Visible = false;
+
+                if (dataGridView1.Columns["Saldada"] != null)
+                    dataGridView1.Columns["Saldada"].Visible = false;
+
+                if (dataGridView1.Columns["FechaSaldada"] != null)
+                    dataGridView1.Columns["FechaSaldada"].Visible = false;
+
+                if (dataGridView1.Columns["EstadoPago"] != null)
+                    dataGridView1.Columns["EstadoPago"].HeaderText = "Estado";
+
                 if (dataGridView1.Columns["MontoSubtotal"] != null)
                 {
                     dataGridView1.Columns["MontoSubtotal"].HeaderText = "Subtotal";
@@ -147,6 +159,7 @@ namespace Vista
                 }
 
                 dataGridView1.ClearSelection();
+                ActualizarEstadoBotonPago();
             }
             catch (Exception ex)
             {
@@ -212,6 +225,72 @@ namespace Vista
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            ActualizarEstadoBotonPago();
+        }
+
+        private void ActualizarEstadoBotonPago()
+        {
+            btnMarcarPagada.Enabled =
+                dataGridView1.CurrentRow?.DataBoundItem
+                    is VentaResumenDTO venta &&
+                venta.EsCuentaCorriente &&
+                !venta.Saldada;
+        }
+
+        private void btnMarcarPagada_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow?.DataBoundItem
+                is not VentaResumenDTO venta)
+            {
+                MessageBox.Show(
+                    "Debe seleccionar una venta.",
+                    "Venta no seleccionada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
+
+            DialogResult confirmacion = MessageBox.Show(
+                $"¿Confirma el pago total de la venta N° {venta.NumeroVenta} " +
+                $"por {venta.MontoTotal:C2}?",
+                "Confirmar pago",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
+            string resultado =
+                ControladoraVenta.Instancia.MarcarComoSaldada(venta.VentaId);
+
+            bool operacionExitosa =
+                resultado == "Venta saldada correctamente.";
+
+            MessageBox.Show(
+                resultado,
+                operacionExitosa ? "Pago registrado" : "No se pudo registrar el pago",
+                MessageBoxButtons.OK,
+                operacionExitosa
+                    ? MessageBoxIcon.Information
+                    : MessageBoxIcon.Warning
+            );
+
+            if (operacionExitosa)
+                RefrescarGrillaUltimasVentas();
+        }
+
+        private void estadoDeCtaCorrienteDeClientesToolStripMenuItem_Click(
+            object sender,
+            EventArgs e)
+        {
+            frmEstadoCtaCte frm = new frmEstadoCtaCte();
+            frm.ShowDialog();
         }
 
     }

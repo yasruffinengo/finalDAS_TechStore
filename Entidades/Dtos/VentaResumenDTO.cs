@@ -12,5 +12,12 @@ namespace Entidades.DTOs
         public decimal MontoSubtotal { get; set; }
         public decimal MontoDescuento { get; set; }
         public decimal MontoTotal { get; set; }
+        public bool EsCuentaCorriente { get; set; }
+        public bool Saldada { get; set; }
+        public DateTime? FechaSaldada { get; set; }
+        public string EstadoPago =>
+            EsCuentaCorriente
+                ? (Saldada ? "Saldada" : "Pendiente")
+                : "Pagada";
     }
 }

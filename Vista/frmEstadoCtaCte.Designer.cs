@@ -1,16 +1,9 @@
-﻿namespace Vista
+namespace Vista
 {
     partial class frmEstadoCtaCte
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,90 +15,116 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
-            label1 = new Label();
-            label2 = new Label();
-            dataGridView1 = new DataGridView();
-            linkLabel1 = new LinkLabel();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            cmbCliente = new ComboBox();
+            lblTitulo = new Label();
+            lblCliente = new Label();
+            lblResumen = new Label();
+            lblMovimientos = new Label();
+            dgvResumen = new DataGridView();
+            dgvDetalle = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvResumen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDetalle).BeginInit();
             SuspendLayout();
             // 
-            // comboBox1
+            // cmbCliente
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(171, 55);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(204, 23);
-            comboBox1.TabIndex = 0;
+            cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCliente.FormattingEnabled = true;
+            cmbCliente.Location = new Point(171, 55);
+            cmbCliente.Name = "cmbCliente";
+            cmbCliente.Size = new Size(260, 23);
+            cmbCliente.TabIndex = 0;
+            cmbCliente.SelectedIndexChanged += cmbCliente_SelectedIndexChanged;
             // 
-            // label1
+            // lblTitulo
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(28, 20);
-            label1.Name = "label1";
-            label1.Size = new Size(317, 21);
-            label1.TabIndex = 1;
-            label1.Text = "Estado de Cuentas Corrientes de los Clientes";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 12F);
+            lblTitulo.Location = new Point(28, 20);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(317, 21);
+            lblTitulo.TabIndex = 1;
+            lblTitulo.Text = "Estado de Cuentas Corrientes de los Clientes";
             // 
-            // label2
+            // lblCliente
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F);
-            label2.Location = new Point(33, 56);
-            label2.Name = "label2";
-            label2.Size = new Size(119, 19);
-            label2.TabIndex = 2;
-            label2.Text = "Seleccionar cliente";
+            lblCliente.AutoSize = true;
+            lblCliente.Font = new Font("Segoe UI", 10F);
+            lblCliente.Location = new Point(33, 56);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(119, 19);
+            lblCliente.TabIndex = 2;
+            lblCliente.Text = "Seleccionar cliente";
             // 
-            // dataGridView1
+            // lblResumen
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(33, 91);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(695, 283);
-            dataGridView1.TabIndex = 3;
+            lblResumen.AutoSize = true;
+            lblResumen.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblResumen.Location = new Point(33, 94);
+            lblResumen.Name = "lblResumen";
+            lblResumen.Size = new Size(72, 19);
+            lblResumen.TabIndex = 3;
+            lblResumen.Text = "Resumen";
             // 
-            // linkLabel1
+            // lblMovimientos
             // 
-            linkLabel1.Location = new Point(0, 0);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(88, 17);
-            linkLabel1.TabIndex = 0;
+            lblMovimientos.AutoSize = true;
+            lblMovimientos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblMovimientos.Location = new Point(33, 284);
+            lblMovimientos.Name = "lblMovimientos";
+            lblMovimientos.Size = new Size(95, 19);
+            lblMovimientos.TabIndex = 4;
+            lblMovimientos.Text = "Movimientos";
+            //
+            // dgvResumen
+            //
+            dgvResumen.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvResumen.Location = new Point(33, 116);
+            dgvResumen.Name = "dgvResumen";
+            dgvResumen.RowHeadersWidth = 51;
+            dgvResumen.Size = new Size(820, 150);
+            dgvResumen.TabIndex = 5;
+            //
+            // dgvDetalle
+            //
+            dgvDetalle.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDetalle.Location = new Point(33, 306);
+            dgvDetalle.Name = "dgvDetalle";
+            dgvDetalle.RowHeadersWidth = 51;
+            dgvDetalle.Size = new Size(820, 235);
+            dgvDetalle.TabIndex = 6;
             // 
             // frmEstadoCtaCte
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(747, 395);
-            Controls.Add(linkLabel1);
-            Controls.Add(dataGridView1);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(comboBox1);
-            Margin = new Padding(3, 2, 3, 2);
+            ClientSize = new Size(887, 565);
+            Controls.Add(dgvDetalle);
+            Controls.Add(dgvResumen);
+            Controls.Add(lblMovimientos);
+            Controls.Add(lblResumen);
+            Controls.Add(lblCliente);
+            Controls.Add(lblTitulo);
+            Controls.Add(cmbCliente);
             Name = "frmEstadoCtaCte";
-            Text = "frmEstadoCtaCte";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Text = "Estado de cuentas corrientes";
+            Load += frmEstadoCtaCte_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvResumen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDetalle).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
-        private Label label1;
-        private Label label2;
-        private DataGridView dataGridView1;
-        private LinkLabel linkLabel1;
+        private ComboBox cmbCliente;
+        private Label lblTitulo;
+        private Label lblCliente;
+        private Label lblResumen;
+        private Label lblMovimientos;
+        private DataGridView dgvResumen;
+        private DataGridView dgvDetalle;
     }
 }

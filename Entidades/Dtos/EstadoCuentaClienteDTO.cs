@@ -10,7 +10,7 @@ namespace Entidades.DTOs
     {
         public int IdCliente { get; set; }
 
-        public string Cliente { get; set; }
+        public string Cliente { get; set; } = string.Empty;
 
         public decimal TotalCompras { get; set; }
 

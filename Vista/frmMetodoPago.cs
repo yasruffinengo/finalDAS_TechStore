@@ -29,6 +29,8 @@ namespace Vista
 
             dgvMetodosPago.Columns["Ventas"].Visible = false;
             dgvMetodosPago.Columns["MetodoPagoId"].HeaderText = "Id";
+            dgvMetodosPago.Columns["EsCuentaCorriente"].HeaderText =
+                "Reservado";
         }
         
         private void LimpiarCampos()
@@ -133,6 +135,17 @@ namespace Vista
                         .CurrentRow
                         .DataBoundItem;
 
+                if (mpSeleccionado.EsCuentaCorriente)
+                {
+                    MessageBox.Show(
+                        "El método Cuenta corriente es reservado y no se puede desactivar.",
+                        "Método reservado",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                    return;
+                }
+
                 string accion = mpSeleccionado.Activo
                     ? "desactivar"
                     : "activar";
@@ -198,7 +211,21 @@ namespace Vista
                 return;
             }
 
-            mpEnEdicion = (MetodoPago)dgvMetodosPago.CurrentRow.DataBoundItem;
+            MetodoPago metodoSeleccionado =
+                (MetodoPago)dgvMetodosPago.CurrentRow.DataBoundItem;
+
+            if (metodoSeleccionado.EsCuentaCorriente)
+            {
+                MessageBox.Show(
+                    "El método Cuenta corriente es reservado y no se puede modificar.",
+                    "Método reservado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
+
+            mpEnEdicion = metodoSeleccionado;
             LlenarCampos(mpEnEdicion);
             txtNombre.Focus();
         }

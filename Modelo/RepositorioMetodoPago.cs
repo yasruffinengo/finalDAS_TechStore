@@ -96,6 +96,31 @@ namespace Modelo
             }
         }
 
+        public IReadOnlyCollection<MetodoPago> ListarMetodosPagoActivosParaCliente(
+            bool esCuentacorrentista)
+        {
+            try
+            {
+                return context.MetodoPago
+                    .Where(m =>
+                        m.Activo &&
+                        (!m.EsCuentaCorriente || esCuentacorrentista))
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ListarMetodosPagoActivosParaCliente(): "
+                    + detalle
+                );
+            }
+        }
+
         public MetodoPago? ObtenerMetodoPagoPorId(int metodoPagoId)
         {
             try

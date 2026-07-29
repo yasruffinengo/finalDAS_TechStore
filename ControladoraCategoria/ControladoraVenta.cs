@@ -151,6 +151,12 @@ namespace Controladora
             if (!metodoPago.Activo)
                 return "El método de pago seleccionado no está activo.";
 
+            if (metodoPago.EsCuentaCorriente &&
+                !cliente.EsCuentacorrentista)
+            {
+                return "El cliente seleccionado no está habilitado para operar con cuenta corriente.";
+            }
+
 
             if (venta.DescuentoId.HasValue)
             {
@@ -281,6 +287,16 @@ namespace Controladora
                 // Fecha
                 venta.FechaVenta = DateTime.Now;
 
+                MetodoPago metodoPago =
+                    ControladoraMetodoPago.Instancia.ObtenerMetodoPagoPorId(
+                        venta.MetodoPagoId
+                    )!;
+
+                venta.Saldada = !metodoPago.EsCuentaCorriente;
+                venta.FechaSaldada = metodoPago.EsCuentaCorriente
+                    ? null
+                    : venta.FechaVenta;
+
                 // Número de venta
                 venta.NumeroVenta = repositorio.ObtenerProximoNumeroVenta();
 
@@ -295,6 +311,36 @@ namespace Controladora
             }
 
         }
+
+        public string MarcarComoSaldada(int ventaId)
+        {
+            try
+            {
+                if (ventaId <= 0)
+                    return "La venta seleccionada no es válida.";
+
+                Venta? venta = repositorio.ObtenerVentaPorId(ventaId);
+
+                if (venta == null)
+                    return "La venta seleccionada no existe.";
+
+                if (!venta.MetodoPago.EsCuentaCorriente)
+                {
+                    return "Solo se pueden saldar ventas realizadas a cuenta corriente.";
+                }
+
+                if (venta.Saldada)
+                    return "La venta seleccionada ya está saldada.";
+
+                repositorio.MarcarComoSaldada(ventaId, DateTime.Now);
+                return "Venta saldada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         private void CalcularSubtotalesDetalles(Venta venta)
         {
             try

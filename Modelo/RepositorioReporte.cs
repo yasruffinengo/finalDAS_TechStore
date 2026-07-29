@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using Entidades.Dtos;
 using Entidades.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -125,13 +126,93 @@ namespace Modelo
         }
         
     
-    /*
-
-            public List<EstadoCuentaClienteDTO> ObtenerEstadoCuentasCorrientes(
-                int? clienteId)
+        public List<EstadoCuentaClienteDTO> ObtenerEstadoCuentasCorrientes(
+            int? clienteId)
+        {
+            try
             {
-                // Consulta de deuda, pagos y saldo.
-            }*/
+                var consulta = context.Cliente
+                    .AsNoTracking()
+                    .Where(c =>
+                        c.EsCuentacorrentista ||
+                        c.Ventas.Any(v => v.MetodoPago.EsCuentaCorriente));
+
+                if (clienteId.HasValue)
+                {
+                    consulta = consulta.Where(c =>
+                        c.ClienteId == clienteId.Value);
+                }
+
+                return consulta
+                    .Select(c => new EstadoCuentaClienteDTO
+                    {
+                        IdCliente = c.ClienteId,
+                        Cliente = c.Nombre,
+                        TotalCompras = c.Ventas
+                            .Where(v => v.MetodoPago.EsCuentaCorriente)
+                            .Sum(v => (decimal?)v.MontoTotal) ?? 0m,
+                        TotalPagado = c.Ventas
+                            .Where(v =>
+                                v.MetodoPago.EsCuentaCorriente &&
+                                v.Saldada)
+                            .Sum(v => (decimal?)v.MontoTotal) ?? 0m,
+                        SaldoPendiente = c.Ventas
+                            .Where(v =>
+                                v.MetodoPago.EsCuentaCorriente &&
+                                !v.Saldada)
+                            .Sum(v => (decimal?)v.MontoTotal) ?? 0m
+                    })
+                    .OrderBy(c => c.Cliente)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerEstadoCuentasCorrientes(): "
+                    + detalle
+                );
+            }
+        }
+
+        public List<DetalleCuentaCorrienteDTO> ObtenerDetalleCuentaCorriente(
+            int clienteId)
+        {
+            try
+            {
+                return context.Venta
+                    .AsNoTracking()
+                    .Where(v =>
+                        v.ClienteId == clienteId &&
+                        v.MetodoPago.EsCuentaCorriente)
+                    .OrderByDescending(v => v.FechaVenta)
+                    .ThenByDescending(v => v.NumeroVenta)
+                    .Select(v => new DetalleCuentaCorrienteDTO
+                    {
+                        VentaId = v.VentaId,
+                        NumeroVenta = v.NumeroVenta,
+                        FechaVenta = v.FechaVenta,
+                        MontoTotal = v.MontoTotal,
+                        Saldada = v.Saldada,
+                        FechaSaldada = v.FechaSaldada
+                    })
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.ObtenerDetalleCuentaCorriente(): "
+                    + detalle
+                );
+            }
+        }
       }
 }
 

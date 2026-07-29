@@ -31,6 +31,7 @@
             dgvClientes = new DataGridView();
             label4 = new Label();
             groupBox1 = new GroupBox();
+            chkEsCuentacorrentista = new CheckBox();
             cmbTiposCliente = new ComboBox();
             label8 = new Label();
             txtDomicilio = new TextBox();
@@ -76,6 +77,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(chkEsCuentacorrentista);
             groupBox1.Controls.Add(cmbTiposCliente);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(txtDomicilio);
@@ -96,6 +98,16 @@
             groupBox1.Size = new Size(302, 335);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
+            //
+            // chkEsCuentacorrentista
+            //
+            chkEsCuentacorrentista.AutoSize = true;
+            chkEsCuentacorrentista.Location = new Point(111, 278);
+            chkEsCuentacorrentista.Name = "chkEsCuentacorrentista";
+            chkEsCuentacorrentista.Size = new Size(155, 19);
+            chkEsCuentacorrentista.TabIndex = 20;
+            chkEsCuentacorrentista.Text = "Habilitar cuenta corriente";
+            chkEsCuentacorrentista.UseVisualStyleBackColor = true;
             // 
             // cmbTiposCliente
             // 
@@ -296,5 +308,6 @@
         private Button btnCambiarEstado;
         private ComboBox cmbTiposCliente;
         private Label label8;
+        private CheckBox chkEsCuentacorrentista;
     }
 }

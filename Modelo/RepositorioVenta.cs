@@ -123,7 +123,10 @@ namespace Modelo
                         MetodoPago = v.MetodoPago.Nombre,
                         MontoSubtotal = v.MontoSubtotal,
                         MontoDescuento = v.MontoDescuento,
-                        MontoTotal = v.MontoTotal
+                        MontoTotal = v.MontoTotal,
+                        EsCuentaCorriente = v.MetodoPago.EsCuentaCorriente,
+                        Saldada = v.Saldada,
+                        FechaSaldada = v.FechaSaldada
                     })
                     .ToList()
                     .AsReadOnly();
@@ -155,6 +158,44 @@ namespace Modelo
             catch (Exception ex)
             {
                 throw new Exception("Error al obtener la venta por ID: " + ex.Message);
+            }
+        }
+
+        public void MarcarComoSaldada(int ventaId, DateTime fechaSaldada)
+        {
+            try
+            {
+                using var context = new Context();
+                Venta? venta = context.Venta
+                    .Include(v => v.MetodoPago)
+                    .FirstOrDefault(v => v.VentaId == ventaId);
+
+                if (venta == null)
+                    throw new Exception("La venta seleccionada no existe.");
+
+                if (!venta.MetodoPago.EsCuentaCorriente)
+                {
+                    throw new Exception(
+                        "Solo se pueden saldar ventas realizadas a cuenta corriente."
+                    );
+                }
+
+                if (venta.Saldada)
+                    throw new Exception("La venta seleccionada ya está saldada.");
+
+                venta.Saldada = true;
+                venta.FechaSaldada = fechaSaldada;
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en Repositorio.MarcarComoSaldada(): " + detalle
+                );
             }
         }
     }
