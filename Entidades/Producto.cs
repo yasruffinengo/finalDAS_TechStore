@@ -15,8 +15,9 @@ namespace Entidades
         public string Descripcion { get; set; }
         public decimal MontoUnitario { get; set; }
         public bool Activo { get; set; } = true;
+        
         //para mostrar columna estado en la grilla de productos
-        [NotMapped]
+        [NotMapped] //no se migra a la bdd 
         public string Estado
         {
             get

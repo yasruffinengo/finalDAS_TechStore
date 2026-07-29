@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Modelo
 {
@@ -63,6 +64,7 @@ namespace Modelo
             try
             {
                 return context.Cliente
+                    .Include(c => c.TipoCliente)
                     .ToList()
                     .AsReadOnly();
             }

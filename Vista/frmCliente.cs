@@ -26,9 +26,13 @@ namespace Vista
         {
             dgvClientes.DataSource = null;
             dgvClientes.DataSource = ControladoraCliente.Instancia.ListarClientes();
-            //oculto el bool
             dgvClientes.Columns["Activo"].Visible = false;
+            dgvClientes.Columns["Ventas"].Visible = false;
+            dgvClientes.Columns["TipoClienteId"].Visible = false;
+
+            dgvClientes.Columns["ClienteId"].HeaderText = "Id";
             dgvClientes.Columns["NumeroDocumento"].HeaderText = "Dni";
+            dgvClientes.Columns["TipoCliente"].HeaderText = "Tipo de cliente";
         }
         private void LimpiarCampos()
         {

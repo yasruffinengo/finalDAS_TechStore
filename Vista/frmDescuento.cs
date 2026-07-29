@@ -30,8 +30,10 @@ namespace Vista
             //oculto el bool
             dgvDescuentos.Columns["Activo"].Visible = false;
             dgvDescuentos.Columns["TipoClienteId"].Visible = false;
+            dgvDescuentos.Columns["Ventas"].Visible = false;
+
             dgvDescuentos.Columns["DescuentoId"].HeaderText = "Id";
-            dgvDescuentos.Columns["TipoCliente"].HeaderText = "Cliente";
+            dgvDescuentos.Columns["TipoCliente"].HeaderText = "Tipo de cliente";
             dgvDescuentos.Columns["TipoDeDescuento"].HeaderText = "Tipo";
         }
         private void LimpiarCampos()
@@ -281,6 +283,11 @@ namespace Vista
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private void dgvDescuentos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
