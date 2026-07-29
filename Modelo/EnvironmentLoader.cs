@@ -2,6 +2,7 @@ namespace Modelo
 {
     public static class EnvironmentLoader
     {
+        // Evita cargar el .env mas de una vez si varios repositorios crean Context al mismo tiempo.
         private static readonly object Lock = new();
         private static bool loaded;
         private static string? loadedPath;
@@ -49,6 +50,9 @@ namespace Modelo
         private static string? FindEnvFile()
         {
             HashSet<string> visitedDirectories = new(StringComparer.OrdinalIgnoreCase);
+
+            // AppContext.BaseDirectory apunta al ejecutable; CurrentDirectory puede variar segun
+            // si se arranca desde Visual Studio, consola o un acceso directo.
             string? envPath = FindEnvFileFrom(AppContext.BaseDirectory, visitedDirectories);
 
             return envPath ?? FindEnvFileFrom(Directory.GetCurrentDirectory(), visitedDirectories);
@@ -60,6 +64,8 @@ namespace Modelo
 
             while (directory != null)
             {
+                // Al buscar desde dos rutas, algunos directorios pueden repetirse.
+                // Los salteamos para no revisar dos veces la misma rama del arbol.
                 if (!visitedDirectories.Add(directory.FullName))
                 {
                     directory = directory.Parent;
