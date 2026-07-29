@@ -20,6 +20,7 @@
 \usepackage{tabularx}
 \usepackage{ragged2e}
 \usepackage{graphicx}
+\graphicspath{{docs/}{./}}
 \usepackage{float}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit}
@@ -227,6 +228,7 @@ Entidades, relaciones, enumeraciones y DTO utilizados por reportes y consultas. 
 
 \begin{figure}[H]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[node distance=1.25cm and 1.5cm]
     \node[component] (user) {Usuario};
     \node[component, right=of user] (view) {Vista\\Windows Forms};
@@ -249,6 +251,7 @@ Entidades, relaciones, enumeraciones y DTO utilizados por reportes y consultas. 
     \draw[arrow] (controller) -- node[right,align=left,font=\small]
         {JSON / PDF} (invoice);
 \end{tikzpicture}
+}
 \caption{Arquitectura general del sistema}
 \end{figure}
 
@@ -287,6 +290,7 @@ El patrón MVC se aplica de la siguiente manera:
 
 \begin{table}[H]
 \centering
+\small
 \caption{Correspondencia entre MVC y la solución}
 \begin{tabularx}{\textwidth}{L{2.5cm} Y L{4.2cm}}
 \toprule
@@ -295,24 +299,26 @@ El patrón MVC se aplica de la siguiente manera:
 Modelo &
 Entidades del dominio y repositorios de persistencia. &
 \texttt{Venta}, \texttt{Producto}, \texttt{Inventario},
-\texttt{RepositorioVenta}. \\
+\texttt{Repositorio\allowbreak Venta}. \\
 Vista &
 Formularios Windows Forms. &
-\texttt{frmVenta}, \texttt{frmProducto}, \texttt{frmReporteVenta}. \\
+\texttt{frmVenta}, \texttt{frmProducto},
+\texttt{frmReporte\allowbreak Venta}. \\
 Controlador &
 Clases que reciben las solicitudes de la Vista y coordinan reglas y
 repositorios. &
-\texttt{ControladoraVenta}, \texttt{ControladoraProducto},
-\texttt{ControladoraReporte}. \\
+\texttt{Controladora\allowbreak Venta},
+\texttt{Controladora\allowbreak Producto},
+\texttt{Controladora\allowbreak Reporte}. \\
 \bottomrule
 \end{tabularx}
+\normalsize
 \end{table}
 
-Por ejemplo, \texttt{frmVenta} captura la selección del cliente, sucursal,
-vendedor, método de pago y productos; construye una solicitud representada por
-\texttt{Venta}; luego invoca a \texttt{ControladoraVenta}. La controladora
-valida y calcula los importes y, finalmente, delega la persistencia a
-\texttt{RepositorioVenta}.
+Por ejemplo, la vista de ventas captura la selección del cliente, la sucursal,
+el vendedor, el método de pago y los productos, y construye una entidad
+\texttt{Venta}. Después, la controladora correspondiente valida y calcula los
+importes y delega la persistencia al repositorio de ventas.
 
 % ---------------------------------------------------------------------------
 \section{Patrones implementados}
@@ -461,5 +467,26 @@ FechaVenta < fechaHasta.Date.AddDays(1)
 Esta forma evita problemas producidos por componentes de hora, minutos y
 segundos.
 
+% ---------------------------------------------------------------------------
+\clearpage
+\section{Diagrama de clases}
+\thispagestyle{fancy}
+
+El siguiente diagrama representa las entidades persistentes del sistema, sus
+atributos principales, claves primarias y foráneas, enumeraciones, clases
+asociativas y multiplicidades. Los DTO utilizados por los reportes no se
+incluyen porque son proyecciones de consulta y no forman parte del modelo de
+dominio persistente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=\textwidth,
+        height=0.80\textheight,
+        keepaspectratio
+    ]{DiagramaClases.png}
+    \caption{Diagrama de clases de la capa Entidades}
+    \label{fig:diagrama-clases-entidades}
+\end{figure}
 
 \end{document}
