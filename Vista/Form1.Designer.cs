@@ -46,15 +46,19 @@ namespace Vista
             btbConsultarInventario = new Button();
             btnFacturas = new Button();
             btnProductos = new Button();
+            dataGridView1 = new DataGridView();
+            label1 = new Label();
+            label2 = new Label();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // btnNuevaVenta
             // 
-            btnNuevaVenta.Location = new Point(203, 90);
+            btnNuevaVenta.Location = new Point(621, 59);
             btnNuevaVenta.Margin = new Padding(2);
             btnNuevaVenta.Name = "btnNuevaVenta";
-            btnNuevaVenta.Size = new Size(203, 56);
+            btnNuevaVenta.Size = new Size(178, 42);
             btnNuevaVenta.TabIndex = 0;
             btnNuevaVenta.Text = "Nueva Venta";
             btnNuevaVenta.UseVisualStyleBackColor = true;
@@ -66,8 +70,8 @@ namespace Vista
             menuStrip1.Items.AddRange(new ToolStripItem[] { configuracionesToolStripMenuItem, registrarToolStripMenuItem, reportesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(636, 28);
+            menuStrip1.Padding = new Padding(4, 2, 0, 2);
+            menuStrip1.Size = new Size(803, 24);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -75,34 +79,34 @@ namespace Vista
             // 
             configuracionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { categoriasProductosToolStripMenuItem, descuentosToolStripMenuItem, metodosDePagoToolStripMenuItem, sucursaleToolStripMenuItem });
             configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
-            configuracionesToolStripMenuItem.Size = new Size(128, 24);
+            configuracionesToolStripMenuItem.Size = new Size(104, 20);
             configuracionesToolStripMenuItem.Text = "configuraciones";
             // 
             // categoriasProductosToolStripMenuItem
             // 
             categoriasProductosToolStripMenuItem.Name = "categoriasProductosToolStripMenuItem";
-            categoriasProductosToolStripMenuItem.Size = new Size(232, 26);
+            categoriasProductosToolStripMenuItem.Size = new Size(185, 22);
             categoriasProductosToolStripMenuItem.Text = "categorias productos";
             categoriasProductosToolStripMenuItem.Click += categoriasProductosToolStripMenuItem_Click;
             // 
             // descuentosToolStripMenuItem
             // 
             descuentosToolStripMenuItem.Name = "descuentosToolStripMenuItem";
-            descuentosToolStripMenuItem.Size = new Size(232, 26);
+            descuentosToolStripMenuItem.Size = new Size(185, 22);
             descuentosToolStripMenuItem.Text = "descuentos";
             descuentosToolStripMenuItem.Click += descuentosToolStripMenuItem_Click;
             // 
             // metodosDePagoToolStripMenuItem
             // 
             metodosDePagoToolStripMenuItem.Name = "metodosDePagoToolStripMenuItem";
-            metodosDePagoToolStripMenuItem.Size = new Size(232, 26);
+            metodosDePagoToolStripMenuItem.Size = new Size(185, 22);
             metodosDePagoToolStripMenuItem.Text = "metodos de pago";
             metodosDePagoToolStripMenuItem.Click += metodosDePagoToolStripMenuItem_Click;
             // 
             // sucursaleToolStripMenuItem
             // 
             sucursaleToolStripMenuItem.Name = "sucursaleToolStripMenuItem";
-            sucursaleToolStripMenuItem.Size = new Size(232, 26);
+            sucursaleToolStripMenuItem.Size = new Size(185, 22);
             sucursaleToolStripMenuItem.Text = "sucursales";
             sucursaleToolStripMenuItem.Click += sucursaleToolStripMenuItem_Click;
             // 
@@ -110,20 +114,20 @@ namespace Vista
             // 
             registrarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vendedorToolStripMenuItem, vendedorToolStripMenuItem1 });
             registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
-            registrarToolStripMenuItem.Size = new Size(78, 24);
+            registrarToolStripMenuItem.Size = new Size(62, 20);
             registrarToolStripMenuItem.Text = "registrar";
             // 
             // vendedorToolStripMenuItem
             // 
             vendedorToolStripMenuItem.Name = "vendedorToolStripMenuItem";
-            vendedorToolStripMenuItem.Size = new Size(155, 26);
+            vendedorToolStripMenuItem.Size = new Size(124, 22);
             vendedorToolStripMenuItem.Text = "cliente";
             vendedorToolStripMenuItem.Click += vendedorToolStripMenuItem_Click;
             // 
             // vendedorToolStripMenuItem1
             // 
             vendedorToolStripMenuItem1.Name = "vendedorToolStripMenuItem1";
-            vendedorToolStripMenuItem1.Size = new Size(155, 26);
+            vendedorToolStripMenuItem1.Size = new Size(124, 22);
             vendedorToolStripMenuItem1.Text = "vendedor";
             vendedorToolStripMenuItem1.Click += vendedorToolStripMenuItem1_Click;
             // 
@@ -131,36 +135,36 @@ namespace Vista
             // 
             reportesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ventasToolStripMenuItem, productosMásVendidosToolStripMenuItem, estadoDeCtaCorrienteDeClientesToolStripMenuItem });
             reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            reportesToolStripMenuItem.Size = new Size(78, 24);
+            reportesToolStripMenuItem.Size = new Size(62, 20);
             reportesToolStripMenuItem.Text = "reportes";
             reportesToolStripMenuItem.Click += reportesToolStripMenuItem_Click;
             // 
             // ventasToolStripMenuItem
             // 
             ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
-            ventasToolStripMenuItem.Size = new Size(320, 26);
+            ventasToolStripMenuItem.Size = new Size(253, 22);
             ventasToolStripMenuItem.Text = "Ventas";
             ventasToolStripMenuItem.Click += ventasToolStripMenuItem_Click;
             // 
             // productosMásVendidosToolStripMenuItem
             // 
             productosMásVendidosToolStripMenuItem.Name = "productosMásVendidosToolStripMenuItem";
-            productosMásVendidosToolStripMenuItem.Size = new Size(320, 26);
+            productosMásVendidosToolStripMenuItem.Size = new Size(253, 22);
             productosMásVendidosToolStripMenuItem.Text = "Productos más vendidos";
             productosMásVendidosToolStripMenuItem.Click += productosMásVendidosToolStripMenuItem_Click;
             // 
             // estadoDeCtaCorrienteDeClientesToolStripMenuItem
             // 
             estadoDeCtaCorrienteDeClientesToolStripMenuItem.Name = "estadoDeCtaCorrienteDeClientesToolStripMenuItem";
-            estadoDeCtaCorrienteDeClientesToolStripMenuItem.Size = new Size(320, 26);
+            estadoDeCtaCorrienteDeClientesToolStripMenuItem.Size = new Size(253, 22);
             estadoDeCtaCorrienteDeClientesToolStripMenuItem.Text = "Estado de cta corriente de clientes";
             // 
             // btbConsultarInventario
             // 
-            btbConsultarInventario.Location = new Point(203, 250);
+            btbConsultarInventario.Location = new Point(621, 105);
             btbConsultarInventario.Margin = new Padding(2);
             btbConsultarInventario.Name = "btbConsultarInventario";
-            btbConsultarInventario.Size = new Size(203, 56);
+            btbConsultarInventario.Size = new Size(178, 42);
             btbConsultarInventario.TabIndex = 5;
             btbConsultarInventario.Text = "Inventario";
             btbConsultarInventario.UseVisualStyleBackColor = true;
@@ -168,10 +172,10 @@ namespace Vista
             // 
             // btnFacturas
             // 
-            btnFacturas.Location = new Point(203, 331);
+            btnFacturas.Location = new Point(621, 196);
             btnFacturas.Margin = new Padding(2);
             btnFacturas.Name = "btnFacturas";
-            btnFacturas.Size = new Size(203, 56);
+            btnFacturas.Size = new Size(178, 42);
             btnFacturas.TabIndex = 6;
             btnFacturas.Text = "Facturas";
             btnFacturas.UseVisualStyleBackColor = true;
@@ -179,20 +183,49 @@ namespace Vista
             // 
             // btnProductos
             // 
-            btnProductos.Location = new Point(203, 168);
+            btnProductos.Location = new Point(621, 150);
             btnProductos.Margin = new Padding(2);
             btnProductos.Name = "btnProductos";
-            btnProductos.Size = new Size(203, 56);
+            btnProductos.Size = new Size(178, 42);
             btnProductos.TabIndex = 7;
             btnProductos.Text = "Productos";
             btnProductos.UseVisualStyleBackColor = true;
             btnProductos.Click += btnProductos_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 59);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(604, 359);
+            dataGridView1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 41);
+            label1.Name = "label1";
+            label1.Size = new Size(84, 15);
+            label1.TabIndex = 9;
+            label1.Text = "Ultimas ventas";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(621, 41);
+            label2.Name = "label2";
+            label2.Size = new Size(95, 15);
+            label2.TabIndex = 10;
+            label2.Text = "Accesos Rapidos";
+            // 
             // frmInicio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(636, 437);
+            ClientSize = new Size(803, 430);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(dataGridView1);
             Controls.Add(btnProductos);
             Controls.Add(btnFacturas);
             Controls.Add(btbConsultarInventario);
@@ -205,6 +238,7 @@ namespace Vista
             Load += frmInicio_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +274,8 @@ namespace Vista
         private ToolStripMenuItem ventasToolStripMenuItem;
         private ToolStripMenuItem productosMásVendidosToolStripMenuItem;
         private ToolStripMenuItem estadoDeCtaCorrienteDeClientesToolStripMenuItem;
+        private DataGridView dataGridView1;
+        private Label label1;
+        private Label label2;
     }
 }

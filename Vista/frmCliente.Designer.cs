@@ -54,21 +54,23 @@
             // dgvClientes
             // 
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(12, 125);
+            dgvClientes.Location = new Point(8, 75);
+            dgvClientes.Margin = new Padding(2, 2, 2, 2);
             dgvClientes.MultiSelect = false;
             dgvClientes.Name = "dgvClientes";
             dgvClientes.ReadOnly = true;
             dgvClientes.RowHeadersWidth = 62;
             dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvClientes.Size = new Size(728, 540);
+            dgvClientes.Size = new Size(510, 324);
             dgvClientes.TabIndex = 0;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(811, 100);
+            label4.Location = new Point(568, 60);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(122, 25);
+            label4.Size = new Size(82, 15);
             label4.TabIndex = 9;
             label4.Text = "Nuevo Cliente";
             // 
@@ -87,9 +89,11 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
-            groupBox1.Location = new Point(811, 128);
+            groupBox1.Location = new Point(568, 77);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(432, 559);
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Size = new Size(302, 335);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             // 
@@ -97,105 +101,118 @@
             // 
             cmbTiposCliente.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTiposCliente.FormattingEnabled = true;
-            cmbTiposCliente.Location = new Point(178, 407);
+            cmbTiposCliente.Location = new Point(111, 244);
+            cmbTiposCliente.Margin = new Padding(2, 2, 2, 2);
             cmbTiposCliente.Name = "cmbTiposCliente";
-            cmbTiposCliente.Size = new Size(225, 33);
+            cmbTiposCliente.Size = new Size(173, 23);
             cmbTiposCliente.TabIndex = 19;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(23, 415);
+            label8.Location = new Point(16, 247);
+            label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(131, 25);
+            label8.Size = new Size(88, 15);
             label8.TabIndex = 18;
             label8.Text = "Tipo de cliente:";
             // 
             // txtDomicilio
             // 
-            txtDomicilio.Location = new Point(158, 338);
+            txtDomicilio.Location = new Point(111, 203);
+            txtDomicilio.Margin = new Padding(2, 2, 2, 2);
             txtDomicilio.Name = "txtDomicilio";
-            txtDomicilio.Size = new Size(245, 31);
+            txtDomicilio.Size = new Size(173, 23);
             txtDomicilio.TabIndex = 17;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(158, 265);
+            txtEmail.Location = new Point(111, 159);
+            txtEmail.Margin = new Padding(2, 2, 2, 2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(245, 31);
+            txtEmail.Size = new Size(173, 23);
             txtEmail.TabIndex = 16;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(158, 197);
+            txtTelefono.Location = new Point(111, 118);
+            txtTelefono.Margin = new Padding(2, 2, 2, 2);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(245, 31);
+            txtTelefono.Size = new Size(173, 23);
             txtTelefono.TabIndex = 15;
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(158, 123);
+            txtDni.Location = new Point(111, 74);
+            txtDni.Margin = new Padding(2, 2, 2, 2);
             txtDni.Name = "txtDni";
-            txtDni.Size = new Size(245, 31);
+            txtDni.Size = new Size(173, 23);
             txtDni.TabIndex = 14;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(23, 203);
+            label3.Location = new Point(16, 122);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(83, 25);
+            label3.Size = new Size(56, 15);
             label3.TabIndex = 11;
             label3.Text = "Telefono:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(24, 344);
+            label6.Location = new Point(17, 206);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(91, 25);
+            label6.Size = new Size(61, 15);
             label6.TabIndex = 13;
             label6.Text = "Domicilio:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(24, 271);
+            label5.Location = new Point(17, 163);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(58, 25);
+            label5.Size = new Size(39, 15);
             label5.TabIndex = 12;
             label5.Text = "Email:";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(158, 57);
+            txtNombre.Location = new Point(111, 34);
+            txtNombre.Margin = new Padding(2, 2, 2, 2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(245, 31);
+            txtNombre.Size = new Size(173, 23);
             txtNombre.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 60);
+            label1.Location = new Point(17, 36);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(82, 25);
+            label1.Size = new Size(54, 15);
             label1.TabIndex = 0;
             label1.Text = "Nombre:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 129);
+            label2.Location = new Point(17, 77);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(43, 25);
+            label2.Size = new Size(28, 15);
             label2.TabIndex = 1;
             label2.Text = "Dni:";
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(291, 503);
+            btnGuardar.Location = new Point(204, 302);
+            btnGuardar.Margin = new Padding(2, 2, 2, 2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(112, 34);
+            btnGuardar.Size = new Size(78, 20);
             btnGuardar.TabIndex = 5;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -207,17 +224,19 @@
             label7.AllowDrop = true;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 13F);
-            label7.Location = new Point(12, 71);
+            label7.Location = new Point(8, 43);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(123, 36);
+            label7.Size = new Size(86, 25);
             label7.TabIndex = 11;
             label7.Text = "CLIENTES";
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(425, 689);
+            btnModificar.Location = new Point(298, 413);
+            btnModificar.Margin = new Padding(2, 2, 2, 2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(112, 34);
+            btnModificar.Size = new Size(78, 20);
             btnModificar.TabIndex = 12;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
@@ -225,9 +244,10 @@
             // 
             // btnCambiarEstado
             // 
-            btnCambiarEstado.Location = new Point(563, 689);
+            btnCambiarEstado.Location = new Point(394, 413);
+            btnCambiarEstado.Margin = new Padding(2, 2, 2, 2);
             btnCambiarEstado.Name = "btnCambiarEstado";
-            btnCambiarEstado.Size = new Size(177, 34);
+            btnCambiarEstado.Size = new Size(124, 20);
             btnCambiarEstado.TabIndex = 13;
             btnCambiarEstado.Text = "Cambiar estado";
             btnCambiarEstado.UseVisualStyleBackColor = true;
@@ -235,15 +255,16 @@
             // 
             // frmCliente
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1273, 747);
+            ClientSize = new Size(891, 448);
             Controls.Add(btnCambiarEstado);
             Controls.Add(btnModificar);
             Controls.Add(label7);
             Controls.Add(label4);
             Controls.Add(groupBox1);
             Controls.Add(dgvClientes);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "frmCliente";
             Text = "Clientes";
             Load += frmCliente_Load;

@@ -38,24 +38,27 @@
             // lblMensaje
             // 
             lblMensaje.AutoSize = true;
-            lblMensaje.Location = new Point(73, 52);
+            lblMensaje.Location = new Point(11, 9);
+            lblMensaje.Margin = new Padding(2, 0, 2, 0);
             lblMensaje.Name = "lblMensaje";
-            lblMensaje.Size = new Size(59, 25);
+            lblMensaje.Size = new Size(38, 15);
             lblMensaje.TabIndex = 0;
             lblMensaje.Text = "label1";
             // 
             // nudAgregarStock
             // 
-            nudAgregarStock.Location = new Point(73, 106);
+            nudAgregarStock.Location = new Point(11, 26);
+            nudAgregarStock.Margin = new Padding(2, 2, 2, 2);
             nudAgregarStock.Name = "nudAgregarStock";
-            nudAgregarStock.Size = new Size(180, 31);
+            nudAgregarStock.Size = new Size(355, 23);
             nudAgregarStock.TabIndex = 1;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(73, 213);
+            btnCancelar.Location = new Point(206, 66);
+            btnCancelar.Margin = new Padding(2, 2, 2, 2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(112, 34);
+            btnCancelar.Size = new Size(78, 20);
             btnCancelar.TabIndex = 2;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
@@ -63,9 +66,10 @@
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(331, 103);
+            btnAceptar.Location = new Point(288, 66);
+            btnAceptar.Margin = new Padding(2, 2, 2, 2);
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(112, 34);
+            btnAceptar.Size = new Size(78, 20);
             btnAceptar.TabIndex = 3;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
@@ -73,13 +77,14 @@
             // 
             // frmAgregarStock
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(538, 274);
+            ClientSize = new Size(372, 97);
             Controls.Add(btnAceptar);
             Controls.Add(btnCancelar);
             Controls.Add(nudAgregarStock);
             Controls.Add(lblMensaje);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "frmAgregarStock";
             Text = "Agregar Stock";
             Load += frmAgregarStock_Load;

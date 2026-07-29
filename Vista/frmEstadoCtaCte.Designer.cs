@@ -39,18 +39,19 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(195, 73);
+            comboBox1.Location = new Point(171, 55);
+            comboBox1.Margin = new Padding(3, 2, 3, 2);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(233, 28);
+            comboBox1.Size = new Size(204, 23);
             comboBox1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(32, 26);
+            label1.Location = new Point(28, 20);
             label1.Name = "label1";
-            label1.Size = new Size(396, 28);
+            label1.Size = new Size(317, 21);
             label1.TabIndex = 1;
             label1.Text = "Estado de Cuentas Corrientes de los Clientes";
             // 
@@ -58,38 +59,40 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F);
-            label2.Location = new Point(38, 74);
+            label2.Location = new Point(33, 56);
             label2.Name = "label2";
-            label2.Size = new Size(151, 23);
+            label2.Size = new Size(119, 19);
             label2.TabIndex = 2;
             label2.Text = "Seleccionar cliente";
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(38, 138);
+            dataGridView1.Location = new Point(33, 91);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(794, 377);
+            dataGridView1.Size = new Size(695, 283);
             dataGridView1.TabIndex = 3;
             // 
             // linkLabel1
             // 
             linkLabel1.Location = new Point(0, 0);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(100, 23);
+            linkLabel1.Size = new Size(88, 17);
             linkLabel1.TabIndex = 0;
             // 
             // frmEstadoCtaCte
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(854, 527);
+            ClientSize = new Size(747, 395);
             Controls.Add(linkLabel1);
             Controls.Add(dataGridView1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(comboBox1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmEstadoCtaCte";
             Text = "frmEstadoCtaCte";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
