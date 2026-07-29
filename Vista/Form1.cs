@@ -71,7 +71,19 @@ namespace Vista
 
         private void btbConsultarInventario_Click(object sender, EventArgs e)
         {
-            frmInventario frm = new frmInventario();    
+            frmInventario frm = new frmInventario();
+            frm.ShowDialog();
+        }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteVenta frm = new frmReporteVenta();
+            frm.ShowDialog();
+        }
+
+        private void productosMásVendidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProductoMasVendido frm = new frmProductoMasVendido();
             frm.ShowDialog();
         }
     }

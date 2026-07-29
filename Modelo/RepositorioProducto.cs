@@ -75,10 +75,9 @@ namespace Modelo
             try
             {
                 return context.Producto
-                    .Where(p => p.Nombre.Contains(nombre))
-                    .Include(p => p.Categoria)
-                    .ToList()
-                    .AsReadOnly();
+                .Where(producto =>
+                producto.Nombre.StartsWith(nombre))
+                .ToList(); ;
             }
             catch (Exception ex)
             {

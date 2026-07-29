@@ -59,6 +59,7 @@ namespace Vista
             cmbSucursal.AutoCompleteSource =
                 AutoCompleteSource.ListItems;
         }
+
         private void CargarSucursalesFiltro()
         {
             cmbSucursalFiltro.DataSource =
@@ -71,6 +72,39 @@ namespace Vista
             cmbSucursalFiltro.DropDownStyle =
                 ComboBoxStyle.DropDownList;
         }
+
+        //metodo para obtener valor del cmb 
+        private int ObtenerSucursalesSeleccionada()
+        {
+            if (cmbSucursalFiltro.SelectedValue == null)
+                return 0;
+            //retorna ID SUCURSAL
+            return Convert.ToInt32(
+                cmbSucursalFiltro.SelectedValue
+            );
+        }
+
+
+        //evento de sucursal del filtro, para que filtre la grilla por categoria
+        private void cmbSucursalFiltro_SelectionChangeCommitted(
+    object sender,
+    EventArgs e)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+        }
+
         private void Refrescar()
         {
             IReadOnlyCollection<Inventario> inventarios;
@@ -146,22 +180,6 @@ namespace Vista
             dgvInventario.ClearSelection();
         }
 
-
-        private void frmInventario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbProducto.SelectedItem is Producto producto)
@@ -176,15 +194,7 @@ namespace Vista
             }
         }
 
-        private void cmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-        
-        private void btnGuardar_Click(object sender, EventArgs e)
-        { 
-
-        }
 
         private void dgvInventario_CellClick(object sender, DataGridViewCellEventArgs e)
         {

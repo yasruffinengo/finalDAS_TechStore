@@ -53,14 +53,16 @@
             // dgvDescuentos
             // 
             dgvDescuentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDescuentos.Location = new Point(39, 111);
+            dgvDescuentos.Location = new Point(31, 89);
+            dgvDescuentos.Margin = new Padding(2, 2, 2, 2);
             dgvDescuentos.MultiSelect = false;
             dgvDescuentos.Name = "dgvDescuentos";
             dgvDescuentos.ReadOnly = true;
             dgvDescuentos.RowHeadersWidth = 62;
             dgvDescuentos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDescuentos.Size = new Size(865, 475);
+            dgvDescuentos.Size = new Size(692, 380);
             dgvDescuentos.TabIndex = 0;
+            dgvDescuentos.CellContentClick += dgvDescuentos_CellContentClick;
             // 
             // label7
             // 
@@ -68,18 +70,20 @@
             label7.AllowDrop = true;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 13F);
-            label7.Location = new Point(39, 55);
+            label7.Location = new Point(31, 44);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(173, 36);
+            label7.Size = new Size(147, 30);
             label7.TabIndex = 12;
             label7.Text = "DESCUENTOS";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(952, 86);
+            label4.Location = new Point(762, 69);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(153, 25);
+            label4.Size = new Size(126, 20);
             label4.TabIndex = 13;
             label4.Text = "Nuevo Descuento";
             // 
@@ -96,25 +100,29 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnGuardar);
-            groupBox1.Location = new Point(952, 114);
+            groupBox1.Location = new Point(762, 91);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(472, 444);
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Size = new Size(378, 355);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(211, 123);
+            txtDescripcion.Location = new Point(169, 98);
+            txtDescripcion.Margin = new Padding(2, 2, 2, 2);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(245, 31);
+            txtDescripcion.Size = new Size(197, 27);
             txtDescripcion.TabIndex = 22;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(24, 129);
+            label5.Location = new Point(19, 103);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(108, 25);
+            label5.Size = new Size(90, 20);
             label5.TabIndex = 21;
             label5.Text = "Descripcion:";
             // 
@@ -122,77 +130,86 @@
             // 
             cmbTipoCliente.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoCliente.FormattingEnabled = true;
-            cmbTipoCliente.Location = new Point(211, 327);
+            cmbTipoCliente.Location = new Point(169, 262);
+            cmbTipoCliente.Margin = new Padding(2, 2, 2, 2);
             cmbTipoCliente.Name = "cmbTipoCliente";
-            cmbTipoCliente.Size = new Size(245, 33);
+            cmbTipoCliente.Size = new Size(197, 28);
             cmbTipoCliente.TabIndex = 20;
             // 
             // nudValor
             // 
             nudValor.DecimalPlaces = 2;
-            nudValor.Location = new Point(211, 190);
+            nudValor.Location = new Point(169, 152);
+            nudValor.Margin = new Padding(2, 2, 2, 2);
             nudValor.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudValor.Name = "nudValor";
-            nudValor.Size = new Size(245, 31);
+            nudValor.Size = new Size(196, 27);
             nudValor.TabIndex = 15;
             // 
             // cmbTipoDescuento
             // 
             cmbTipoDescuento.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoDescuento.FormattingEnabled = true;
-            cmbTipoDescuento.Location = new Point(211, 254);
+            cmbTipoDescuento.Location = new Point(169, 203);
+            cmbTipoDescuento.Margin = new Padding(2, 2, 2, 2);
             cmbTipoDescuento.Name = "cmbTipoDescuento";
-            cmbTipoDescuento.Size = new Size(245, 33);
+            cmbTipoDescuento.Size = new Size(197, 28);
             cmbTipoDescuento.TabIndex = 19;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(24, 330);
+            label8.Location = new Point(19, 264);
+            label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(131, 25);
+            label8.Size = new Size(111, 20);
             label8.TabIndex = 18;
             label8.Text = "Tipo de cliente:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(24, 262);
+            label3.Location = new Point(19, 210);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(163, 25);
+            label3.Size = new Size(135, 20);
             label3.TabIndex = 11;
             label3.Text = "Tipo de descuento:";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(211, 54);
+            txtNombre.Location = new Point(169, 43);
+            txtNombre.Margin = new Padding(2, 2, 2, 2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(245, 31);
+            txtNombre.Size = new Size(197, 27);
             txtNombre.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 60);
+            label1.Location = new Point(19, 48);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(82, 25);
+            label1.Size = new Size(67, 20);
             label1.TabIndex = 0;
             label1.Text = "Nombre:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 196);
+            label2.Location = new Point(19, 157);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(56, 25);
+            label2.Size = new Size(46, 20);
             label2.TabIndex = 1;
             label2.Text = "Valor:";
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(344, 398);
+            btnGuardar.Location = new Point(275, 318);
+            btnGuardar.Margin = new Padding(2, 2, 2, 2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(112, 34);
+            btnGuardar.Size = new Size(90, 27);
             btnGuardar.TabIndex = 5;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -200,9 +217,10 @@
             // 
             // btnCambiarEstado
             // 
-            btnCambiarEstado.Location = new Point(727, 602);
+            btnCambiarEstado.Location = new Point(582, 482);
+            btnCambiarEstado.Margin = new Padding(2, 2, 2, 2);
             btnCambiarEstado.Name = "btnCambiarEstado";
-            btnCambiarEstado.Size = new Size(177, 34);
+            btnCambiarEstado.Size = new Size(142, 27);
             btnCambiarEstado.TabIndex = 16;
             btnCambiarEstado.Text = "Cambiar estado";
             btnCambiarEstado.UseVisualStyleBackColor = true;
@@ -210,9 +228,10 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(589, 602);
+            btnModificar.Location = new Point(471, 482);
+            btnModificar.Margin = new Padding(2, 2, 2, 2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(112, 34);
+            btnModificar.Size = new Size(90, 27);
             btnModificar.TabIndex = 15;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
@@ -220,15 +239,16 @@
             // 
             // frmDescuento
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1452, 648);
+            ClientSize = new Size(1162, 518);
             Controls.Add(btnCambiarEstado);
             Controls.Add(btnModificar);
             Controls.Add(label4);
             Controls.Add(groupBox1);
             Controls.Add(label7);
             Controls.Add(dgvDescuentos);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "frmDescuento";
             Text = "Descuentos";
             Load += frmDescuento_Load;

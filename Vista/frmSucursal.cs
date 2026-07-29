@@ -27,10 +27,11 @@ namespace Vista
             dgvSucursales.DataSource = ControladoraSucursal.Instancia.ListarSucursales();
             //oculto el bool
             dgvSucursales.Columns["Activo"].Visible = false;
+            dgvSucursales.Columns["Ventas"].Visible = false;
             dgvSucursales.Columns["Inventarios"].Visible = false;
-            dgvSucursales.Columns["SucursalId"].HeaderText = "Id";
+            dgvSucursales.Columns["Vendedores"].Visible = false;
 
-            dgvSucursales.Columns["Vendedores"].HeaderText = "Vendedor";
+            dgvSucursales.Columns["SucursalId"].HeaderText = "Id";
 
         }
         private void LimpiarCampos()
