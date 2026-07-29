@@ -1,0 +1,244 @@
+@startuml DiagramaClasesEntidadesTechStore
+
+title TechStore S.A. — Diagrama de clases de la capa Entidades
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam ArrowColor #404040
+skinparam ClassBorderColor #2F5597
+skinparam ClassBackgroundColor #F7FAFE
+skinparam ClassHeaderBackgroundColor #D9EAF7
+skinparam ClassFontColor #202020
+skinparam ClassHeaderFontColor #17365D
+skinparam EnumBorderColor #6B4F9E
+skinparam EnumBackgroundColor #F1EAF8
+skinparam EnumFontColor #302040
+skinparam NoteBorderColor #A67C00
+skinparam NoteBackgroundColor #FFF8DC
+
+hide empty methods
+
+legend left
+  |= Marca |= Significado |
+  | <<PK>> | Clave primaria |
+  | <<FK>> | Clave foránea |
+  | /atributo | Propiedad calculada, no persistida |
+endlegend
+
+package "Entidades" {
+
+  class Categoria <<Entidad>> {
+    +CategoriaId: int <<PK>>
+    +Nombre: string
+    +Descripcion: string
+    --
+    +ToString(): string
+  }
+
+  class Producto <<Entidad>> {
+    +ProductoId: int <<PK>>
+    +Nombre: string
+    +Codigo: string
+    +Descripcion: string
+    +MontoUnitario: decimal
+    +Activo: bool
+    +CategoriaId: int <<FK>>
+    +/Estado: string
+    --
+    +ToString(): string
+  }
+
+  class Inventario <<Entidad asociativa>> {
+    +ProductoId: int <<PK, FK>>
+    +SucursalId: int <<PK, FK>>
+    +StockProducto: int
+  }
+
+  class Sucursal <<Entidad>> {
+    +SucursalId: int <<PK>>
+    +Nombre: string
+    +Domicilio: string
+    +Telefono: string
+    +Email: string
+    +Activo: bool
+    +/Estado: string
+    --
+    +ToString(): string
+  }
+
+  class Vendedor <<Entidad>> {
+    +VendedorId: int <<PK>>
+    +Nombre: string
+    +Apellido: string
+    +Dni: string
+    +Activo: bool
+    +SucursalId: int <<FK>>
+    +/Estado: string
+  }
+
+  class TipoCliente <<Entidad>> {
+    +TipoClienteId: int <<PK>>
+    +Nombre: string
+    --
+    +ToString(): string
+  }
+
+  class Cliente <<Entidad>> {
+    +ClienteId: int <<PK>>
+    +Nombre: string
+    +NumeroDocumento: string
+    +Telefono: string
+    +Email: string
+    +Domicilio: string
+    +Activo: bool
+    +EsCuentacorrentista: bool
+    +TipoClienteId: int <<FK>>
+    +/Estado: string
+  }
+
+  enum TipoDescuento {
+    Fijo
+    Porcentaje
+  }
+
+  class Descuento <<Entidad>> {
+    +DescuentoId: int <<PK>>
+    +Nombre: string
+    +Descripcion: string
+    +Valor: decimal
+    +Activo: bool
+    +TipoDeDescuento: TipoDescuento
+    +TipoClienteId: int <<FK>>
+    +/Estado: string
+  }
+
+  class MetodoPago <<Entidad>> {
+    +MetodoPagoId: int <<PK>>
+    +Nombre: string
+    +Descripcion: string
+    +Activo: bool
+    +EsCuentaCorriente: bool
+  }
+
+  class Venta <<Entidad>> {
+    +VentaId: int <<PK>>
+    +NumeroVenta: int
+    +FechaVenta: DateTime
+    +MontoSubtotal: decimal
+    +MontoDescuento: decimal
+    +MontoTotal: decimal
+    +Saldada: bool
+    +FechaSaldada: DateTime?
+    +MetodoPagoId: int <<FK>>
+    +ClienteId: int <<FK>>
+    +SucursalId: int <<FK>>
+    +DescuentoId: int? <<FK>>
+    +VendedorId: int <<FK>>
+  }
+
+  class DetalleVenta <<Entidad asociativa>> {
+    +VentaId: int <<PK, FK>>
+    +ProductoId: int <<PK, FK>>
+    +Cantidad: int
+    +PrecioUnitario: decimal
+    +Subtotal: decimal
+    +/ProductoNombre: string
+  }
+
+  enum TipoComprobante {
+    FacturaA
+    FacturaB
+    FacturaC
+    NotaCredito
+    NotaDebito
+  }
+
+  enum TipoDocumento {
+    CUIT
+    CUIL
+    CDI
+    LE
+    LC
+    DNI
+  }
+
+  class Factura <<Entidad>> {
+    +FacturaId: int <<PK>>
+    +NumeroCAE: long
+    +FechaVencimientoCAE: DateTime
+    +NumeroComprobante: int
+    +FechaComprobante: DateTime
+    +TipoDeComprobante: TipoComprobante
+    +Concepto: string
+    +TipoDeDocumento: TipoDocumento
+    +NumeroDocumento: string
+    +ImporteIVA: decimal
+    +ImporteNeto: decimal
+    +ImporteOperacionesExentas: decimal
+    +ImporteTotal: decimal
+    +ImporteTotalNoGravado: decimal
+    +ImporteTributos: decimal
+    +PuntoVenta: int
+    +DetalleIVA: string
+    +EndPointQR: string
+    +VentaId: int <<FK>>
+  }
+}
+
+' Relaciones de catálogo y clasificación
+Categoria "1" -- "0..*" Producto : clasifica >
+TipoCliente "1" -- "0..*" Cliente : define >
+TipoCliente "1" -- "0..*" Descuento : habilita >
+
+' Inventario por producto y sucursal
+Producto "1" -- "0..*" Inventario : posee >
+Sucursal "1" -- "0..*" Inventario : administra >
+
+' Organización comercial
+Sucursal "1" -- "0..*" Vendedor : asigna >
+Sucursal "1" -- "0..*" Venta : registra >
+Vendedor "1" -- "0..*" Venta : realiza >
+Cliente "1" -- "0..*" Venta : compra >
+MetodoPago "1" -- "0..*" Venta : se utiliza en >
+Descuento "0..1" -- "0..*" Venta : se aplica a >
+
+' Composición de la venta
+Venta "1" *-- "1..*" DetalleVenta : contiene >
+Producto "1" -- "0..*" DetalleVenta : se vende como >
+Venta "1" *-- "0..1" Factura : genera >
+
+' Enumeraciones utilizadas
+Descuento ..> TipoDescuento : utiliza
+Factura ..> TipoComprobante : utiliza
+Factura ..> TipoDocumento : utiliza
+
+note right of Inventario
+  La clave compuesta
+  ProductoId + SucursalId
+  garantiza un único stock
+  por producto y sucursal.
+end note
+
+note right of DetalleVenta
+  Conserva el precio unitario
+  aplicado al vender para no
+  alterar el histórico si cambia
+  el precio del producto.
+end note
+
+note bottom of Venta
+  Reglas principales:
+  * debe contener al menos un detalle;
+  * el vendedor pertenece a la sucursal;
+  * el descuento corresponde al tipo de cliente;
+  * la venta descuenta stock de la sucursal;
+  * cuenta corriente puede quedar pendiente.
+end note
+
+footer Universidad Abierta Interamericana — Ruffinengo Yasmin, Noya Ana y Civilotti Genaro
+
+@enduml
