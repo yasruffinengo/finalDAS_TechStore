@@ -22,18 +22,16 @@ namespace Vista
             CargarCategorias();
             Refrescar();
         }
+
         private void Refrescar()
         {
-            dgvProductos.DataSource = null;
-            dgvProductos.DataSource = ControladoraProducto.Instancia.ListarProductos();
-            //oculto el bool
-            dgvProductos.Columns["Activo"].Visible = false;
-            dgvProductos.Columns["CategoriaId"].Visible = false;
-            dgvProductos.Columns["Detalles"].Visible = false;
-            dgvProductos.Columns["Inventarios"].Visible = false;
-            dgvProductos.Columns["ProductoId"].HeaderText = "Id";
-            dgvProductos.Columns["MontoUnitario"].HeaderText = "Precio";
+            var productos = ControladoraProducto
+                .Instancia
+                .ListarProductos();
+
+            CargarGrilla(productos);
         }
+
         private void LimpiarCampos()
         {
             txtNombre.Clear();
@@ -60,22 +58,47 @@ namespace Vista
 
         }
         //los cmb tengan las categorias
+        private void CargarGrilla(IEnumerable<Producto> productos)
+        {
+            dgvProductos.DataSource = null;
+            dgvProductos.DataSource = productos.ToList();
+
+            if (dgvProductos.Columns.Count == 0)
+                return;
+
+            dgvProductos.Columns["Activo"].Visible = false;
+            dgvProductos.Columns["CategoriaId"].Visible = false;
+            dgvProductos.Columns["Detalles"].Visible = false;
+            dgvProductos.Columns["Inventarios"].Visible = false;
+
+            dgvProductos.Columns["ProductoId"].HeaderText = "Id";
+            dgvProductos.Columns["MontoUnitario"].HeaderText = "Precio";
+            FormatoMoneda.Aplicar(dgvProductos.Columns["MontoUnitario"]);
+        }
+
         private void CargarCategorias()
         {
-            var categorias = ControladoraCategoria.ControladoraCategoria.Instancia.ListarCategorias();
+            var categorias = ControladoraCategoria
+                .ControladoraCategoria
+                .Instancia
+                .ListarCategorias();
 
-            // Combo del alta/modificación
-            cmbCategoria.DataSource = categorias.ToList();
+            var listaCategorias = categorias.ToList();
+
+            // Combo para alta y modificación
+            cmbCategoria.DataSource = listaCategorias.ToList();
             cmbCategoria.DisplayMember = "Nombre";
             cmbCategoria.ValueMember = "CategoriaId";
             cmbCategoria.SelectedIndex = -1;
 
-            // Combo del filtro
-            cmbBusquedaCategoria.DataSource = categorias.ToList();
+            // Combo para búsqueda
+            cmbBusquedaCategoria.DataSource = listaCategorias.ToList();
             cmbBusquedaCategoria.DisplayMember = "Nombre";
             cmbBusquedaCategoria.ValueMember = "CategoriaId";
             cmbBusquedaCategoria.SelectedIndex = -1;
         }
+
+
         //metodo para obtener valor del cmb 
         private int ObtenerCategoriaSeleccionada()
         {
@@ -88,6 +111,40 @@ namespace Vista
         }
 
 
+        //evento de categoria del filtro, para que filtre la grilla por categoria
+        private void cmbBusquedaCategoria_SelectionChangeCommitted(
+    object sender,
+    EventArgs e)
+        {
+            try
+            {
+                if (cmbBusquedaCategoria.SelectedIndex == -1 ||
+                    cmbBusquedaCategoria.SelectedValue == null)
+                {
+                    Refrescar();
+                    return;
+                }
+
+                int categoriaId = Convert.ToInt32(
+                    cmbBusquedaCategoria.SelectedValue
+                );
+
+                var productos = ControladoraProducto
+                    .Instancia
+                    .ListarProductosPorCategoria(categoriaId);
+
+                CargarGrilla(productos);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+        }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -180,6 +237,8 @@ namespace Vista
                 );
             }
         }
+
+
         private void frmProducto_Load(object sender, EventArgs e)
         {
 
@@ -265,6 +324,40 @@ namespace Vista
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        //evento de BusquedaNombre para que filtre la grilla por nombre
+        private void txtBusquedaNombre_TextChanged(
+         object sender,
+         EventArgs e)
+        {
+            try
+            {
+                string nombre = txtBusquedaNombre.Text.Trim();
+
+                var productos = ControladoraProducto
+                    .Instancia
+                    .ListarProductosPorNombre(nombre);
+
+                CargarGrilla(productos);
+            }
+            catch (Exception ex)
+            {
+                //tira un  mensaje de error si hay un problema al buscar productos
+                MessageBox.Show(
+                    "Error al buscar productos: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private void btn_limpiarFiltros_Click(object sender, EventArgs e)
+        {
+            txtBusquedaNombre.Clear();
+            cmbBusquedaCategoria.SelectedIndex = -1;
+            Refrescar();
         }
     }
 }

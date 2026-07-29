@@ -5,8 +5,7 @@ namespace Modelo
 {
     public class Context : DbContext
     {
-        
-        private string conexion = "Data Source=YASMIN-PC\\SQLEXPRESS;Initial Catalog=TechStore;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;";
+        private readonly string conexion = EnvironmentLoader.GetRequiredVariable("DB_DSN");
 
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
@@ -20,6 +19,7 @@ namespace Modelo
         public DbSet<TipoCliente> TipoCliente { get; set; }
         public DbSet<Inventario> Inventario { get; set; }
         public DbSet<Vendedor> Vendedor { get; set; }
+
         //navegacion de 1aN
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,11 @@ namespace Modelo
             modelBuilder.Entity<Producto>()
                 .HasIndex(p => p.Codigo)
                 .IsUnique();
+
+            modelBuilder.Entity<MetodoPago>()
+                .HasIndex(mp => mp.EsCuentaCorriente)
+                .IsUnique()
+                .HasFilter("[EsCuentaCorriente] = 1");
 
             //xq relacione sucursal con vendedor.
             //para que no elimine vendedor al eliminar sucursal.
@@ -102,7 +107,12 @@ namespace Modelo
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(conexion);
+        {
+            if (!options.IsConfigured)
+            {
+                options.UseSqlServer(conexion);
+            }
+        }
 
     }
 }

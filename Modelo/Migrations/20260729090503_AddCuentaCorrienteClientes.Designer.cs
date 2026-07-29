@@ -12,8 +12,8 @@ using Modelo;
 namespace Modelo.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20260722000149_AgregarActivoASucursal")]
-    partial class AgregarActivoASucursal
+    [Migration("20260729090503_AddCuentaCorrienteClientes")]
+    partial class AddCuentaCorrienteClientes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,9 @@ namespace Modelo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EsCuentacorrentista")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -97,6 +100,10 @@ namespace Modelo.Migrations
 
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -249,11 +256,18 @@ namespace Modelo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EsCuentaCorriente")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MetodoPagoId");
+
+                    b.HasIndex("EsCuentaCorriente")
+                        .IsUnique()
+                        .HasFilter("[EsCuentaCorriente] = 1");
 
                     b.ToTable("MetodoPago", (string)null);
                 });
@@ -265,6 +279,9 @@ namespace Modelo.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoId"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
 
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
@@ -370,6 +387,10 @@ namespace Modelo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Dni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -398,6 +419,9 @@ namespace Modelo.Migrations
                     b.Property<int?>("DescuentoId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaSaldada")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("FechaVenta")
                         .HasColumnType("datetime2");
 
@@ -415,6 +439,9 @@ namespace Modelo.Migrations
 
                     b.Property<int>("NumeroVenta")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Saldada")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SucursalId")
                         .HasColumnType("int");

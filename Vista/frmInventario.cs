@@ -19,6 +19,7 @@ namespace Vista
         {
 
             InitializeComponent();
+            btnGuardar.Visible = false;
             dgvInventario.ReadOnly = true;
             dgvInventario.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
@@ -27,6 +28,9 @@ namespace Vista
             CargarSucursalesFiltro();
             CargarProductos();
             CargarSucursales();
+
+            txtProductoFiltro.TextChanged += txtProductoFiltro_TextChanged;
+
             Refrescar();
         }
         private void CargarProductos()
@@ -59,6 +63,7 @@ namespace Vista
             cmbSucursal.AutoCompleteSource =
                 AutoCompleteSource.ListItems;
         }
+
         private void CargarSucursalesFiltro()
         {
             cmbSucursalFiltro.DataSource =
@@ -71,6 +76,39 @@ namespace Vista
             cmbSucursalFiltro.DropDownStyle =
                 ComboBoxStyle.DropDownList;
         }
+
+        //metodo para obtener valor del cmb 
+        private int ObtenerSucursalesSeleccionada()
+        {
+            if (cmbSucursalFiltro.SelectedValue == null)
+                return 0;
+            //retorna ID SUCURSAL
+            return Convert.ToInt32(
+                cmbSucursalFiltro.SelectedValue
+            );
+        }
+
+
+        //evento de sucursal del filtro, para que filtre la grilla por categoria
+        private void cmbSucursalFiltro_SelectionChangeCommitted(
+    object sender,
+    EventArgs e)
+        {
+            try
+            {
+                Refrescar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+        }
+
         private void Refrescar()
         {
             IReadOnlyCollection<Inventario> inventarios;
@@ -86,7 +124,7 @@ namespace Vista
             else
             {
                 //agarra el id de la sucursal seleccionada en la cmb
-                int sucursalId = (int)cmbSucursalFiltro.SelectedValue;
+                int sucursalId = ObtenerSucursalesSeleccionada();
 
                 inventarios = ControladoraInventario
                     .Instancia
@@ -146,22 +184,6 @@ namespace Vista
             dgvInventario.ClearSelection();
         }
 
-
-        private void frmInventario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbProducto.SelectedItem is Producto producto)
@@ -176,15 +198,7 @@ namespace Vista
             }
         }
 
-        private void cmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-        
-        private void btnGuardar_Click(object sender, EventArgs e)
-        { 
-
-        }
 
         private void dgvInventario_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -210,10 +224,10 @@ namespace Vista
         {
             try
             {
-                if (inventarioSeleccionado == null)
+                if (cmbProducto.SelectedValue == null)
                 {
                     MessageBox.Show(
-                        "Debe seleccionar un inventario de la grilla.",
+                        "Debe seleccionar un producto.",
                         "Atención",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
@@ -222,26 +236,58 @@ namespace Vista
                     return;
                 }
 
+                if (cmbSucursal.SelectedValue == null)
+                {
+                    MessageBox.Show(
+                        "Debe seleccionar una sucursal.",
+                        "Atención",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                Producto productoSeleccionado =
+                    (Producto)cmbProducto.SelectedItem;
+
+                int productoId =
+                    (int)cmbProducto.SelectedValue;
+
+                int sucursalId =
+                    (int)cmbSucursal.SelectedValue;
+
                 frmAgregarStock formulario =
                     new frmAgregarStock(
-                        inventarioSeleccionado.Producto.Nombre
+                        productoSeleccionado.Nombre
                     );
 
                 if (formulario.ShowDialog() == DialogResult.OK)
                 {
-                    int nuevoStock =
-                        inventarioSeleccionado.StockProducto
-                        + formulario.CantidadIngresada;
+                    Inventario? inventarioExistente =
+                        ControladoraInventario
+                            .Instancia
+                            .ObtenerPorProductoYSucursal(
+                                productoId,
+                                sucursalId
+                            );
+
+                    int stockActual = 0;
+
+                    if (inventarioExistente != null)
+                    {
+                        stockActual =
+                            inventarioExistente.StockProducto;
+                    }
 
                     Inventario inventario = new Inventario
                     {
-                        ProductoId =
-                            inventarioSeleccionado.ProductoId,
+                        ProductoId = productoId,
+                        SucursalId = sucursalId,
 
-                        SucursalId =
-                            inventarioSeleccionado.SucursalId,
-
-                        StockProducto = nuevoStock
+                        StockProducto =
+                            stockActual
+                            + formulario.CantidadIngresada
                     };
 
                     string mensaje =
@@ -264,6 +310,31 @@ namespace Vista
             {
                 MessageBox.Show(
                     "Error al agregar stock: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private void btn_limpiarFiltros_Click(object sender, EventArgs e)
+        {
+            cmbSucursalFiltro.SelectedIndex = -1;
+            txtProductoFiltro.Clear();
+
+            Refrescar();
+        }
+
+        private void txtProductoFiltro_TextChanged(object? sender, EventArgs e)
+        {
+            try
+            {
+                Refrescar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error al filtrar inventario: " + ex.Message,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error

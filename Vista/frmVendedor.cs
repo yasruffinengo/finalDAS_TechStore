@@ -28,8 +28,10 @@ namespace Vista
             //oculto el bool
             dgvVendedores.Columns["Activo"].Visible = false;
             dgvVendedores.Columns["SucursalId"].Visible = false;
-            dgvVendedores.Columns["VendedorId"].HeaderText = "Id";
+            dgvVendedores.Columns["Ventas"].Visible = false;
 
+            dgvVendedores.Columns["VendedorId"].HeaderText = "Id";
+            dgvVendedores.Columns["Sucursal"].HeaderText = "Sucursal";
         }
         private void LimpiarCampos()
         {

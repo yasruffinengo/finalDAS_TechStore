@@ -15,6 +15,8 @@ namespace Entidades
         public decimal MontoDescuento { get; set; }
         public decimal MontoTotal { get; set; }
         public int MetodoPagoId { get; set; }
+        public bool Saldada { get; set; } = true;
+        public DateTime? FechaSaldada { get; set; }
         //1aN navegacion. venta.detalle 
         public ICollection<DetalleVenta> Detalles { get; set; } = new List<DetalleVenta>();
 

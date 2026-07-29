@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Modelo
 {
@@ -43,8 +44,7 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ModificarCliente(): " + detalle);
             }
         }
-        //se llama eliminar, pero es BAJA LOGICA
-        //cambia el estado. 
+
         public IReadOnlyCollection<Cliente> ListarClientesActivos()
         {
             try
@@ -64,6 +64,7 @@ namespace Modelo
             try
             {
                 return context.Cliente
+                    .Include(c => c.TipoCliente)
                     .ToList()
                     .AsReadOnly();
             }
@@ -79,7 +80,7 @@ namespace Modelo
             }
         
         }
-        public Cliente ObtenerClientePorId(int id)
+        public Cliente? ObtenerClientePorId(int id)
         {
             try
             {

@@ -134,31 +134,6 @@ namespace Controladora
                 return "Error al modificar cliente: " + detalle;
             }
         }
-        public List<Cliente> ListarClientes()
-        {
-            try
-            {
-                return repositorio.ListarClientes().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("error al listar clientes" + ex.Message);
-            }
-
-        }
-        public List<Cliente> ListarClientesActivos()
-        {
-            try
-            {
-                return repositorio.ListarClientesActivos().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("error al listar clientes activos" + ex.Message);
-            }
-
-        }
-
         //baja logica ....  .. . . .
         public string CambiarEstadoCliente(int clienteId)
         {
@@ -188,5 +163,42 @@ namespace Controladora
                 return "Error al cambiar el estado del cliente: " + detalle;
             }
         }
+        public List<Cliente> ListarClientes()
+        {
+            try
+            {
+                return repositorio.ListarClientes().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al listar clientes" + ex.Message);
+            }
+
+        }
+        public List<Cliente> ListarClientesActivos()
+        {
+            try
+            {
+                return repositorio.ListarClientesActivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al listar clientes activos" + ex.Message);
+            }
+
+        }
+
+        public Cliente? ObtenerClientePorId(int id)
+        {
+            try
+            {
+                return repositorio.ObtenerClientePorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el cliente por ID: " + ex.Message);
+            }
+        }
+
     }
 }

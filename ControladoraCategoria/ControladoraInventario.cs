@@ -99,5 +99,29 @@ namespace Controladora
         {
             return repositorio.ListarPorSucursal(sucursalId);
         }
+        public IReadOnlyCollection<Inventario> ListarInventariosPorSucursal(int sucursalId)
+        {
+            try
+            {
+                if (sucursalId <= 0)
+                {
+                    throw new Exception(
+                        "Debe seleccionar una sucursal."
+                    );
+                }
+
+                return repositorio
+                    .ListarInventariosPorSucursal(
+                        sucursalId
+                    );
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error en ControladoraInventario.ListarInventariosPorSucursal(): "
+                    + ex.Message
+                );
+            }
+        }
     }
 }

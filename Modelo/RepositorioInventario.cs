@@ -10,17 +10,11 @@ namespace Modelo
 {
     public class RepositorioInventario
     {
-        private Context context;
-
-        public RepositorioInventario()
-        {
-            context = new Context();
-        }
-
         public void AgregarInventario(Inventario inventario)
         {
             try
             {
+                using var context = new Context();
                 context.Inventario.Add(inventario);
                 context.SaveChanges();
             }
@@ -36,6 +30,7 @@ namespace Modelo
         {
             try
             {
+                using var context = new Context();
                 context.Inventario.Update(inventario);
                 context.SaveChanges();
             }
@@ -52,7 +47,10 @@ namespace Modelo
         {
             try
             {
-                return context.Inventario.FirstOrDefault(i => i.ProductoId == productoId && i.SucursalId == sucursalId);
+                using var context = new Context();
+                return context.Inventario
+                    .AsNoTracking()
+                    .FirstOrDefault(i => i.ProductoId == productoId && i.SucursalId == sucursalId);
             }
             catch (Exception ex)
             {
@@ -65,7 +63,9 @@ namespace Modelo
         {
             try
             {
+                using var context = new Context();
                 return context.Inventario
+                    .AsNoTracking()
                     .Include(i => i.Producto)
                     .Include(i => i.Sucursal)
                     .ToList();
@@ -82,7 +82,9 @@ namespace Modelo
 
             try
             {
+                using var context = new Context();
                 return context.Inventario
+                    .AsNoTracking()
                     .Include(i => i.Producto)
                     .Include(i => i.Sucursal)
                     .Where(i => i.SucursalId == sucursalId)
@@ -91,6 +93,34 @@ namespace Modelo
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Error en Repositorio.ListarPorSucursal(): " + detalle);
+            }
+        }
+        public IReadOnlyCollection<Inventario> ListarInventariosPorSucursal(int sucursalId)
+        {
+            try
+            {
+                using var context = new Context();
+                return context.Inventario
+                    .AsNoTracking()
+                    .Include(i => i.Producto)
+                    .Include(i => i.Sucursal)
+                    .Where(i =>
+                        i.SucursalId == sucursalId &&
+                        i.Producto.Activo &&
+                        i.StockProducto > 0)
+                    .OrderBy(i => i.Producto.Nombre)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en RepositorioInventario.ListarInventariosPorSucursal(): "
+                    + detalle
+                );
             }
         }
     }

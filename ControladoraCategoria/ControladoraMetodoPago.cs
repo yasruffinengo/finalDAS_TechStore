@@ -36,6 +36,11 @@ namespace Controladora
         {
             try
             {
+                if (metodoPago == null)
+                    return "Error: El Metodo de pago no puede ser nulo.";
+
+                metodoPago.EsCuentaCorriente = false;
+
                 string validacion = ValidarMetodoPago(metodoPago);
 
                 if (validacion != "OK")
@@ -62,6 +67,14 @@ namespace Controladora
                 return "Error: El nombre del Metodo de pago es obligatorio.";
 
             metodoPago.Nombre = metodoPago.Nombre.Trim();
+
+            if (!metodoPago.EsCuentaCorriente &&
+                metodoPago.Nombre.Equals(
+                    "Cuenta corriente",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return "Error: Cuenta corriente es un método de pago reservado del sistema.";
+            }
 
             if (metodoPago.Nombre.Length < 3)
                 return "Error: El nombre debe tener al menos 3 caracteres.";
@@ -92,6 +105,21 @@ namespace Controladora
         {
             try
             {
+                if (metodoPago == null)
+                    return "Error: El Metodo de pago no puede ser nulo.";
+
+                MetodoPago? metodoPersistido =
+                    repositorio.ObtenerMetodoPagoPorId(
+                        metodoPago.MetodoPagoId
+                    );
+
+                if (metodoPersistido?.EsCuentaCorriente == true)
+                {
+                    return "Error: El método Cuenta corriente no se puede modificar.";
+                }
+
+                metodoPago.EsCuentaCorriente = false;
+
                 string validacion = ValidarMetodoPago(metodoPago);
 
                 if (validacion != "OK")
@@ -132,6 +160,24 @@ namespace Controladora
             }
         }
 
+        public List<MetodoPago> ListarMetodosPagoActivosParaCliente(
+            bool esCuentacorrentista)
+        {
+            try
+            {
+                return repositorio
+                    .ListarMetodosPagoActivosParaCliente(esCuentacorrentista)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al listar métodos de pago para el cliente: "
+                    + ex.Message
+                );
+            }
+        }
+
         public string CambiarEstadoMetodoPago(int metodoPagoId)
         {
             try
@@ -141,6 +187,11 @@ namespace Controladora
 
                 if (mp == null)
                     return "Error: El Metodo de pago no existe.";
+
+                if (mp.EsCuentaCorriente)
+                {
+                    return "Error: El método Cuenta corriente no se puede desactivar.";
+                }
 
                 mp.Activo = !mp.Activo;
 
@@ -158,6 +209,17 @@ namespace Controladora
                     : ex.Message;
 
                 return "Error al cambiar el estado del metodo de pago: " + detalle;
+            }
+        }
+        public MetodoPago? ObtenerMetodoPagoPorId(int id)
+        {
+            try
+            {
+                return repositorio.ObtenerMetodoPagoPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el metodo de pago por ID: " + ex.Message);
             }
         }
     }

@@ -125,5 +125,29 @@ namespace Modelo
                 );
             }
         }
+
+        public IReadOnlyCollection<Descuento> ListarDescuentosActivosPorTipoCliente(int tipoClienteId)
+        {
+            try
+            {
+                return context.Descuento
+                    .Where(d =>
+                        d.Activo &&
+                        d.TipoClienteId == tipoClienteId)
+                    .OrderBy(d => d.Nombre)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en RepositorioDescuento.ListarDescuentosActivosPorTipoCliente(): "
+                    + detalle
+                );
+            }
+        }
     }
 }
