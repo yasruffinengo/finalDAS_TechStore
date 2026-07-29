@@ -184,7 +184,7 @@ namespace Vista
             btnDescargarFactura.TabIndex = 6;
             btnDescargarFactura.Text = "Descargar factura";
             btnDescargarFactura.UseVisualStyleBackColor = true;
-            btnDescargarFactura.Click += button3_Click;
+            btnDescargarFactura.Click += btnDescargarFactura_Click;
             // 
             // btnProductos
             // 

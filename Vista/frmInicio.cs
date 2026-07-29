@@ -16,9 +16,74 @@ namespace Vista
             frm.ShowDialog();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void btnDescargarFactura_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.CurrentRow?.DataBoundItem is not VentaResumenDTO ventaResumen)
+            {
+                MessageBox.Show(
+                    "Debe seleccionar una venta.",
+                    "Venta no seleccionada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
 
+            var venta = ControladoraVenta.Instancia
+                .ObtenerVentaPorId(ventaResumen.VentaId);
+
+            if (venta == null)
+            {
+                MessageBox.Show(
+                    "No se encontró la venta seleccionada.",
+                    "Venta no encontrada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            using SaveFileDialog saveFileDialog = new()
+            {
+                Filter = "PDF (*.pdf)|*.pdf",
+                FileName = $"FacturaC_Venta_{venta.NumeroVenta}.pdf",
+                Title = "Guardar factura"
+            };
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try
+            {
+                btnDescargarFactura.Enabled = false;
+                UseWaitCursor = true;
+
+                byte[] pdf = await ControladoraFactura.Instancia
+                    .GenerarFacturaCPruebaPdfAsync(venta);
+
+                await File.WriteAllBytesAsync(saveFileDialog.FileName, pdf);
+
+                MessageBox.Show(
+                    "Factura descargada correctamente.",
+                    "Factura",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error al descargar factura",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            finally
+            {
+                UseWaitCursor = false;
+                btnDescargarFactura.Enabled = true;
+            }
         }
 
         private void categoriasProductosToolStripMenuItem_Click(object sender, EventArgs e)
