@@ -49,6 +49,7 @@ namespace Vista
             dataGridView1 = new DataGridView();
             label1 = new Label();
             label2 = new Label();
+            btn_Clientes = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -218,11 +219,23 @@ namespace Vista
             label2.TabIndex = 10;
             label2.Text = "Accesos Rapidos";
             // 
+            // btn_Clientes
+            // 
+            btn_Clientes.Location = new Point(621, 376);
+            btn_Clientes.Margin = new Padding(2);
+            btn_Clientes.Name = "btn_Clientes";
+            btn_Clientes.Size = new Size(178, 42);
+            btn_Clientes.TabIndex = 11;
+            btn_Clientes.Text = "Clientes";
+            btn_Clientes.UseVisualStyleBackColor = true;
+            btn_Clientes.Click += btn_Clientes_Click;
+            // 
             // frmInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 430);
+            Controls.Add(btn_Clientes);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
@@ -277,5 +290,6 @@ namespace Vista
         private DataGridView dataGridView1;
         private Label label1;
         private Label label2;
+        private Button btn_Clientes;
     }
 }

@@ -14,7 +14,7 @@ namespace Vista
     public partial class frmCategoria : Form
     {
         //sirve para modificar
-        private Categoria categoriaEnEdicion;
+        private Categoria? categoriaEnEdicion;
         public frmCategoria()
         {
             InitializeComponent();
@@ -44,8 +44,6 @@ namespace Vista
             if (categoriaEnEdicion == null)
             {
                 Categoria categoria = new Categoria();
-                //lo comento xq no entiendo xq esta
-                //categoria.Nombre = txtNombre.Text;
 
                 try
                 {
@@ -123,6 +121,14 @@ namespace Vista
             string mensaje = ControladoraCategoria.ControladoraCategoria.Instancia.EliminarCategoria(categoriaSeleccionada.CategoriaId);
 
             MessageBox.Show(mensaje);
+
+            if (mensaje == "Categoria eliminada correctamente." &&
+                categoriaEnEdicion != null &&
+                categoriaEnEdicion.CategoriaId == categoriaSeleccionada.CategoriaId)
+            {
+                categoriaEnEdicion = null;
+                LimpiarCampos();
+            }
 
             Refrescar();
         }

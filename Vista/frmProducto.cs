@@ -22,7 +22,7 @@ namespace Vista
             CargarCategorias();
             Refrescar();
         }
-      
+
         private void Refrescar()
         {
             var productos = ControladoraProducto
@@ -31,7 +31,7 @@ namespace Vista
 
             CargarGrilla(productos);
         }
-        
+
         private void LimpiarCampos()
         {
             txtNombre.Clear();
@@ -350,6 +350,13 @@ namespace Vista
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private void btn_limpiarFiltros_Click(object sender, EventArgs e)
+        {
+            txtBusquedaNombre.Clear();
+            cmbBusquedaCategoria.SelectedIndex = -1;
+            Refrescar();
         }
     }
 }

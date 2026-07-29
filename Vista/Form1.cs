@@ -80,5 +80,11 @@ namespace Vista
             frmVenta frm = new frmVenta();
             frm.ShowDialog();
         }
+
+        private void btn_Clientes_Click(object sender, EventArgs e)
+        {
+            frmCliente frm = new frmCliente();
+            frm.ShowDialog();
+        }
     }
 }

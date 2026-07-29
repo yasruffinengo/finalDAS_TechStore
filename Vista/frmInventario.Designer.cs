@@ -47,6 +47,7 @@ namespace Vista
             label1 = new Label();
             label2 = new Label();
             txtProductoFiltro = new TextBox();
+            btn_limpiarFiltros = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvInventario).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -54,14 +55,14 @@ namespace Vista
             // dgvInventario
             // 
             dgvInventario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvInventario.Location = new Point(22, 105);
+            dgvInventario.Location = new Point(19, 79);
             dgvInventario.Margin = new Padding(2);
             dgvInventario.MultiSelect = false;
             dgvInventario.Name = "dgvInventario";
             dgvInventario.ReadOnly = true;
             dgvInventario.RowHeadersWidth = 62;
             dgvInventario.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInventario.Size = new Size(582, 445);
+            dgvInventario.Size = new Size(530, 334);
             dgvInventario.TabIndex = 1;
             dgvInventario.CellClick += dgvInventario_CellClick;
             // 
@@ -71,20 +72,20 @@ namespace Vista
             label7.AllowDrop = true;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 13F);
-            label7.Location = new Point(22, 26);
+            label7.Location = new Point(19, 20);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(244, 30);
+            label7.Size = new Size(200, 25);
             label7.TabIndex = 12;
             label7.Text = "STOCK DE PRODUCTOS";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(648, 105);
+            label4.Location = new Point(567, 79);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(115, 20);
+            label4.Size = new Size(91, 15);
             label4.TabIndex = 13;
             label4.Text = "Actualizar Stock";
             // 
@@ -99,20 +100,20 @@ namespace Vista
             groupBox1.Controls.Add(cmbProducto);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label8);
-            groupBox1.Location = new Point(643, 127);
+            groupBox1.Location = new Point(563, 95);
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(345, 302);
+            groupBox1.Size = new Size(302, 226);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             // 
             // btnAgregarStock
             // 
-            btnAgregarStock.Location = new Point(193, 218);
+            btnAgregarStock.Location = new Point(169, 164);
             btnAgregarStock.Margin = new Padding(2);
             btnAgregarStock.Name = "btnAgregarStock";
-            btnAgregarStock.Size = new Size(113, 50);
+            btnAgregarStock.Size = new Size(99, 38);
             btnAgregarStock.TabIndex = 35;
             btnAgregarStock.Text = "Agregar stock";
             btnAgregarStock.UseVisualStyleBackColor = true;
@@ -121,40 +122,40 @@ namespace Vista
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(126, 129);
+            lblNombre.Location = new Point(110, 97);
             lblNombre.Margin = new Padding(2, 0, 2, 0);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(25, 20);
+            lblNombre.Size = new Size(19, 15);
             lblNombre.TabIndex = 34;
             lblNombre.Text = "    ";
             // 
             // lblCodigo
             // 
             lblCodigo.AutoSize = true;
-            lblCodigo.Location = new Point(126, 86);
+            lblCodigo.Location = new Point(110, 64);
             lblCodigo.Margin = new Padding(2, 0, 2, 0);
             lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(21, 20);
+            lblCodigo.Size = new Size(16, 15);
             lblCodigo.TabIndex = 33;
             lblCodigo.Text = "   ";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(18, 129);
+            label9.Location = new Point(16, 97);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(67, 20);
+            label9.Size = new Size(54, 15);
             label9.TabIndex = 32;
             label9.Text = "Nombre:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(18, 86);
+            label6.Location = new Point(16, 64);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(61, 20);
+            label6.Size = new Size(49, 15);
             label6.TabIndex = 31;
             label6.Text = "Codigo:";
             // 
@@ -163,10 +164,10 @@ namespace Vista
             cmbSucursal.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbSucursal.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbSucursal.FormattingEnabled = true;
-            cmbSucursal.Location = new Point(126, 170);
+            cmbSucursal.Location = new Point(110, 128);
             cmbSucursal.Margin = new Padding(2);
             cmbSucursal.Name = "cmbSucursal";
-            cmbSucursal.Size = new Size(181, 28);
+            cmbSucursal.Size = new Size(159, 23);
             cmbSucursal.TabIndex = 30;
             // 
             // cmbProducto
@@ -174,48 +175,39 @@ namespace Vista
             cmbProducto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbProducto.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbProducto.FormattingEnabled = true;
-            cmbProducto.Location = new Point(126, 35);
+            cmbProducto.Location = new Point(110, 26);
             cmbProducto.Margin = new Padding(2);
             cmbProducto.Name = "cmbProducto";
-            cmbProducto.Size = new Size(181, 28);
+            cmbProducto.Size = new Size(159, 23);
             cmbProducto.TabIndex = 29;
             cmbProducto.SelectedIndexChanged += cmbProducto_SelectedIndexChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(18, 176);
+            label5.Location = new Point(16, 132);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(66, 20);
+            label5.Size = new Size(54, 15);
             label5.TabIndex = 20;
             label5.Text = "Sucursal:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(18, 42);
+            label8.Location = new Point(16, 32);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(72, 20);
+            label8.Size = new Size(59, 15);
             label8.TabIndex = 18;
             label8.Text = "Producto:";
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(22, 542);
+            btnGuardar.Location = new Point(947, 498);
             btnGuardar.Margin = new Padding(2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(8, 8);
-            btnGuardar.TabIndex = 24;
-            btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
-            // 
-            // btnGuardar
-            // 
-            btnGuardar.Location = new Point(1082, 664);
-            btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(175, 54);
+            btnGuardar.Size = new Size(153, 40);
             btnGuardar.TabIndex = 24;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -225,46 +217,58 @@ namespace Vista
             // 
             cmbSucursalFiltro.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSucursalFiltro.FormattingEnabled = true;
-            cmbSucursalFiltro.Location = new Point(104, 65);
+            cmbSucursalFiltro.Location = new Point(77, 49);
             cmbSucursalFiltro.Margin = new Padding(2);
             cmbSucursalFiltro.Name = "cmbSucursalFiltro";
-            cmbSucursalFiltro.Size = new Size(181, 28);
+            cmbSucursalFiltro.Size = new Size(159, 23);
             cmbSucursalFiltro.TabIndex = 21;
             cmbSucursalFiltro.SelectionChangeCommitted += cmbSucursalFiltro_SelectionChangeCommitted;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(22, 71);
+            label1.Location = new Point(19, 53);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(66, 20);
+            label1.Size = new Size(54, 15);
             label1.TabIndex = 20;
             label1.Text = "Sucursal:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(315, 71);
+            label2.Location = new Point(240, 52);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(72, 20);
+            label2.Size = new Size(59, 15);
             label2.TabIndex = 22;
             label2.Text = "Producto:";
             // 
             // txtProductoFiltro
             // 
-            txtProductoFiltro.Location = new Point(403, 65);
+            txtProductoFiltro.Location = new Point(303, 49);
             txtProductoFiltro.Margin = new Padding(2);
             txtProductoFiltro.Name = "txtProductoFiltro";
-            txtProductoFiltro.Size = new Size(181, 27);
+            txtProductoFiltro.Size = new Size(159, 23);
             txtProductoFiltro.TabIndex = 23;
+            // 
+            // btn_limpiarFiltros
+            // 
+            btn_limpiarFiltros.Location = new Point(466, 49);
+            btn_limpiarFiltros.Margin = new Padding(2);
+            btn_limpiarFiltros.Name = "btn_limpiarFiltros";
+            btn_limpiarFiltros.Size = new Size(83, 23);
+            btn_limpiarFiltros.TabIndex = 36;
+            btn_limpiarFiltros.Text = "Limpiar";
+            btn_limpiarFiltros.UseVisualStyleBackColor = true;
+            btn_limpiarFiltros.Click += btn_limpiarFiltros_Click;
             // 
             // frmInventario
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1015, 561);
+            ClientSize = new Size(924, 442);
+            Controls.Add(btn_limpiarFiltros);
             Controls.Add(txtProductoFiltro);
             Controls.Add(label2);
             Controls.Add(cmbSucursalFiltro);
@@ -309,5 +313,6 @@ namespace Vista
         private Label lblNombre;
         private Label lblCodigo;
         private Button btnAgregarStock;
+        private Button btn_limpiarFiltros;
     }
 }

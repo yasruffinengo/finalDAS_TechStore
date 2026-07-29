@@ -8,6 +8,7 @@ namespace Entidades
         {
             FacturaA,
             FacturaB,
+            FacturaC,
             NotaCredito,
             NotaDebito
         } 

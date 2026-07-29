@@ -17,7 +17,7 @@ namespace Vista
         private Inventario? inventarioSeleccionado;
         public frmInventario()
         {
-            
+
             InitializeComponent();
             btnGuardar.Visible = false;
             dgvInventario.ReadOnly = true;
@@ -28,6 +28,9 @@ namespace Vista
             CargarSucursalesFiltro();
             CargarProductos();
             CargarSucursales();
+
+            txtProductoFiltro.TextChanged += txtProductoFiltro_TextChanged;
+
             Refrescar();
         }
         private void CargarProductos()
@@ -93,7 +96,7 @@ namespace Vista
         {
             try
             {
-                
+                Refrescar();
             }
             catch (Exception ex)
             {
@@ -121,7 +124,7 @@ namespace Vista
             else
             {
                 //agarra el id de la sucursal seleccionada en la cmb
-                int sucursalId = (int)cmbSucursalFiltro.SelectedValue;
+                int sucursalId = ObtenerSucursalesSeleccionada();
 
                 inventarios = ControladoraInventario
                     .Instancia
@@ -307,6 +310,31 @@ namespace Vista
             {
                 MessageBox.Show(
                     "Error al agregar stock: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private void btn_limpiarFiltros_Click(object sender, EventArgs e)
+        {
+            cmbSucursalFiltro.SelectedIndex = -1;
+            txtProductoFiltro.Clear();
+
+            Refrescar();
+        }
+
+        private void txtProductoFiltro_TextChanged(object? sender, EventArgs e)
+        {
+            try
+            {
+                Refrescar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error al filtrar inventario: " + ex.Message,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
