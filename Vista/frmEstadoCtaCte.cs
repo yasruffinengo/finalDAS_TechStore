@@ -140,7 +140,7 @@ namespace Vista
                 return;
 
             grilla.Columns[columna].HeaderText = encabezado;
-            grilla.Columns[columna].DefaultCellStyle.Format = "C2";
+            FormatoMoneda.Aplicar(grilla.Columns[columna]);
         }
 
         private void cmbCliente_SelectedIndexChanged(

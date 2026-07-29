@@ -73,6 +73,7 @@ namespace Vista
 
             dgvProductos.Columns["ProductoId"].HeaderText = "Id";
             dgvProductos.Columns["MontoUnitario"].HeaderText = "Precio";
+            FormatoMoneda.Aplicar(dgvProductos.Columns["MontoUnitario"]);
         }
 
         private void CargarCategorias()

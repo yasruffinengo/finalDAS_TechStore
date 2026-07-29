@@ -28,7 +28,7 @@ namespace Vista
             lblVenta.Text = $"Venta: {venta.NumeroVenta}";
             lblCliente.Text = $"Cliente: {venta.Cliente?.Nombre ?? "-"}";
             lblSucursal.Text = $"Sucursal: {venta.Sucursal?.Nombre ?? "-"}";
-            lblTotal.Text = $"Total: {venta.MontoTotal:C2}";
+            lblTotal.Text = $"Total: {FormatoMoneda.Texto(venta.MontoTotal)}";
 
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = venta.Detalles
@@ -57,13 +57,13 @@ namespace Vista
             if (dataGridView1.Columns["PrecioUnitario"] != null)
             {
                 dataGridView1.Columns["PrecioUnitario"].HeaderText = "Precio unitario";
-                dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C2";
+                FormatoMoneda.Aplicar(dataGridView1.Columns["PrecioUnitario"]);
             }
 
             if (dataGridView1.Columns["Subtotal"] != null)
             {
                 dataGridView1.Columns["Subtotal"].HeaderText = "Subtotal";
-                dataGridView1.Columns["Subtotal"].DefaultCellStyle.Format = "C2";
+                FormatoMoneda.Aplicar(dataGridView1.Columns["Subtotal"]);
             }
 
             dataGridView1.ClearSelection();

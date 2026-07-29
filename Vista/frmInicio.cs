@@ -208,19 +208,19 @@ namespace Vista
                 if (dataGridView1.Columns["MontoSubtotal"] != null)
                 {
                     dataGridView1.Columns["MontoSubtotal"].HeaderText = "Subtotal";
-                    dataGridView1.Columns["MontoSubtotal"].DefaultCellStyle.Format = "C2";
+                    FormatoMoneda.Aplicar(dataGridView1.Columns["MontoSubtotal"]);
                 }
 
                 if (dataGridView1.Columns["MontoDescuento"] != null)
                 {
                     dataGridView1.Columns["MontoDescuento"].HeaderText = "Descuento";
-                    dataGridView1.Columns["MontoDescuento"].DefaultCellStyle.Format = "C2";
+                    FormatoMoneda.Aplicar(dataGridView1.Columns["MontoDescuento"]);
                 }
 
                 if (dataGridView1.Columns["MontoTotal"] != null)
                 {
                     dataGridView1.Columns["MontoTotal"].HeaderText = "Total";
-                    dataGridView1.Columns["MontoTotal"].DefaultCellStyle.Format = "C2";
+                    FormatoMoneda.Aplicar(dataGridView1.Columns["MontoTotal"]);
                 }
 
                 dataGridView1.ClearSelection();
@@ -322,7 +322,7 @@ namespace Vista
 
             DialogResult confirmacion = MessageBox.Show(
                 $"¿Confirma el pago total de la venta N° {venta.NumeroVenta} " +
-                $"por {venta.MontoTotal:C2}?",
+                $"por {FormatoMoneda.Texto(venta.MontoTotal)}?",
                 "Confirmar pago",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question

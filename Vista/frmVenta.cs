@@ -210,7 +210,7 @@ namespace Vista
 
 
             lblPrecio.Text =
-                $"Precio: {inventario.Producto.MontoUnitario:C2}";
+                $"Precio: {FormatoMoneda.Texto(inventario.Producto.MontoUnitario)}";
 
             lblStockDisponible.Text =
                 $"Stock: {inventario.StockProducto}";
@@ -379,13 +379,13 @@ namespace Vista
             decimal total = subtotal - montoDescuento;
 
             lblSubtotal.Text =
-                $"Subtotal: {subtotal:C2}";
+                $"Subtotal: {FormatoMoneda.Texto(subtotal)}";
 
             lblDescuento.Text =
-                $"Descuento: {montoDescuento:C2}";
+                $"Descuento: {FormatoMoneda.Texto(montoDescuento)}";
 
             lblTotal.Text =
-                $"Total: {total:C2}";
+                $"Total: {FormatoMoneda.Texto(total)}";
         }
         //este va
         private void RefrescarGrillaDetalles()
@@ -423,16 +423,16 @@ namespace Vista
                     "Precio unitario";
 
                 dgvDetalleVenta.Columns["PrecioUnitario"].DisplayIndex = 2;
-                dgvDetalleVenta.Columns["PrecioUnitario"]
-                    .DefaultCellStyle.Format = "C2";
+                FormatoMoneda.Aplicar(
+                    dgvDetalleVenta.Columns["PrecioUnitario"]
+                );
             }
 
             if (dgvDetalleVenta.Columns["Subtotal"] != null)
             {
                 dgvDetalleVenta.Columns["Subtotal"].HeaderText = "Subtotal";
                 dgvDetalleVenta.Columns["Subtotal"].DisplayIndex = 3;
-                dgvDetalleVenta.Columns["Subtotal"]
-                    .DefaultCellStyle.Format = "C2";
+                FormatoMoneda.Aplicar(dgvDetalleVenta.Columns["Subtotal"]);
             }
 
             dgvDetalleVenta.AutoSizeColumnsMode =
