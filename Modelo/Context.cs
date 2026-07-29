@@ -5,9 +5,8 @@ namespace Modelo
 {
     public class Context : DbContext
     {
-        
-        private string conexion = "Data Source=YASMIN-PC\\SQLEXPRESS;Initial Catalog=TechStore;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;";
 
+        private string conexion = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TechStore;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False";
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Venta> Venta { get; set; }

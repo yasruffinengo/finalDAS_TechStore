@@ -22,12 +22,15 @@ namespace Vista
         }
         private void Refrescar()
         {
+         
             dgvMetodosPago.DataSource = null;
-            dgvMetodosPago.DataSource = ControladoraMetodoPago.Instancia.ListarMetodosPago();
-            //oculto el bool
-            dgvMetodosPago.Columns["Activo"].Visible = false;
+            dgvMetodosPago.DataSource =
+                ControladoraMetodoPago.Instancia.ListarMetodosPago();
+
+            dgvMetodosPago.Columns["Ventas"].Visible = false;
             dgvMetodosPago.Columns["MetodoPagoId"].HeaderText = "Id";
         }
+        
         private void LimpiarCampos()
         {
             txtNombre.Clear();
