@@ -617,5 +617,10 @@ namespace Vista
                 );
             }
         }
+
+        private void lblNombreCliente_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
