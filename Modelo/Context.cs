@@ -5,7 +5,7 @@ namespace Modelo
 {
     public class Context : DbContext
     {
-        private string conexion = Environment.GetEnvironmentVariable("DB_DSN");
+        private readonly string conexion = EnvironmentLoader.GetRequiredVariable("DB_DSN");
 
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
@@ -102,7 +102,12 @@ namespace Modelo
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(conexion);
+        {
+            if (!options.IsConfigured)
+            {
+                options.UseSqlServer(conexion);
+            }
+        }
 
     }
 }
