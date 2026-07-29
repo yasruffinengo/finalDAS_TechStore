@@ -267,7 +267,7 @@ namespace Vista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(924, 442);
+            ClientSize = new Size(881, 442);
             Controls.Add(btn_limpiarFiltros);
             Controls.Add(txtProductoFiltro);
             Controls.Add(label2);

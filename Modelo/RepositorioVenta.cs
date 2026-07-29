@@ -10,15 +10,9 @@ namespace Modelo
 {
     public class RepositorioVenta
     {
-        private Context context;
-
-        public RepositorioVenta()
-        {
-            context = new Context();
-        }
-
         public void AgregarVenta(Venta venta)
         {
+            using var context = new Context();
             using var transaccion = context.Database.BeginTransaction();
 
             try
@@ -75,7 +69,9 @@ namespace Modelo
         {
             try
             {
+                using var context = new Context();
                 int ultimoNumero = context.Venta
+                    .AsNoTracking()
                     .OrderByDescending(v => v.NumeroVenta)
                     .Select(v => v.NumeroVenta)
                     .FirstOrDefault();
@@ -93,7 +89,11 @@ namespace Modelo
         {
             try
             {
-                return context.Venta.ToList().AsReadOnly();
+                using var context = new Context();
+                return context.Venta
+                    .AsNoTracking()
+                    .ToList()
+                    .AsReadOnly();
             }
             catch (Exception ex)
             {
@@ -107,7 +107,9 @@ namespace Modelo
             try
             {
                 //para visualizarlos en otras grillas.
+                using var context = new Context();
                 return context.Venta
+                    .AsNoTracking()
                     .Include(v => v.Cliente)
                     .Include(v => v.Vendedor)
                     .Include(v => v.Sucursal)

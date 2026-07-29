@@ -50,6 +50,7 @@ namespace Vista
             label1 = new Label();
             label2 = new Label();
             btn_Clientes = new Button();
+            btn_vendedores = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -221,7 +222,7 @@ namespace Vista
             // 
             // btn_Clientes
             // 
-            btn_Clientes.Location = new Point(621, 376);
+            btn_Clientes.Location = new Point(621, 330);
             btn_Clientes.Margin = new Padding(2);
             btn_Clientes.Name = "btn_Clientes";
             btn_Clientes.Size = new Size(178, 42);
@@ -230,11 +231,23 @@ namespace Vista
             btn_Clientes.UseVisualStyleBackColor = true;
             btn_Clientes.Click += btn_Clientes_Click;
             // 
+            // btn_vendedores
+            // 
+            btn_vendedores.Location = new Point(621, 376);
+            btn_vendedores.Margin = new Padding(2);
+            btn_vendedores.Name = "btn_vendedores";
+            btn_vendedores.Size = new Size(178, 42);
+            btn_vendedores.TabIndex = 12;
+            btn_vendedores.Text = "Vendedores";
+            btn_vendedores.UseVisualStyleBackColor = true;
+            btn_vendedores.Click += btn_vendedores_Click;
+            // 
             // frmInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 430);
+            Controls.Add(btn_vendedores);
             Controls.Add(btn_Clientes);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -291,5 +304,6 @@ namespace Vista
         private Label label1;
         private Label label2;
         private Button btn_Clientes;
+        private Button btn_vendedores;
     }
 }

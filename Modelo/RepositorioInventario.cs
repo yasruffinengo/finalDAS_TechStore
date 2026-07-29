@@ -10,17 +10,11 @@ namespace Modelo
 {
     public class RepositorioInventario
     {
-        private Context context;
-
-        public RepositorioInventario()
-        {
-            context = new Context();
-        }
-
         public void AgregarInventario(Inventario inventario)
         {
             try
             {
+                using var context = new Context();
                 context.Inventario.Add(inventario);
                 context.SaveChanges();
             }
@@ -36,6 +30,7 @@ namespace Modelo
         {
             try
             {
+                using var context = new Context();
                 context.Inventario.Update(inventario);
                 context.SaveChanges();
             }
@@ -52,7 +47,10 @@ namespace Modelo
         {
             try
             {
-                return context.Inventario.FirstOrDefault(i => i.ProductoId == productoId && i.SucursalId == sucursalId);
+                using var context = new Context();
+                return context.Inventario
+                    .AsNoTracking()
+                    .FirstOrDefault(i => i.ProductoId == productoId && i.SucursalId == sucursalId);
             }
             catch (Exception ex)
             {
@@ -65,7 +63,9 @@ namespace Modelo
         {
             try
             {
+                using var context = new Context();
                 return context.Inventario
+                    .AsNoTracking()
                     .Include(i => i.Producto)
                     .Include(i => i.Sucursal)
                     .ToList();
@@ -82,7 +82,9 @@ namespace Modelo
 
             try
             {
+                using var context = new Context();
                 return context.Inventario
+                    .AsNoTracking()
                     .Include(i => i.Producto)
                     .Include(i => i.Sucursal)
                     .Where(i => i.SucursalId == sucursalId)
@@ -97,7 +99,9 @@ namespace Modelo
         {
             try
             {
+                using var context = new Context();
                 return context.Inventario
+                    .AsNoTracking()
                     .Include(i => i.Producto)
                     .Include(i => i.Sucursal)
                     .Where(i =>
