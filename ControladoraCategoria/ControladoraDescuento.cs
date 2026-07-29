@@ -164,6 +164,8 @@ namespace Controladora
                 return "Error al cambiar el estado del descuento: " + detalle;
             }
         }
+
+        //este esta de mas
         public List<Descuento> ObtenerDescuentosPorTipoCliente(int tipoClienteId)
         {
             try
@@ -176,6 +178,39 @@ namespace Controladora
             {
                 throw new Exception(
                     "Error al obtener descuentos por tipo de cliente: "
+                    + ex.Message
+                );
+            }
+        }
+        public Descuento? ObtenerDescuentoPorId(int id)
+        {
+            try
+            {
+                return repositorio.ObtenerDescuentoPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el descuento por ID: " + ex.Message);
+            }
+        }
+        public IReadOnlyCollection<Descuento> ListarDescuentosActivosPorTipoCliente(int tipoClienteId)
+        {
+            try
+            {
+                if (tipoClienteId <= 0)
+                {
+                    throw new Exception(
+                        "Debe seleccionar un tipo de cliente."
+                    );
+                }
+
+                return repositorio
+                    .ListarDescuentosActivosPorTipoCliente(tipoClienteId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error en ControladoraDescuento.ListarDescuentosActivosPorTipoCliente(): "
                     + ex.Message
                 );
             }

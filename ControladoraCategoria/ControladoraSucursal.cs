@@ -149,7 +149,17 @@ namespace Controladora
                 throw new Exception("Error al listar sucursales activas: " + ex.Message);
             }
         }
-
+        public Sucursal? ObtenerSucursalPorId(int idSucursal)
+        {
+            try
+            {
+                return repositorio.ObtenerSucursalPorId(idSucursal);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la sucursal por ID: " + ex.Message);
+            }
+        }
         public string CambiarEstadoSucursal(int sucursalId)
         {
             try

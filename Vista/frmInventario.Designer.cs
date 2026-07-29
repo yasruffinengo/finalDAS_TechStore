@@ -39,9 +39,9 @@
             label6 = new Label();
             cmbSucursal = new ComboBox();
             cmbProducto = new ComboBox();
-            btnGuardar = new Button();
             label5 = new Label();
             label8 = new Label();
+            btnGuardar = new Button();
             cmbSucursalFiltro = new ComboBox();
             label1 = new Label();
             label2 = new Label();
@@ -170,16 +170,6 @@
             cmbProducto.TabIndex = 29;
             cmbProducto.SelectedIndexChanged += cmbProducto_SelectedIndexChanged;
             // 
-            // btnGuardar
-            // 
-            btnGuardar.Location = new Point(27, 677);
-            btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(10, 10);
-            btnGuardar.TabIndex = 24;
-            btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnGuardar_Click;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -198,6 +188,16 @@
             label8.TabIndex = 18;
             label8.Text = "Producto:";
             label8.Click += label8_Click;
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.Location = new Point(1082, 664);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(175, 54);
+            btnGuardar.TabIndex = 24;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // cmbSucursalFiltro
             // 

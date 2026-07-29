@@ -53,6 +53,7 @@
             btnNuevaVenta.TabIndex = 0;
             btnNuevaVenta.Text = "Nueva Venta";
             btnNuevaVenta.UseVisualStyleBackColor = true;
+            btnNuevaVenta.Click += btnNuevaVenta_Click;
             // 
             // menuStrip1
             // 

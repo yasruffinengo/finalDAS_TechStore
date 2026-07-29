@@ -93,5 +93,31 @@ namespace Modelo
                 throw new Exception("Error en Repositorio.ListarPorSucursal(): " + detalle);
             }
         }
+        public IReadOnlyCollection<Inventario> ListarInventariosPorSucursal(int sucursalId)
+        {
+            try
+            {
+                return context.Inventario
+                    .Include(i => i.Producto)
+                    .Include(i => i.Sucursal)
+                    .Where(i =>
+                        i.SucursalId == sucursalId &&
+                        i.Producto.Activo &&
+                        i.StockProducto > 0)
+                    .OrderBy(i => i.Producto.Nombre)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
+                throw new Exception(
+                    "Error en RepositorioInventario.ListarInventariosPorSucursal(): "
+                    + detalle
+                );
+            }
+        }
     }
 }
