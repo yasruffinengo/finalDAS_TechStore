@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Microsoft.EntityFrameworkCore;
+using Entidades.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,6 +100,38 @@ namespace Modelo
             {
                 string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Error en Repositorio.ListarVentas: " + detalle);
+            }
+        }
+
+        public IReadOnlyCollection<VentaResumenDTO> ListarVentasResumen()
+        {
+            try
+            {
+                using var context = new Context();
+                return context.Venta
+                    .AsNoTracking()
+                    .OrderByDescending(v => v.FechaVenta)
+                    .ThenByDescending(v => v.NumeroVenta)
+                    .Select(v => new VentaResumenDTO
+                    {
+                        VentaId = v.VentaId,
+                        NumeroVenta = v.NumeroVenta,
+                        FechaVenta = v.FechaVenta,
+                        Cliente = v.Cliente.Nombre,
+                        Sucursal = v.Sucursal.Nombre,
+                        Vendedor = v.Vendedor.Nombre,
+                        MetodoPago = v.MetodoPago.Nombre,
+                        MontoSubtotal = v.MontoSubtotal,
+                        MontoDescuento = v.MontoDescuento,
+                        MontoTotal = v.MontoTotal
+                    })
+                    .ToList()
+                    .AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                string detalle = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Error en Repositorio.ListarVentasResumen: " + detalle);
             }
         }
 

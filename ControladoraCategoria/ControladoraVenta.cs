@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Modelo;
+using Entidades.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,31 @@ namespace Controladora
                 throw new Exception("Error en ControladoraVenta.ObtenerProximoNumeroVenta(): " + ex.Message);
             }
         }
+
+        public IReadOnlyCollection<VentaResumenDTO> ListarVentasResumen()
+        {
+            try
+            {
+                return repositorio.ListarVentasResumen();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en ControladoraVenta.ListarVentasResumen(): " + ex.Message);
+            }
+        }
+
+        public Venta? ObtenerVentaPorId(int ventaId)
+        {
+            try
+            {
+                return repositorio.ObtenerVentaPorId(ventaId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en ControladoraVenta.ObtenerVentaPorId(): " + ex.Message);
+            }
+        }
+
         //validaciones mas basicas.
         private string ValidarDatosBasicos(Venta venta)
         {

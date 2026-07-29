@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entidades
 {
@@ -21,6 +21,9 @@ namespace Entidades
         
 
         public decimal PrecioUnitario { get; set; }
+
+        [NotMapped]
+        public string ProductoNombre { get; set; } = "";
 
     }
 }

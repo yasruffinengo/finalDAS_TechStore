@@ -282,6 +282,9 @@ namespace Vista
                         detalleExistente.PrecioUnitario
                         * detalleExistente.Cantidad;
 
+                    if (string.IsNullOrWhiteSpace(detalleExistente.ProductoNombre))
+                        detalleExistente.ProductoNombre = inventario.Producto.Nombre;
+
                     RefrescarGrillaDetalles();
 
                     MessageBox.Show(
@@ -309,8 +312,7 @@ namespace Vista
                         new DetalleVenta
                         {
                             ProductoId = inventario.ProductoId,
-                            //chau 
-                            //Producto = inventario.Producto,
+                            ProductoNombre = inventario.Producto.Nombre,
                             Cantidad = cantidad,
                             PrecioUnitario =
                                 inventario.Producto.MontoUnitario,
@@ -395,15 +397,18 @@ namespace Vista
                 dgvDetalleVenta.Columns["Venta"].Visible = false;
 
             if (dgvDetalleVenta.Columns["Producto"] != null)
+                dgvDetalleVenta.Columns["Producto"].Visible = false;
+
+            if (dgvDetalleVenta.Columns["ProductoNombre"] != null)
             {
-                dgvDetalleVenta.Columns["Producto"].HeaderText = "Producto";
-                dgvDetalleVenta.Columns["Producto"].DisplayIndex = 1;
+                dgvDetalleVenta.Columns["ProductoNombre"].HeaderText = "Producto";
+                dgvDetalleVenta.Columns["ProductoNombre"].DisplayIndex = 0;
             }
 
             if (dgvDetalleVenta.Columns["Cantidad"] != null)
             {
                 dgvDetalleVenta.Columns["Cantidad"].HeaderText = "Cantidad";
-                dgvDetalleVenta.Columns["Cantidad"].DisplayIndex = 0;
+                dgvDetalleVenta.Columns["Cantidad"].DisplayIndex = 1;
             }
 
             if (dgvDetalleVenta.Columns["PrecioUnitario"] != null)
@@ -444,6 +449,33 @@ namespace Vista
 
         }
 
+        private string ObtenerNombreProductoDetalle(DetalleVenta detalle)
+        {
+            string? nombreProducto = detalle.ProductoNombre;
+
+            if (!string.IsNullOrWhiteSpace(nombreProducto))
+                return nombreProducto;
+
+            nombreProducto = detalle.Producto?.Nombre;
+
+            if (!string.IsNullOrWhiteSpace(nombreProducto))
+                return nombreProducto;
+
+            foreach (object item in cmbProducto.Items)
+            {
+                if (item is Inventario inventario &&
+                    inventario.ProductoId == detalle.ProductoId)
+                {
+                    nombreProducto = inventario.Producto?.Nombre;
+
+                    if (!string.IsNullOrWhiteSpace(nombreProducto))
+                        return nombreProducto;
+                }
+            }
+
+            return "el producto seleccionado";
+        }
+
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             try
@@ -466,9 +498,12 @@ namespace Vista
                         .CurrentRow
                         .DataBoundItem;
 
+                string nombreProducto =
+                    ObtenerNombreProductoDetalle(detalleSeleccionado);
+
                 DialogResult resultado =
                     MessageBox.Show(
-                        $"¿Desea quitar {detalleSeleccionado.Producto.Nombre} de la venta?",
+                        $"¿Desea quitar {nombreProducto} de la venta?",
                         "Confirmar",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question
